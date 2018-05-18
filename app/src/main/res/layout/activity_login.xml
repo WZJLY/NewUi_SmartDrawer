@@ -10,12 +10,8 @@
         android:id="@+id/logo1_imageView"
         android:layout_width="46dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="924dp"
-        android:layout_marginEnd="377dp"
-        android:layout_marginStart="378dp"
         android:layout_marginTop="161dp"
-        android:background="@drawable/Group"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/group"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,33 +20,11 @@
         android:id="@+id/login_view"
         android:layout_width="572dp"
         android:layout_height="171dp"
-        android:layout_marginBottom="661dp"
-        android:layout_marginEnd="114dp"
-        android:layout_marginStart="114dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="122dp"
         android:background="#ffffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo2_imageView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/account_imageView"
-        android:layout_width="32dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/个人中心"
-        app:layout_constraintBottom_toBottomOf="@+id/login_view"
-        app:layout_constraintEnd_toStartOf="@+id/account"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintStart_toStartOf="@+id/login_view"
-        app:layout_constraintTop_toTopOf="@+id/login_view"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintTop_toBottomOf="@+id/logo2_imageView" />
 
     <ImageView
         android:id="@+id/password_imageView"
@@ -66,7 +40,23 @@
         app:layout_constraintStart_toStartOf="@+id/login_view"
         app:layout_constraintTop_toTopOf="@+id/login_view"
         app:layout_constraintVertical_bias="0.82"
-        app:srcCompat="@drawable/密码" />
+        app:srcCompat="@drawable/lock" />
+
+    <ImageView
+        android:id="@+id/account_imageView"
+        android:layout_width="32dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/person"
+        app:layout_constraintBottom_toBottomOf="@+id/login_view"
+        app:layout_constraintEnd_toStartOf="@+id/account"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/login_view"
+        app:layout_constraintTop_toTopOf="@+id/login_view"
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <EditText
         android:id="@+id/account"
@@ -78,7 +68,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="@+id/login_view"
         app:layout_constraintEnd_toEndOf="@+id/login_view"
         app:layout_constraintHorizontal_bias="0.63"
@@ -95,8 +84,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/login_view"
         app:layout_constraintEnd_toEndOf="@+id/login_view"
         app:layout_constraintHorizontal_bias="0.63"
@@ -108,22 +96,18 @@
         android:id="@+id/logo2_imageView"
         android:layout_width="134dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="826dp"
-        android:layout_marginEnd="330dp"
-        android:layout_marginStart="336dp"
+        android:layout_marginTop="11dp"
         android:background="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo1_imageView" />
 
     <ImageButton
         android:id="@+id/loginButton"
         android:layout_width="614dp"
         android:layout_height="112dp"
-        android:layout_marginBottom="436dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="37dp"
         android:background="@drawable/login"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_view" />
@@ -136,7 +120,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/清除"
+        android:background="@drawable/delete"
         app:layout_constraintBottom_toBottomOf="@+id/login_view"
         app:layout_constraintEnd_toEndOf="@+id/login_view"
         app:layout_constraintHorizontal_bias="0.0"
