@@ -121,7 +121,7 @@
     <ImageView
         android:id="@+id/imageView11"
         android:layout_width="752dp"
-        android:layout_height="106dp"
+        android:layout_height="100dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/background_drawer"
         app:layout_constraintEnd_toEndOf="parent"

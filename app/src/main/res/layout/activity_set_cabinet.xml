@@ -93,4 +93,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView18"
+        android:layout_width="match_parent"
+        android:layout_height="258dp"
+        android:background="#f6f6f6"
+        app:srcCompat="@android:color/transparent"
+        tools:layout_editor_absoluteX="360dp"
+        tools:layout_editor_absoluteY="240dp" />
 </android.support.constraint.ConstraintLayout>
