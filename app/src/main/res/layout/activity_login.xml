@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FBFBFB"
     tools:context="com.example.newui_smartdrawer.LoginActivity">
 
     <ImageView
@@ -94,6 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/btn_login_style"
+        android:paddingBottom="10dp"
         android:src="@drawable/btn_login_style"
         android:text="登录"
         android:textAlignment="center"

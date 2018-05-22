@@ -11,7 +11,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         loginButton.setOnClickListener {
-            intent.setClass(this,MainAdminActivity::class.java)
+            intent.setClass(this,DrawerActivity::class.java)
             startActivity(intent)
         }
     }

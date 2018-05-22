@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FBFBFB"
+    tools:context="com.example.newui_smartdrawer.MainActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="3dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="800dp"
+                android:layout_height="80dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:color/background_light" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="160dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="44dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                app:srcCompat="@drawable/icon" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/ib_mainAdmin_user"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_circle"
+        android:elevation="3dp"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/person" />
+
+    <Button
+        android:id="@+id/ib_mainAdmin_operation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/btn_operation_style"
+        android:text="试剂操作"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/ib_mainAdmin_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_search_style"
+        android:text="试剂查找"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_operation" />
+
+    <TextView
+        android:id="@+id/tv_mainAdmin_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="admin"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/ib_mainAdmin_user"
+        app:layout_constraintStart_toStartOf="@+id/ib_mainAdmin_user"
+        app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_user" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/background_main" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@android:color/transparent"
+        android:text="退出登录"
+        android:textColor="#494949"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <Button
+        android:id="@+id/btn_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/btn_update_style"
+        android:text="系统升级"
+        android:textColor="#494949"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search">
+
+        <Button
+            android:id="@+id/btn_mainAdmin_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_main_style"
+            android:drawableLeft="@drawable/setting"
+            android:paddingEnd="50dp"
+            android:paddingStart="50dp"
+            android:text="智能柜设置"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search" />
+
+        <Button
+            android:id="@+id/btn_mainAdmin_record"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_main_style"
+            android:drawableLeft="@drawable/search"
+            android:paddingEnd="60dp"
+            android:paddingStart="50dp"
+            android:text="记录查询"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/btn_mainAdmin_setting"
+            app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/btn_mainAdmin_management"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_main_style"
+            android:drawableLeft="@drawable/management"
+            android:paddingEnd="60dp"
+            android:paddingStart="50dp"
+            android:text="人员管理"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_mainAdmin_setting" />
+
+        <Button
+            android:id="@+id/btn_mainAdmin_template"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_main_style"
+            android:drawableLeft="@drawable/edit"
+            android:paddingEnd="60dp"
+            android:paddingStart="50dp"
+            android:text="试剂模板"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@+id/btn_mainAdmin_management"
+            app:layout_constraintTop_toBottomOf="@+id/btn_mainAdmin_record" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -8,15 +8,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity" android:theme="@style/style">
+        android:theme="@style/style">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainAdminActivity" android:theme="@style/style">
-        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ManagementActivity" />
+        <activity android:name=".OperationActivity" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".SetCabinetActivity" />
+        <activity android:name=".DrawerActivity"></activity>
     </application>
 
 </manifest>
