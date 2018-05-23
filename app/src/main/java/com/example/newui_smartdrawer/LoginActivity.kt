@@ -27,10 +27,7 @@ class LoginActivity : AppCompatActivity() {
         val lastname = getLastLoginName()
         account.setText(lastname)
         loginButton.setOnClickListener {
-<<<<<<< Updated upstream
-            intent.setClass(this,SetDrawerActivity::class.java)
-            startActivity(intent)
-=======
+
             login(account.text.toString(),password.text.toString())
         }
         delet_Button.setOnClickListener({
@@ -67,8 +64,8 @@ class LoginActivity : AppCompatActivity() {
                 scApp?.setUserInfo(strUserId, strAccount, strPassword, iPower,"","","0")
                 saveUserName(strAccount)
 
-
                 intent.setClass(this,MainActivity::class.java)
+                intent.putExtra("account",userName)
                 startActivity(intent)
 
             } else {
@@ -87,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
 
             if(userInfo?.statue!="1") {
                 intent.setClass(this,MainActivity::class.java)
+                intent.putExtra("account",userName)
                 startActivity(intent)
                 saveUserName(userName)
                 startActivity(intent)
@@ -94,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
             else
                 Toast.makeText(this,"该用户已被禁用", Toast.LENGTH_SHORT).show()
 //            finish()
->>>>>>> Stashed changes
+
         }
     }
 
