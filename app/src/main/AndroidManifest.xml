@@ -21,7 +21,8 @@
         <activity android:name=".OperationActivity" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".SetCabinetActivity" />
-        <activity android:name=".DrawerActivity"></activity>
+        <activity android:name=".SetDrawerActivity" />
+        <activity android:name=".SubOperationActivity"></activity>
     </application>
 
 </manifest>

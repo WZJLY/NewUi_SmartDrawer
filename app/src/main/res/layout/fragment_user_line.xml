@@ -14,23 +14,23 @@
         android:layout_height="80dp"
         android:layout_marginStart="38dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/image_userline"
+        android:src="@drawable/image_6_fff"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/ib_userLine_del"
+        android:id="@+id/ib_FuserLine_del"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_marginStart="26dp"
-        android:background="@drawable/btn_circle_fff"
+        android:background="@drawable/circle_fff"
         android:src="@drawable/del_user"
         app:layout_constraintBottom_toBottomOf="@+id/imageView15"
         app:layout_constraintStart_toEndOf="@+id/imageView15"
         app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
     <ImageView
-        android:id="@+id/iv_userLine_icon"
+        android:id="@+id/iv_FuserLine_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
     <TextView
-        android:id="@+id/tv_userLine_Name"
+        android:id="@+id/tv_FuserLine_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -48,17 +48,17 @@
         android:textColor="#494949"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-        app:layout_constraintStart_toEndOf="@+id/iv_userLine_icon"
+        app:layout_constraintStart_toEndOf="@+id/iv_FuserLine_icon"
         app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_FuserLine_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="32dp"
         android:text="普通用户"
         android:textColor="#D2D2D2"
-        app:layout_constraintStart_toEndOf="@+id/tv_userLine_Name"
+        app:layout_constraintStart_toEndOf="@+id/tv_FuserLine_Name"
         app:layout_constraintTop_toTopOf="@+id/imageView15" />
 </android.support.constraint.ConstraintLayout>

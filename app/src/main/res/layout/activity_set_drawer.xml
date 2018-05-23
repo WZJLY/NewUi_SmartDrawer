@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FCFCFC"
-    tools:context=".DrawerActivity">
+    tools:context=".SetDrawerActivity">
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#7dececec"
@@ -29,12 +30,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/image_background_drawer" />
+
+            <!--<FrameLayout-->
+                <!--android:id="@+id/fl_setDrawer_table"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="@+id/imageView14">-->
+
+            <!--</FrameLayout>-->
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -53,14 +67,14 @@
                 app:srcCompat="@android:color/background_light" />
 
             <Button
-                android:id="@+id/btn_drawer_OK"
+                android:id="@+id/btn_setDrawer_OK"
                 android:layout_width="670dp"
                 android:layout_height="77dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/btn_drawer_style"
+                android:background="@drawable/btn_drawer_style_39"
                 android:text="保存"
                 android:textColor="@android:color/white"
                 android:textSize="26sp"
@@ -103,7 +117,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/ib_drawer_back"
+                android:id="@+id/ib_setDrawer_back"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
@@ -123,7 +137,7 @@
         android:layout_width="752dp"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:background="@drawable/background_drawer"
+        android:background="@drawable/background_drawer_6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView5" />
@@ -136,18 +150,157 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView11"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.477"
         app:srcCompat="@drawable/rectangle" />
 
     <TextView
-        android:id="@+id/tv_drawer_num"
+        android:id="@+id/tv_setDrawer_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="柜1-抽屉1"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/imageView11"
         app:layout_constraintTop_toTopOf="@+id/imageView11" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="43dp"
+        android:text="行列数"
+        android:textColor="#3A3A3A"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView7" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="23dp"
+        android:text="抽屉状态"
+        android:textColor="#3A3A3A"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="101dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="6dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+        <RadioButton
+            android:id="@+id/rb_setDrawer_3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="17dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:text="3x3"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setDrawer_4"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="17dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:text="4x4"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setDrawer_5"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="17dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:text="5x5"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setDrawer_6"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="17dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:text="6x6"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setDrawer_7"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="17dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:text="7x7"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
+
+        <RadioButton
+            android:id="@+id/button16"
+            android:layout_width="140dp"
+            android:layout_height="46dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_23_style"
+            android:button="@null"
+            android:text="正常使用"
+            android:textAlignment="center"
+            android:textColor="@color/btn_23_textstyle"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/button15"
+            android:layout_width="140dp"
+            android:layout_height="46dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_23_style"
+            android:button="@null"
+            android:text="暂时停用"
+            android:textAlignment="center"
+            android:textColor="@color/btn_23_textstyle"
+            android:textSize="20sp" />
+    </RadioGroup>
+
 
 </android.support.constraint.ConstraintLayout>

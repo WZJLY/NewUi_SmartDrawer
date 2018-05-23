@@ -9,45 +9,45 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:id="@+id/tv_Fdrawer_num"
+        android:id="@+id/tv_Fcabinet_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="柜1"
         android:textColor="#CCCCCC"
-        app:layout_constraintEnd_toEndOf="@+id/imageView16"
-        app:layout_constraintStart_toStartOf="@+id/imageView16"
+        app:layout_constraintEnd_toEndOf="@+id/im_Fcabinet_cabinet"
+        app:layout_constraintStart_toStartOf="@+id/im_Fcabinet_cabinet"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView16"
+        android:id="@+id/im_Fcabinet_cabinet"
         android:layout_width="54dp"
         android:layout_height="141dp"
         android:layout_marginStart="19dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/cabinet"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/tv_Fdrawer_num" />
+        app:layout_constraintStart_toStartOf="@+id/ib_Fcabinet_del"
+        app:layout_constraintTop_toBottomOf="@+id/tv_Fcabinet_num" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/im_Fcabinet"
         android:layout_width="11dp"
         android:layout_height="11dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:src="@drawable/btn_circle_a2a2a2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView16"
-        app:layout_constraintStart_toStartOf="@+id/imageView16"
-        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+        android:src="@drawable/circle_a2a2a2"
+        app:layout_constraintEnd_toEndOf="@+id/im_Fcabinet_cabinet"
+        app:layout_constraintStart_toStartOf="@+id/im_Fcabinet_cabinet"
+        app:layout_constraintTop_toBottomOf="@+id/im_Fcabinet_cabinet" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/ib_Fcabinet_del"
         android:layout_width="21dp"
         android:layout_height="21dp"
         android:layout_marginTop="9dp"
-        android:background="@drawable/btn_circle_fff"
+        android:background="@drawable/circle_fff"
         android:src="@drawable/btn_cabinet_del"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_Fdrawer_num" />
+        app:layout_constraintTop_toTopOf="@+id/tv_Fcabinet_num" />
 </android.support.constraint.ConstraintLayout>
