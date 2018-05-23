@@ -29,13 +29,15 @@
 
     <ImageView
         android:id="@+id/password_imageView"
-        android:layout_width="34dp"
+        android:layout_width="0dp"
         android:layout_height="36dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginEnd="441dp"
+        android:layout_marginStart="146dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/login_view"
-        app:layout_constraintStart_toStartOf="@+id/login_view"
+        app:layout_constraintEnd_toStartOf="@+id/delet_Button"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login_view"
         app:layout_constraintVertical_bias="0.82"
         app:srcCompat="@drawable/lock" />
@@ -106,13 +108,15 @@
         app:layout_constraintTop_toBottomOf="@+id/login_view" />
 
     <ImageButton
-        android:id="@+id/deletButton"
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/delete"
+        android:id="@+id/delet_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="27dp"
+        android:layout_marginEnd="140dp"
+        android:background="@color/cardview_shadow_end_color"
         app:layout_constraintBottom_toBottomOf="@+id/login_view"
-        app:layout_constraintEnd_toEndOf="@+id/login_view" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/password_imageView"
+        app:srcCompat="@drawable/delete" />
 
 </android.support.constraint.ConstraintLayout>
