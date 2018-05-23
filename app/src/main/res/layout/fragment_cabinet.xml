@@ -43,11 +43,11 @@
 
     <ImageButton
         android:id="@+id/ib_Fcabinet_del"
-        android:layout_width="21dp"
-        android:layout_height="21dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
-        android:background="@drawable/circle_fff"
-        android:src="@drawable/btn_cabinet_del"
+        android:background="@android:color/transparent"
+        android:src="@drawable/btn_cabinet_del_style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_Fcabinet_num" />
 </android.support.constraint.ConstraintLayout>
