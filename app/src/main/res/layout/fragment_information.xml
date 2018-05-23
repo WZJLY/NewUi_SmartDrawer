@@ -2,10 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_Finformation"
     android:layout_width="710dp"
     android:layout_height="175dp"
     android:background="@drawable/image_information"
-    tools:context=".informationFragment">
+    tools:context=".InformationFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -159,16 +160,6 @@
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/ib_Finformation_jump"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="39dp"
-        android:src="@drawable/btn_information"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
@@ -180,4 +171,15 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <ImageButton
+        android:id="@+id/ib_Finformation_jump"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="26dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/btn_information"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
