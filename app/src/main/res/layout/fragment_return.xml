@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReturnFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="ml"
+        android:textColor="#3A3A3A"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_residue"
+        app:layout_constraintStart_toEndOf="@+id/et_Freturn_residue"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_residue" />
+
+    <EditText
+        android:id="@+id/et_Freturn_load"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/et_Freturn_code" />
+
+    <EditText
+        android:id="@+id/et_Freturn_code"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="13dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="试剂条码："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_code"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_code" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="称重重量："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_load"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_load" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="试剂条码："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_residue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_residue" />
+
+    <EditText
+        android:id="@+id/et_Freturn_residue"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/et_Freturn_load" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="g"
+        android:textColor="#3A3A3A"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_load"
+        app:layout_constraintStart_toEndOf="@+id/et_Freturn_load"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_load" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_code"
+        android:text="扫码"
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_code"
+        app:layout_constraintStart_toEndOf="@+id/et_Freturn_code"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_code" />
+</android.support.constraint.ConstraintLayout>
