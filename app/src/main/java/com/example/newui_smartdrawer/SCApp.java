@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.newui_smartdrawer.util.CabinetInfo;
 import com.example.newui_smartdrawer.util.DBManager;
+import com.example.newui_smartdrawer.util.SerialPortInterface;
 import com.example.newui_smartdrawer.util.UserAccount;
 
 
@@ -21,7 +22,7 @@ public class SCApp extends Application {  //全局变量
     private int TemplateNum;
     private String reagentID;
     private String serialPortID;
-//    SerialPortInterface spi;
+    SerialPortInterface spi;
     private static Context context;
     private String TemplateID;
     private int statue;
@@ -90,12 +91,12 @@ public class SCApp extends Application {  //全局变量
         return TemplateNum;
     }
 
-//    public void setSpi(SerialPortInterface serialPort) {
-//        this.spi = serialPort;
-//    }
-//    public SerialPortInterface getSpi() {
-//        return spi;
-//    }
+    public void setSpi(SerialPortInterface serialPort) {
+        this.spi = serialPort;
+    }
+    public SerialPortInterface getSpi() {
+        return spi;
+    }
     public void setTemplateID(String id){
         this.TemplateID=id;
     }
