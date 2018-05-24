@@ -4,6 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.os.Looper
+import android.os.Message
+import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.webkit.JavascriptInterface
@@ -12,12 +16,16 @@ import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.SC_Const
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_login.*
+import java.io.*
+import java.net.MalformedURLException
+import java.net.URL
 
 class LoginActivity : AppCompatActivity() {
     private var dbManager: DBManager? = null
     private var scApp: SCApp? = null
     private val LOGINNAME = "smart_cabinet)smart_cabinet_login_name"
     private val NAME = "name"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -65,7 +73,6 @@ class LoginActivity : AppCompatActivity() {
                 saveUserName(strAccount)
 
                 intent.setClass(this,MainActivity::class.java)
-                intent.putExtra("account",userName)
                 startActivity(intent)
 
             } else {
@@ -84,7 +91,6 @@ class LoginActivity : AppCompatActivity() {
 
             if(userInfo?.statue!="1") {
                 intent.setClass(this,MainActivity::class.java)
-                intent.putExtra("account",userName)
                 startActivity(intent)
                 saveUserName(userName)
                 startActivity(intent)
@@ -112,4 +118,8 @@ class LoginActivity : AppCompatActivity() {
         super.onDestroy()
         dbManager?.closeDB()
     }
+
+
+
+
 }

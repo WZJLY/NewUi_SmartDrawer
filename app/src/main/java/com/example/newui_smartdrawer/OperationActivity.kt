@@ -22,7 +22,6 @@ class OperationActivity : AppCompatActivity() {
 
         ib_operation_search.setOnClickListener(
                 {
-                    finish()
                     val intent =Intent()
                     intent.setClass(this,SearchActivity::class.java)
                     startActivity(intent)

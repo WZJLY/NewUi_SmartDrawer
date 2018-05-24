@@ -133,24 +133,26 @@
         app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search">
 
         <Button
-            android:id="@+id/btn_mainAdmin_setting"
+            android:id="@+id/btn_mainAdmin_template"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/btn_main_style"
-            android:drawableLeft="@drawable/setting"
-            android:paddingEnd="50dp"
+            android:drawableLeft="@drawable/edit"
+            android:paddingEnd="60dp"
             android:paddingStart="50dp"
-            android:text="智能柜设置"
+            android:text="试剂模板"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search" />
+            app:layout_constraintStart_toEndOf="@+id/btn_mainAdmin_management"
+            app:layout_constraintTop_toBottomOf="@+id/btn_mainAdmin_record" />
 
         <Button
             android:id="@+id/btn_mainAdmin_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/btn_main_style"
             android:drawableLeft="@drawable/search"
             android:paddingEnd="60dp"
@@ -161,7 +163,6 @@
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@+id/btn_mainAdmin_setting"
             app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -177,6 +178,7 @@
             android:id="@+id/btn_mainAdmin_management"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/btn_main_style"
             android:drawableLeft="@drawable/management"
             android:paddingEnd="60dp"
@@ -188,19 +190,21 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_mainAdmin_setting" />
 
         <Button
-            android:id="@+id/btn_mainAdmin_template"
+            android:id="@+id/btn_mainAdmin_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:background="@drawable/btn_main_style"
-            android:drawableLeft="@drawable/edit"
-            android:paddingEnd="60dp"
+            android:drawableLeft="@drawable/setting"
+            android:paddingEnd="50dp"
             android:paddingStart="50dp"
-            android:text="试剂模板"
+            android:text="智能柜设置"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            app:layout_constraintStart_toEndOf="@+id/btn_mainAdmin_management"
-            app:layout_constraintTop_toBottomOf="@+id/btn_mainAdmin_record" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
