@@ -3,6 +3,9 @@ package com.example.newui_smartdrawer
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_set_cabinet.*
 
 class SetCabinetActivity : AppCompatActivity() {
@@ -22,6 +25,25 @@ class SetCabinetActivity : AppCompatActivity() {
 
             finish()
         })
+
+        ib_setCabinet_cabinet.setOnClickListener({
+val drawerFragment = DrawerFragment()
+            addFragment(R.id.)
+
+        })
+    }
+
+    inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
+        val fragmentTransaction = beginTransaction()
+        fragmentTransaction.func()
+        fragmentTransaction.commit()
+    }
+    fun AppCompatActivity.replaceFragment(frameId: Int, fragment: Fragment) {
+        supportFragmentManager.inTransaction { replace(frameId, fragment) }
+    }
+
+    fun AppCompatActivity.addFragment(frameId: Int, fragment: Fragment) {
+        supportFragmentManager.inTransaction { add(frameId, fragment) }
     }
 
 }

@@ -67,9 +67,9 @@ class LoginActivity : AppCompatActivity() {
                 val strAccount = "admin"
                 val strPassword = "admin"
                 val iPower = SC_Const.ADMIN
-                val account = UserAccount(strUserId, strAccount, strPassword, iPower,"","","0")
+                val account = UserAccount(strUserId, strAccount, strPassword, iPower,"admin","","0")
                 dbManager?.addAccount(account)
-                scApp?.setUserInfo(strUserId, strAccount, strPassword, iPower,"","","0")
+                scApp?.setUserInfo(strUserId, strAccount, strPassword, iPower,"admin","","0")
                 saveUserName(strAccount)
 
                 intent.setClass(this,MainActivity::class.java)
