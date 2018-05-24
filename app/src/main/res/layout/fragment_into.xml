@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".IntoFragment">
+
+
+    <EditText
+        android:id="@+id/et_Finto_data"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Finto_residue" />
+
+    <TextView
+        android:id="@+id/textView29"
+        android:layout_width="wrap_content"
+        android:layout_height="31dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="8dp"
+        android:text="失效日期："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Finto_data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Finto_data" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:text="试剂类型："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinner" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="ml"
+        android:textColor="#3A3A3A"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Finto_residue"
+        app:layout_constraintStart_toEndOf="@+id/et_Finto_residue"
+        app:layout_constraintTop_toTopOf="@+id/et_Finto_residue" />
+
+    <EditText
+        android:id="@+id/et_Finto_load"
+        android:layout_width="172dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView25"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+    <EditText
+        android:id="@+id/et_Freturn_code2"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="17dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="8dp"
+        android:text="试剂条码："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_code2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_code2" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="8dp"
+        android:text="称重重量："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Finto_load"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Finto_load" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:text="试剂余量："
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Finto_residue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/et_Finto_residue" />
+
+    <EditText
+        android:id="@+id/et_Finto_residue"
+        android:layout_width="175dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/tv_background"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/textView26"
+        app:layout_constraintTop_toBottomOf="@+id/et_Finto_load" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="g"
+        android:textColor="#3A3A3A"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Finto_load"
+        app:layout_constraintStart_toEndOf="@+id/et_Finto_load"
+        app:layout_constraintTop_toTopOf="@+id/et_Finto_load" />
+
+    <Button
+        android:id="@+id/btn_Freturn_code2"
+        android:layout_width="72dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_code"
+        android:text="扫码"
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_code"
+        app:layout_constraintStart_toEndOf="@+id/et_Freturn_code2"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_code2" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="500dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toEndOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/et_Freturn_code2" />
+
+</android.support.constraint.ConstraintLayout>

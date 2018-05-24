@@ -2,8 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".ReturnFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -24,7 +24,7 @@
         android:id="@+id/et_Freturn_load"
         android:layout_width="175dp"
         android:layout_height="41dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/tv_background"
         android:ems="10"
@@ -37,7 +37,8 @@
         android:id="@+id/et_Freturn_code"
         android:layout_width="175dp"
         android:layout_height="41dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="27dp"
         android:background="@drawable/tv_background"
         android:ems="10"
         android:inputType="textPersonName"
@@ -49,6 +50,7 @@
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
         android:text="试剂条码："
         android:textColor="#282828"
         android:textSize="24sp"
@@ -60,6 +62,7 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
         android:text="称重重量："
         android:textColor="#282828"
         android:textSize="24sp"
@@ -71,7 +74,8 @@
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="试剂条码："
+        android:layout_marginStart="37dp"
+        android:text="试剂余量："
         android:textColor="#282828"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_residue"
@@ -82,7 +86,7 @@
         android:id="@+id/et_Freturn_residue"
         android:layout_width="175dp"
         android:layout_height="41dp"
-        android:layout_marginStart="13dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/tv_background"
         android:ems="10"
@@ -104,7 +108,7 @@
         app:layout_constraintTop_toTopOf="@+id/et_Freturn_load" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_Freturn_code"
         android:layout_width="72dp"
         android:layout_height="37dp"
         android:layout_marginStart="8dp"

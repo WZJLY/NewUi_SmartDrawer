@@ -35,7 +35,7 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".SetCabinetActivity" />
         <activity android:name=".SetDrawerActivity" />
-        <activity android:name=".SubOperationActivity"></activity>
+        <activity android:name=".SubOperationActivity" />
     </application>
 
 </manifest>
