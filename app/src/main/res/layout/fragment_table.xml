@@ -78,6 +78,6 @@
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:text="CheckBox"
-        tools:layout_editor_absoluteX="267dp"
-        tools:layout_editor_absoluteY="675dp" />
+        tools:layout_editor_absoluteX="236dp"
+        tools:layout_editor_absoluteY="268dp" />
 </android.support.constraint.ConstraintLayout>

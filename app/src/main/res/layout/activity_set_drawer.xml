@@ -22,22 +22,14 @@
             android:layout_height="wrap_content">
 
             <FrameLayout
+                android:id="@+id/fl_setDrawer_table"
                 android:layout_width="670dp"
                 android:layout_height="468dp"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </FrameLayout>
 
-            <!--<FrameLayout-->
-                <!--android:id="@+id/fl_setDrawer_table"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toTopOf="@+id/imageView14">-->
-
-            <!--</FrameLayout>-->
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 
