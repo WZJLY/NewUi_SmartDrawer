@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Import_Dialog">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/imageView29"
+        android:layout_width="634dp"
+        android:layout_height="835dp"
+        android:src="@drawable/fc_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.51" />
+
+    <ImageView
+        android:id="@+id/imageView30"
+        android:layout_width="634dp"
+        android:layout_height="104dp"
+        android:src="@drawable/background_drawer_12"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintStart_toStartOf="@+id/imageView29"
+        app:layout_constraintTop_toTopOf="@+id/imageView29" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="单个导入"
+        android:textColor="#fff"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView30"
+        app:layout_constraintEnd_toEndOf="@+id/imageView30"
+        app:layout_constraintStart_toStartOf="@+id/imageView30"
+        app:layout_constraintTop_toTopOf="@+id/imageView30" />
+
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:text="试剂名称"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_name"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_name"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_name" />
+
+    <EditText
+        android:id="@+id/et_Dimport_name"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/imageView30" />
+
+    <EditText
+        android:id="@+id/et_Dimport_manfactor"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_purity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:text="试剂名称"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_name"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_name"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_name" />
+
+    <EditText
+        android:id="@+id/et_Dimport_code"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_manfactor" />
+
+    <EditText
+        android:id="@+id/et_Dimport_purity"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_density" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="8dp"
+        android:text="试剂形态"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:text="试剂瓶容量"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_volume"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_volume"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_volume" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="22dp"
+        android:text="试剂别称"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_anotherName"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_anotherName"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_anotherName" />
+
+    <EditText
+        android:id="@+id/et_Dimport_anotherName"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_name" />
+
+    <EditText
+        android:id="@+id/et_Dimport_volume"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_anotherName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:text="试剂纯度(%)"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_purity"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_purity"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_purity" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:text="商品码"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_code"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_code"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_code" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:text="厂商"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_manfactor"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_manfactor"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_manfactor" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginTop="8dp"
+        android:text="试剂密度(g/ml)"
+        android:textColor="#808080"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_density"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dimport_density"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_density" />
+
+    <EditText
+        android:id="@+id/et_Dimport_density"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="#676767"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_volume" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginTop="22dp"
+        android:checkedButton="@+id/rb_Dimport_state2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_code">
+
+        <RadioButton
+            android:id="@+id/rb_Dimport_state2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="液体"
+            android:textColor="@color/btn_32_textstyle"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/rb_Dimport_state1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="固体"
+            android:textColor="@color/btn_32_textstyle"
+            android:textSize="20sp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_Dimport_yes"
+        android:layout_width="320dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="69dp"
+        android:background="@drawable/btn_34_style"
+        android:text="保存"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintStart_toStartOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <Button
+        android:id="@+id/btn_Dimport_no"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:text="取消"
+        android:textColor="#328BD8"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView29"
+        app:layout_constraintStart_toStartOf="@+id/imageView29"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Dimport_yes" />
+</android.support.constraint.ConstraintLayout>
