@@ -27,6 +27,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo2_imageView" />
 
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="480dp"
+        android:background="#DFDFDF"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="@+id/password"
+        app:layout_constraintStart_toStartOf="@+id/password"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/password_imageView"
         android:layout_width="0dp"
@@ -57,26 +69,29 @@
 
     <EditText
         android:id="@+id/account"
-        android:layout_width="387dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="26dp"
         android:layout_marginTop="8dp"
+        android:background="@null"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textSize="28sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/account_imageView"
         app:layout_constraintStart_toEndOf="@+id/account_imageView"
-        app:layout_constraintTop_toTopOf="@+id/account_imageView" />
+        app:layout_constraintTop_toTopOf="@+id/account_imageView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="387dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
+        android:background="@null"
         android:ems="10"
         android:inputType="textPassword"
-        android:textSize="28sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@+id/password_imageView"
         app:layout_constraintStart_toEndOf="@+id/password_imageView"
         app:layout_constraintTop_toTopOf="@+id/password_imageView" />
@@ -95,7 +110,7 @@
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="514dp"
         android:background="@drawable/btn_login_style"
         android:paddingBottom="10dp"
         android:src="@drawable/btn_login_style"
@@ -103,9 +118,10 @@
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_view" />
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
 
     <ImageButton
         android:id="@+id/delet_Button"

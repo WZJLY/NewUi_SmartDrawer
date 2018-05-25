@@ -27,8 +27,8 @@ class SetCabinetActivity : AppCompatActivity() {
         })
 
         ib_setCabinet_cabinet.setOnClickListener({
-val drawerFragment = DrawerFragment()
-            addFragment(R.id.)
+            val cabinetFragment = CabinetFragment()
+            addFragment(R.id.drawer_area,cabinetFragment)
 
         })
     }

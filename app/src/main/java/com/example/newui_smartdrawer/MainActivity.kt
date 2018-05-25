@@ -13,34 +13,19 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private var scApp:SCApp?=null
         private var mbackKeyPressed=false
         private var dbManager:DBManager?=null
-    var mHandler: Handler = object : Handler() {
-        override  fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            when (msg.what) {
-                0 -> {
-                    //在这里得到数据，并且可以直接更新UI
-                    val data = msg.obj as String
-                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
 
-                }
-                2 -> {
-                    val data = msg.obj as String
-                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dbManager= DBManager(this)
-
+        TimeThread().start()
         scApp=application as SCApp
         tv_mainAdmin_user.text=scApp!!.userInfo.userName
        val power = scApp!!.userInfo.userPower
@@ -260,4 +245,46 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()  //开启一个线程
     }
+
+    internal inner class TimeThread : Thread() {
+        override fun run() {
+            do {
+                try {
+
+                    val msg = Message()
+                    msg.what = 3  //消息(一个整型值)
+                    mHandler.sendMessage(msg)
+                    Thread.sleep(1000)// 每隔1秒发送一个msg给mHandler
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+
+            } while (true)
+        }
+    }
+    var mHandler: Handler = object : Handler() {
+        override  fun handleMessage(msg: Message) {
+            super.handleMessage(msg)
+            when (msg.what) {
+                0 -> {
+                    //在这里得到数据，并且可以直接更新UI
+                    val data = msg.obj as String
+                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+
+                }
+                2 -> {
+                    val data = msg.obj as String
+                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+                }
+                3->{
+                    val formatter = SimpleDateFormat("HH:mm")
+                    val curDate = Date(System.currentTimeMillis())
+                    val str = formatter.format(curDate)
+                    time_text.text=str
+                }
+
+            }
+        }
+    }
+
 }
