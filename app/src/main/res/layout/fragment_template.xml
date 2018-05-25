@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".TemplateFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="623dp"
+            android:layout_height="163dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/image_information"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="商品码："
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_Ftemplate_manufactor"
+            app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_anotherName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView46"
+            app:layout_constraintStart_toEndOf="@+id/textView46"
+            app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView39"
+            app:layout_constraintStart_toEndOf="@+id/textView39"
+            app:layout_constraintTop_toTopOf="@+id/textView39" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_density"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView43"
+            app:layout_constraintStart_toEndOf="@+id/textView43"
+            app:layout_constraintTop_toTopOf="@+id/textView43" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView41"
+            app:layout_constraintStart_toEndOf="@+id/textView41"
+            app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_manufactor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView42"
+            app:layout_constraintStart_toEndOf="@+id/textView42"
+            app:layout_constraintTop_toTopOf="@+id/textView42" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="试剂瓶容量："
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_Ftemplate_anotherName"
+            app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="纯度："
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_Ftemplate_density"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:text="试剂形态"
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_Ftemplate_volume"
+            app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="厂家："
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tv_Ftemplate_purity"
+            app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="10dp"
+            android:text="密度(g/ml)："
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView28"
+            app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="24dp"
+            android:text="酒精"
+            android:textColor="#282828"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView28"
+            app:layout_constraintTop_toTopOf="@+id/imageView28" />
+
+        <TextView
+            android:id="@+id/textView45"
+            android:layout_width="36dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="39dp"
+            android:layout_marginTop="7dp"
+            android:background="#E86242"
+            app:layout_constraintStart_toStartOf="@+id/imageView28"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Ftemplate_name" />
+
+        <TextView
+            android:id="@+id/tv_Ftemplate_purity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#676767"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView40"
+            app:layout_constraintStart_toEndOf="@+id/textView40"
+            app:layout_constraintTop_toTopOf="@+id/textView40" />
+
+        <TextView
+            android:id="@+id/textView46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="37dp"
+            android:layout_marginTop="8dp"
+            android:text="试剂别称："
+            android:textColor="#B5B5B5"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/imageView28"
+            app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+        <ImageButton
+            android:id="@+id/ib_Ftemplate_del"
+            android:layout_width="47dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/circle_fff"
+            android:src="@drawable/del_user"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView28"
+            app:layout_constraintStart_toEndOf="@+id/imageView28"
+            app:layout_constraintTop_toTopOf="@+id/imageView28" />
+
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>
