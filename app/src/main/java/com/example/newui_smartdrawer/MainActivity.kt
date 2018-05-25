@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent()
             intent.setClass(this,ManagementActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         })
         btn_mainAdmin_template.setOnClickListener({
 
@@ -74,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent()
                 intent.setClass(this,LoginActivity::class.java)
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             }
 
         })
@@ -82,11 +84,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent()
             intent.setClass(this,OperationActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         })
         ib_mainAdmin_search.setOnClickListener({
             val intent = Intent()
             intent.setClass(this,SearchActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         })
         ib_mainAdmin_user.setOnClickListener({
 

@@ -17,6 +17,7 @@ class OperationActivity : AppCompatActivity() {
         ib_operation_back.setOnClickListener({
 
             finish()
+            overridePendingTransition(0, 0)
 
         })
 
@@ -25,6 +26,7 @@ class OperationActivity : AppCompatActivity() {
                     val intent =Intent()
                     intent.setClass(this,SearchActivity::class.java)
                     startActivity(intent)
+                    overridePendingTransition(0, 0)
                 }
         )
 

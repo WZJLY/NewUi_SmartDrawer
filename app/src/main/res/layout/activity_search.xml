@@ -68,7 +68,6 @@
         android:paddingStart="86dp"
         android:shadowColor="#E2EDF6"
         android:shadowDy="3"
-        android:text="search"
         android:textAlignment="textStart"
         android:textColor="@android:color/black"
         android:textSize="26dp"

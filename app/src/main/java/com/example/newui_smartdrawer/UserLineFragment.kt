@@ -22,7 +22,6 @@ class UserLineFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_line, container, false)
 
-
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -35,6 +34,14 @@ class UserLineFragment : Fragment() {
         tv_FuserLine_Name.text=user?.userAccount
         if(user?.userPower==SC_Const.ADMIN)
         tv_FuserLine_user.text="管理员"
+
+
+        ib_FuserLine_del.setOnClickListener({
+
+
+
+
+        })
     }
 
 

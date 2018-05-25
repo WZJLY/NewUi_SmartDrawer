@@ -1,5 +1,6 @@
 package com.example.newui_smartdrawer
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -74,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
                 intent.setClass(this,MainActivity::class.java)
                 startActivity(intent)
+//                overridePendingTransition(0, 0)
 
             } else {
                 Toast.makeText(this.applicationContext,"登陆失败", Toast.LENGTH_SHORT).show()
@@ -94,6 +96,7 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 saveUserName(userName)
                 startActivity(intent)
+                overridePendingTransition(0, 0)
             }
             else
                 Toast.makeText(this,"该用户已被禁用", Toast.LENGTH_SHORT).show()

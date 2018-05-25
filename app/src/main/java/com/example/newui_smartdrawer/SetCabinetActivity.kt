@@ -18,12 +18,13 @@ class SetCabinetActivity : AppCompatActivity() {
             val intent = Intent()
             intent.setClass(this,SetDrawerActivity::class.java)
             startActivity(intent)
-
+            overridePendingTransition(0, 0)
 
         })
         ib_setCabinet_back.setOnClickListener({
 
             finish()
+            overridePendingTransition(0, 0)
         })
 
         ib_setCabinet_cabinet.setOnClickListener({

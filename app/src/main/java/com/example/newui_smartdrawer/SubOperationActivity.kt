@@ -13,6 +13,7 @@ class SubOperationActivity : AppCompatActivity() {
         ib_subOperation_back.setOnClickListener({
 
             finish()
+            overridePendingTransition(0, 0)
         })
     }
 

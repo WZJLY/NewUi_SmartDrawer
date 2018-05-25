@@ -10,9 +10,12 @@ class SetDrawerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_drawer)
 
+
         ib_setDrawer_back.setOnClickListener({
             finish()
+            overridePendingTransition(0, 0)
         })
+
 
     }
 

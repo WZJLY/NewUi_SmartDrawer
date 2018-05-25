@@ -14,7 +14,7 @@ class SearchActivity : AppCompatActivity() {
 
         ib_search_back.setOnClickListener({
             finish()
-
+           overridePendingTransition(0, 0)
         })
         test_button.setOnClickListener({   //查找试剂位置时传参
 //            finish()

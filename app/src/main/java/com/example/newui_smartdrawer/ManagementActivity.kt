@@ -21,6 +21,7 @@ class ManagementActivity : AppCompatActivity() {
         ib_management_back.setOnClickListener({
 
             finish()
+            overridePendingTransition(0, 0)
         })
         ib_management_add.setOnClickListener({
 

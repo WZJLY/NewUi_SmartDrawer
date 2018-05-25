@@ -23,7 +23,6 @@ class CabinetFragment : Fragment() {
         ib_Fcabinet_del.setOnClickListener({
 
 
-
         })
     }
 
