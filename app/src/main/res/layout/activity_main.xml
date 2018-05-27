@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FBFBFB"
+    android:padding="0dp"
     tools:context="com.example.newui_smartdrawer.MainActivity">
 
     <android.support.v7.widget.CardView
@@ -66,10 +67,10 @@
 
     <Button
         android:id="@+id/ib_mainAdmin_operation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
         android:layout_marginTop="200dp"
-        android:background="@drawable/btn_operation_style"
+        android:background="@drawable/btn_10_style"
         android:text="试剂操作"
         android:textColor="@android:color/white"
         android:textSize="20sp"
@@ -79,8 +80,9 @@
 
     <Button
         android:id="@+id/ib_mainAdmin_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="500dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="39dp"
         android:background="@drawable/btn_search_style"
         android:text="试剂查找"
         android:textColor="@android:color/white"
@@ -103,12 +105,12 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/background_main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/background_main" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/back_button"
@@ -125,11 +127,11 @@
 
     <Button
         android:id="@+id/btn_update"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/btn_update_style"
+        android:layout_width="98dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/btn_21_fff_style"
         android:text="系统升级"
         android:textColor="#494949"
         android:textSize="20sp"
@@ -140,6 +142,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -150,11 +154,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:allowUndo="false"
             android:background="@drawable/btn_main_style"
             android:drawableLeft="@drawable/edit"
+            android:gravity="center_horizontal|center"
+            android:paddingBottom="15dp"
             android:paddingEnd="60dp"
             android:paddingStart="50dp"
             android:text="试剂模板"
+            android:textAlignment="gravity"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="20sp"
@@ -168,6 +176,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main_style"
             android:drawableLeft="@drawable/search"
+            android:paddingBottom="15dp"
             android:paddingEnd="60dp"
             android:paddingStart="50dp"
             android:text="记录查询"
@@ -194,6 +203,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main_style"
             android:drawableLeft="@drawable/management"
+            android:paddingBottom="15dp"
             android:paddingEnd="60dp"
             android:paddingStart="50dp"
             android:text="人员管理"
@@ -209,6 +219,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_main_style"
             android:drawableLeft="@drawable/setting"
+            android:paddingBottom="15dp"
             android:paddingEnd="50dp"
             android:paddingStart="50dp"
             android:text="智能柜设置"
