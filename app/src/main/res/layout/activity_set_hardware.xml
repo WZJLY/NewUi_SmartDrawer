@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fbfbfb"
+    tools:context=".SetHardwareActivity">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="800dp"
+                android:layout_height="80dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:color/background_light" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="硬件设置"
+                android:textColor="#1C71B1"
+                android:textSize="26sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/ib_setHardware_back"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:scaleType="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/back_style" />
+
+            <Button
+                android:id="@+id/btn_setHardware_save"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/transparent"
+                android:text="保存"
+                android:textColor="#1c71b1"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="87dp"
+        android:text="串口号"
+        android:textColor="#282828"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_binding_serviceCode"
+        app:layout_constraintEnd_toStartOf="@+id/et_binding_serviceCode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView13" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="25dp"
+        android:text="摄像头型号"
+        android:textColor="#282828"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@+id/rb_setHardware_ttyS1"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+        <RadioButton
+            android:id="@+id/rb_setHardware_ttyS1"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:padding="10dp"
+            android:text="串口1"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setHardware_ttyS2"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:padding="10dp"
+            android:text="串口2"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setHardware_ttyS3"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:padding="10dp"
+            android:text="串口3"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setHardware_ttyS4"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:padding="10dp"
+            android:text="串口4"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@+id/rb_setHardware_camer1"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <RadioButton
+            android:id="@+id/rb_setHardware_camer1"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:padding="10dp"
+            android:text="相机1"
+            android:textAlignment="center"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rb_setHardware_camera2"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_circle_style"
+            android:button="@null"
+            android:padding="10dp"
+            android:text="相机2"
+            android:textColor="@color/btn_circle_textstyle"
+            android:textSize="16sp" />
+    </RadioGroup>
+</android.support.constraint.ConstraintLayout>

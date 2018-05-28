@@ -7,7 +7,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.dialog_import.*
 
 
-class Import_Dialog(context: Context) : Dialog(context){
+class ImportDialog(context: Context) : Dialog(context){
     private var noOnclickListener: onNoOnclickListener? = null//取消按钮被点击了的监听器
     private var yesOnclickListener: onYesOnclickListener? = null//确定按钮被点击了的监听器
     fun onNoOnclickListener(onNoOnclickListener: onNoOnclickListener) {
@@ -31,9 +31,6 @@ class Import_Dialog(context: Context) : Dialog(context){
     private fun initEvent() {
         //设置确定按钮被点击后，向外界提供监听
         btn_Dimport_yes.setOnClickListener {
-            /**
-             * 保存数据
-             */
             if (yesOnclickListener != null) {
                 yesOnclickListener!!.onYesClick()
             }

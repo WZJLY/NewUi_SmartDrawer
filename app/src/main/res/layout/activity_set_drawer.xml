@@ -94,7 +94,6 @@
                 app:srcCompat="@android:color/background_light" />
 
             <TextView
-                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="抽屉设置"
@@ -265,26 +264,30 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <RadioButton
-            android:id="@+id/button16"
+            android:id="@+id/rb_setDrawer_use"
             android:layout_width="140dp"
             android:layout_height="46dp"
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:background="@drawable/btn_23_style"
             android:button="@null"
+            android:drawableLeft="@drawable/circle_39e85d"
+            android:paddingStart="16dp"
             android:text="正常使用"
             android:textAlignment="center"
             android:textColor="@color/btn_23_textstyle"
             android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/button15"
+            android:id="@+id/rb_setDrawer_nouse"
             android:layout_width="140dp"
             android:layout_height="46dp"
             android:layout_margin="15dp"
             android:layout_weight="1"
             android:background="@drawable/btn_23_style"
             android:button="@null"
+            android:drawableLeft="@drawable/circle_fd7f60"
+            android:paddingStart="16dp"
             android:text="暂时停用"
             android:textAlignment="center"
             android:textColor="@color/btn_23_textstyle"

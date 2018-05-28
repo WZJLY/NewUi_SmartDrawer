@@ -19,7 +19,6 @@ class ManagementActivity : AppCompatActivity() {
         dbManager= DBManager(this)
         updateUser()
         ib_management_back.setOnClickListener({
-
             finish()
             overridePendingTransition(0, 0)
         })

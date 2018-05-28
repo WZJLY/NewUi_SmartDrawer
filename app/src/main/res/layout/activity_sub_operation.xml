@@ -42,7 +42,6 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView6" />
 
     <ImageView
-        android:id="@+id/imageView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/imageView17"
@@ -132,7 +131,7 @@
                 app:srcCompat="@android:color/background_light" />
 
             <Button
-                android:id="@+id/btn_setDrawer_OK2"
+                android:id="@+id/btn_subOperation_OK"
                 android:layout_width="670dp"
                 android:layout_height="77dp"
                 android:background="@drawable/btn_drawer_style_39"

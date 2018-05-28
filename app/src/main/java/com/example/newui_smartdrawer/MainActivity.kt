@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         TimeThread().start()
         scApp=application as SCApp
         tv_mainAdmin_user.text=scApp!!.userInfo.userName
-       val power = scApp!!.userInfo.userPower
+        val power = scApp!!.userInfo.userPower
         if(power==SC_Const.NORMAL)
         {
             btn_mainAdmin_setting.visibility= View.GONE
@@ -37,8 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
         btn_mainAdmin_setting.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this,SetCabinetActivity::class.java)
+            intent.setClass(this,SettingActivity::class.java)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
         btn_mainAdmin_record.setOnClickListener({
 
@@ -54,13 +55,13 @@ class MainActivity : AppCompatActivity() {
 
 
         })
-        btn_update.setOnClickListener({
+        btn_mainAdmin_update.setOnClickListener({
 
             val manager= UpdateAppManager(this)
             manager.getUpdateMsg()
 
         })
-        back_button.setOnClickListener({
+        btn_mainAdmin_back.setOnClickListener({
             if(!mbackKeyPressed)
                 {
                  Toast.makeText(this,"再按一次退出登陆",Toast.LENGTH_SHORT).show()
@@ -284,7 +285,7 @@ class MainActivity : AppCompatActivity() {
                     val formatter = SimpleDateFormat("HH:mm")
                     val curDate = Date(System.currentTimeMillis())
                     val str = formatter.format(curDate)
-                    time_text.text=str
+                    tv_mainAdmin_time.text=str
                 }
 
             }

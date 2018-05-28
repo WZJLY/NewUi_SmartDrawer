@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#00ffffff"
+    tools:context=".BindingDialog">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="634dp"
+        android:layout_height="490dp"
+        android:src="@drawable/fc_12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_Dbinding_yes"
+        android:layout_width="320dp"
+        android:layout_height="54dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/btn_34_style"
+        android:text="保存"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dbinding_serviceCode" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="634dp"
+        android:layout_height="104dp"
+        android:src="@drawable/background_drawer_12"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+
+    <EditText
+        android:id="@+id/et_Dbinding_number"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginTop="59dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:textColor="#282828"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+    <EditText
+        android:id="@+id/et_Dbinding_serviceCode"
+        android:layout_width="280dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/bg_edit_style"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:textColor="#282828"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dbinding_number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="21dp"
+        android:text="智能柜编号"
+        android:textColor="#808080"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dbinding_number"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dbinding_number"
+        app:layout_constraintTop_toTopOf="@+id/et_Dbinding_number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="21dp"
+        android:text="服务码"
+        android:textColor="#808080"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dbinding_serviceCode"
+        app:layout_constraintEnd_toStartOf="@+id/et_Dbinding_serviceCode"
+        app:layout_constraintTop_toTopOf="@+id/et_Dbinding_serviceCode" />
+
+    <TextView
+        android:id="@+id/tv_Dbinding_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="编号错误"
+        android:textColor="#e86344"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/et_Dbinding_number"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dbinding_number" />
+
+    <TextView
+        android:id="@+id/tv_Dbinding_serviceCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="服务码错误"
+        android:textColor="#e86344"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/et_Dbinding_serviceCode"
+        app:layout_constraintTop_toBottomOf="@+id/et_Dbinding_serviceCode" />
+
+</android.support.constraint.ConstraintLayout>

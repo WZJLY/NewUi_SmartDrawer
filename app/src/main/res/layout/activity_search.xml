@@ -30,7 +30,6 @@
                 app:srcCompat="@android:color/background_light" />
 
             <TextView
-                android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="试剂查找"
@@ -87,16 +86,24 @@
         app:layout_constraintTop_toTopOf="@+id/et_search_search"
         app:srcCompat="@drawable/search" />
 
-    <LinearLayout
-        android:id="@+id/ll_search"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:gravity="center"
-        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_search_search"></LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/et_search_search">
+
+        <LinearLayout
+            android:id="@+id/ll_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search_search"></LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/test_button"
