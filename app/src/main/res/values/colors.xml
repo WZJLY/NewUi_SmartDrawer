@@ -3,7 +3,6 @@
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="blue1">#2c8bde</color>
-    <color name="blue2">#52A3EA</color>
-
+    <color name="tb_text">#565656</color>
+    <color name="tb_text_use">#fff</color>
 </resources>
