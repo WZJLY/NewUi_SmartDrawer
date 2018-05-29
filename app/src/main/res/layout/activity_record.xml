@@ -26,7 +26,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/ib_operation_back2"
+                android:id="@+id/ib_record_back"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
@@ -63,6 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView14">
 
         <LinearLayout
+            android:id="@+id/ll_record"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

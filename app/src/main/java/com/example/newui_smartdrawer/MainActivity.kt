@@ -42,8 +42,10 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         }
         btn_mainAdmin_record.setOnClickListener({
-
-
+            val intent = Intent()
+            intent.setClass(this,SettingActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
         })
         btn_mainAdmin_management.setOnClickListener({
             val intent = Intent()
