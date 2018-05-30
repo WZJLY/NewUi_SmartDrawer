@@ -3,6 +3,7 @@ package com.example.newui_smartdrawer
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +34,7 @@ class TemplateFragment : Fragment() {
         val arrListReagentTemplate = dbManager?.reagentTemplate
         reagentTemplate = arrListReagentTemplate?.get(order)
         tv_Ftemplate_name.text=reagentTemplate?.reagentName
+        Log.d("wzj",reagentTemplate?.reagentAlias)
         tv_Ftemplate_anotherName.text=reagentTemplate?.reagentAlias
         tv_Ftemplate_volume.text=reagentTemplate?.reagentSize
         tv_Ftemplate_code.text=reagentTemplate?.reagentGoodsID

@@ -10,11 +10,14 @@ import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.Gravity
 import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.ReagentTemplate
 import com.example.newui_smartdrawer.util.SC_Const
 import kotlinx.android.synthetic.main.activity_template.*
+import kotlinx.android.synthetic.main.dialog_import.*
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
@@ -23,7 +26,6 @@ class TemplateActivity : AppCompatActivity() {
     private var dbManager:DBManager?=null
     private var reagentTemplate: ReagentTemplate?=null
     private var scApp: SCApp? = null
-    private var state:Int = 0
     var mHandler: Handler = object : Handler() {
         override  fun handleMessage(msg: Message) {
             super.handleMessage(msg)
@@ -32,8 +34,6 @@ class TemplateActivity : AppCompatActivity() {
                     //在这里得到数据，并且可以直接更新UI
                     val data = msg.obj as String
                     Toast.makeText(this@TemplateActivity,data,Toast.LENGTH_SHORT).show()
-//                    val editTemplateFragment = EditTemplateFragment()
-//                    replaceFragment(editTemplateFragment, R.id.fl_admin)
                 }
             }
         }
@@ -43,22 +43,11 @@ class TemplateActivity : AppCompatActivity() {
         setContentView(R.layout.activity_template)
         dbManager= DBManager(this)
         scApp = application as SCApp
-        val arrListReagentTemplate = dbManager?.reagentTemplate
-        val sum = arrListReagentTemplate!!.size
-        if(sum>0)
-        {
-            for (i in 1..sum) {
-                reagentTemplate = arrListReagentTemplate?.get(i - 1)
-                val templateFragment = TemplateFragment()
-                val args = Bundle()
-                args.putInt("order",i-1)
-                templateFragment.arguments = args
-                addFragment(templateFragment,R.id.template_line)
-            }
-        }
-        else
-            Toast.makeText(this ,"没有试剂模板", Toast.LENGTH_SHORT).show()
-
+        val templateLine = VerticalFragment()
+        val args = Bundle()
+        args.putString("addtemplate","add")
+        templateLine.arguments=args
+        replaceFragment(templateLine,R.id.fl_template)
         ib_Template_back.setOnClickListener({
 
             finish()
@@ -98,17 +87,21 @@ class TemplateActivity : AppCompatActivity() {
                     var et_code = dialog.findViewById(R.id.et_Dimport_code) as EditText
                     var et_anotherName = dialog.findViewById(R.id.et_Dimport_anotherName) as EditText
                     var template_density = "1"
+                    var rg_Dimport_level=dialog.findViewById(R.id.rg_Dimport_level) as RadioGroup
+                    var selectId=dialog.findViewById(rg_Dimport_level.checkedRadioButtonId) as RadioButton
+
+                    Log.d("radiogroup",""+selectId)
                     if (et_name.length()>0) {
                         if (et_volume.length()>0) {
                             if(et_density.length()>0)
                                 template_density = et_density.text.toString()
-                            if (state == 1) {
-                                dbManager?.addReagentTemplate("",et_name.text.toString(),et_anotherName.toString(),"","",
-                                        state,et_purity.text.toString(),et_volume.text.toString(),et_manfactor.text.toString(),
+                            if (selectId.text.toString() == "固体") {
+                                dbManager?.addReagentTemplate("",et_name.text.toString(),et_anotherName.text.toString(),"","",
+                                        1,et_purity.text.toString(),et_volume.text.toString(),et_manfactor.text.toString(),
                                         et_code.text.toString(),"g",template_density)
-                            } else if (state == 2) {
-                                dbManager?.addReagentTemplate("",et_name.text.toString(),et_anotherName.toString(),"","",
-                                        state,et_purity.text.toString(),et_volume.text.toString(),et_manfactor.text.toString(),
+                            } else if (selectId.text.toString() == "液体") {
+                                dbManager?.addReagentTemplate("",et_name.text.toString(),et_anotherName.text.toString(),"","",
+                                       2,et_purity.text.toString(),et_volume.text.toString(),et_manfactor.text.toString(),
                                         et_code.text.toString(),"ml",template_density)
                             }
                         }
@@ -148,9 +141,9 @@ class TemplateActivity : AppCompatActivity() {
     }
 
 
-    fun AppCompatActivity.addFragment(fragment: Fragment, frameId: Int) {
+    fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
         supportFragmentManager.inTransaction{
-            add(frameId, fragment)
+            replace(frameId, fragment)
         }
     }
     fun templateToDB(filePath: String?): String {

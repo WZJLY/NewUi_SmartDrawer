@@ -1,6 +1,7 @@
 package com.example.newui_smartdrawer
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_user_line.*
 
 
 class UserLineFragment : Fragment() {
+    var activityCallback:UserLineFragment.deletbuttonlisten? = null
     var userName:String?=null
     var dbManager:DBManager?=null
     var user : UserAccount?=null
@@ -23,7 +25,22 @@ class UserLineFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_user_line, container, false)
 
     }
+    interface deletbuttonlisten {
+        fun deletButtonClick(text: String)
+    }
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        try {
+            activityCallback = context as deletbuttonlisten
+        } catch (e: ClassCastException) {
+            throw ClassCastException(context?.toString()
+                    + " must implement AdminFragmentListener")
+        }
 
+    }
+    private fun deletbuttonClicked(text: String) {
+        activityCallback?.deletButtonClick(text)
+    }
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         dbManager= DBManager(context)
         if(arguments!=null)
@@ -37,10 +54,8 @@ class UserLineFragment : Fragment() {
 
 
         ib_FuserLine_del.setOnClickListener({
-
-
-
-
+            dbManager?.deleteAccountByUserName( userName)
+            deletbuttonClicked("deletperson")
         })
     }
 
