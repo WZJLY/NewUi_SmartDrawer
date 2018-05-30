@@ -23,6 +23,12 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
         ib_management_back.setOnClickListener({
             finish()
         })
+        ib_management_add.setOnClickListener({
+
+
+
+        })
+
     }
 
     override fun deletButtonClick(text: String) {

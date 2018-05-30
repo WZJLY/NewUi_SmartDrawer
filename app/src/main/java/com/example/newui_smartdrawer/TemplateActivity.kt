@@ -22,7 +22,7 @@ import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
 
-class TemplateActivity : AppCompatActivity() {
+class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplatelisten {
     private var dbManager:DBManager?=null
     private var reagentTemplate: ReagentTemplate?=null
     private var scApp: SCApp? = null
@@ -34,6 +34,11 @@ class TemplateActivity : AppCompatActivity() {
                     //在这里得到数据，并且可以直接更新UI
                     val data = msg.obj as String
                     Toast.makeText(this@TemplateActivity,data,Toast.LENGTH_SHORT).show()
+                    val templateLine = VerticalFragment()
+                    val args = Bundle()
+                    args.putString("addtemplate","add")
+                    templateLine.arguments=args
+                    replaceFragment(templateLine,R.id.fl_template)
                 }
             }
         }
@@ -72,6 +77,11 @@ class TemplateActivity : AppCompatActivity() {
         btn_template_allDel.setOnClickListener({
 
             dbManager?.deleteAllReagentTemplate()
+            val templateLine = VerticalFragment()
+            val args = Bundle()
+            args.putString("addtemplate","add")
+            templateLine.arguments=args
+            replaceFragment(templateLine,R.id.fl_template)
 
         })
         btn_template_import.setOnClickListener({
@@ -132,6 +142,17 @@ class TemplateActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    override fun deletTemplateClick(text: String) {
+        if(text=="delet_template")
+        {
+            val templateLine = VerticalFragment()
+            val args = Bundle()
+            args.putString("addtemplate","add")
+            templateLine.arguments=args
+            replaceFragment(templateLine,R.id.fl_template)
+        }
     }
 
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
@@ -284,4 +305,13 @@ class TemplateActivity : AppCompatActivity() {
             }
         }.start()  //开启一个线程
     }
+
+//    override fun onRestart() {
+//        super.onRestart()
+//        val templateLine = VerticalFragment()
+//        val args = Bundle()
+//        args.putString("addtemplate","add")
+//        templateLine.arguments=args
+//        replaceFragment(templateLine,R.id.fl_template)
+//    }
 }

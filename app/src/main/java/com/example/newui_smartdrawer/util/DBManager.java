@@ -395,15 +395,15 @@ public class DBManager {
                 strReagentGoodsID, strReagentUnit, strReagentDensity});
     }
     public void deletReagentTemplateByInfo(String strReagentId, String strReagentName, String strReagentAlias,
-                                           String strReagentFormalName, String strReagentChemName, int iReagentType,
+                                           String strReagentFormalName, String strReagentChemName,
                                            String strReagentPurity, String strReagentSize,
                                            String strReagentCreater, String strReagentGoodsID, String strReagentUnit,
                                            String strReagentDensity)
         {
             db.delete("reagentTemplate","reagentId ==? and reagentName == ? and reagentAlias == ? and reagentFormalName == ? " +
-                    "and reagentChemName == ? and reagentType == ? and reagentPurity == ? and reagentSize == ? and  reagentCreater == ?" +
+                    "and reagentChemName == ?  and reagentPurity == ? and reagentSize == ? and  reagentCreater == ?" +
                     "and reagentGoodsID == ? and reagentUnit == ? and reagentDensity ==?",new String[]{strReagentId, strReagentName, strReagentAlias,
-                    strReagentFormalName, strReagentChemName, iReagentType+"",
+                    strReagentFormalName, strReagentChemName,
                     strReagentPurity, strReagentSize,
                     strReagentCreater, strReagentGoodsID, strReagentUnit,
                     strReagentDensity});
