@@ -24,7 +24,6 @@ class ImportDialog(context: Context) : Dialog(context){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_import)
         setCanceledOnTouchOutside(false)
-
         initEvent()
     }
 

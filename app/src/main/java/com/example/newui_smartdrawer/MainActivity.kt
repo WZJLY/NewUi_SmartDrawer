@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
         btn_mainAdmin_record.setOnClickListener({
             val intent = Intent()
-            intent.setClass(this,SettingActivity::class.java)
+            intent.setClass(this,RecordActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         })
@@ -54,11 +54,12 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         })
         btn_mainAdmin_template.setOnClickListener({
-
-
+            val intent = Intent()
+            intent.setClass(this,TemplateActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
         })
         btn_mainAdmin_update.setOnClickListener({
-
             val manager= UpdateAppManager(this)
             manager.getUpdateMsg()
 
@@ -80,7 +81,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
-
         })
 
         ib_mainAdmin_operation.setOnClickListener({
@@ -96,6 +96,9 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         })
         ib_mainAdmin_user.setOnClickListener({
+
+
+
 
         })
     }

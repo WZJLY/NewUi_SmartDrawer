@@ -17,13 +17,13 @@ class ManagementActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_management)
         dbManager= DBManager(this)
-        updateUser()
-        ib_management_back.setOnClickListener({
+            updateUser()
+            ib_management_back.setOnClickListener({
             finish()
-            overridePendingTransition(0, 0)
         })
         ib_management_add.setOnClickListener({
 
+            overridePendingTransition(0, 0)
             val userLineFragment:Fragment = UserLineFragment()
             addFragment(R.id.ll_management_admin,userLineFragment)
         })
