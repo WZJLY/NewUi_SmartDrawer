@@ -19,6 +19,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.51" />
 
+    <TextView
+        android:id="@+id/textView50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:text="(必填）"
+        android:textColor="#E86344"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_volume"
+        app:layout_constraintStart_toEndOf="@+id/et_Dimport_volume"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_volume" />
+
+    <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="(必填）"
+        android:textColor="#E86344"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rg_Duser_level"
+        app:layout_constraintStart_toEndOf="@+id/rg_Duser_level"
+        app:layout_constraintTop_toTopOf="@+id/rg_Duser_level" />
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="(必填）"
+        android:textColor="#E86344"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Dimport_name"
+        app:layout_constraintStart_toEndOf="@+id/et_Dimport_name"
+        app:layout_constraintTop_toTopOf="@+id/et_Dimport_name" />
+
     <ImageView
         android:id="@+id/imageView30"
         android:layout_width="634dp"
@@ -131,9 +171,9 @@
         android:text="试剂形态"
         android:textColor="#808080"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
-        app:layout_constraintEnd_toStartOf="@+id/radioGroup"
-        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+        app:layout_constraintBottom_toBottomOf="@+id/rg_Duser_level"
+        app:layout_constraintEnd_toStartOf="@+id/rg_Duser_level"
+        app:layout_constraintTop_toTopOf="@+id/rg_Duser_level" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -246,7 +286,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_Dimport_volume" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/rg_Duser_level"
         android:layout_width="280dp"
         android:layout_height="41dp"
         android:layout_marginEnd="148dp"
@@ -290,7 +330,7 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView29"
         app:layout_constraintStart_toStartOf="@+id/imageView29"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/rg_Duser_level" />
 
     <Button
         android:id="@+id/btn_Dimport_no"

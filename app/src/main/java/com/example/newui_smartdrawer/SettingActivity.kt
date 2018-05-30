@@ -3,6 +3,7 @@ package com.example.newui_smartdrawer
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.dialog_binding.*
@@ -33,12 +34,12 @@ class SettingActivity : AppCompatActivity() {
 
         btn_setting_binding.setOnClickListener {
             val dialog = BindingDialog(this)
-            dialog.show()
             dialog.setYesOnclickListener(object :BindingDialog.onYesOnclickListener{
                 override fun onYesClick() {
                     dialog.dismiss()
                 }
             })
+            dialog.show()
         }
     }
 }
