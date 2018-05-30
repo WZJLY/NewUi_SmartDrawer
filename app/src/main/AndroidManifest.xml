@@ -42,7 +42,10 @@
         <activity android:name=".SettingActivity" />
         <activity android:name=".SetHardwareActivity" />
         <activity android:name=".RecordActivity" />
-        <activity android:name=".SetCabinetActivity"></activity>
+        <activity android:name=".SetCabinetActivity"/>
+        <activity android:name=".BottomDialog" />
+        <activity android:name=".TopFalseDialog" />
+        <activity android:name=".TopTrueDialog"/>
     </application>
 
 </manifest>

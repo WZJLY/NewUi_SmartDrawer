@@ -51,12 +51,12 @@
         android:text="学/工号"
         android:textColor="#808080"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_Duser_name2"
-        app:layout_constraintEnd_toStartOf="@+id/et_Duser_name2"
-        app:layout_constraintTop_toTopOf="@+id/et_Duser_name2" />
+        app:layout_constraintBottom_toBottomOf="@+id/et_Duser_num"
+        app:layout_constraintEnd_toStartOf="@+id/et_Duser_num"
+        app:layout_constraintTop_toTopOf="@+id/et_Duser_num" />
 
     <EditText
-        android:id="@+id/et_Duser_name3"
+        android:id="@+id/et_Duser_phone"
         android:layout_width="280dp"
         android:layout_height="41dp"
         android:layout_marginEnd="148dp"
@@ -66,16 +66,16 @@
         android:textColor="#676767"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView26"
-        app:layout_constraintTop_toBottomOf="@+id/et_Duser_name2" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Duser_num" />
 
     <EditText
-        android:id="@+id/et_Duser_name2"
+        android:id="@+id/et_Duser_num"
         android:layout_width="280dp"
         android:layout_height="41dp"
         android:layout_marginEnd="148dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_edit_style"
-        android:inputType="phone"
+        android:inputType="number"
         android:textColor="#676767"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView26"
@@ -103,9 +103,9 @@
         android:text="手机号"
         android:textColor="#808080"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/et_Duser_name3"
-        app:layout_constraintEnd_toStartOf="@+id/et_Duser_name3"
-        app:layout_constraintTop_toTopOf="@+id/et_Duser_name3" />
+        app:layout_constraintBottom_toBottomOf="@+id/et_Duser_phone"
+        app:layout_constraintEnd_toStartOf="@+id/et_Duser_phone"
+        app:layout_constraintTop_toTopOf="@+id/et_Duser_phone" />
 
     <RadioGroup
         android:id="@+id/rg_Duser_level"
@@ -113,7 +113,7 @@
         android:layout_height="41dp"
         android:layout_marginEnd="148dp"
         android:layout_marginTop="10dp"
-        android:checkedButton="@+id/rb_Duser_nomal"
+        android:checkedButton="@+id/rb_Duser_normal"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/imageView26"
@@ -303,7 +303,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rg_Duser_level" />
 
     <Button
-        android:id="@+id/btn_Duser_OK"
+        android:id="@+id/btn_Duser_yes"
         android:layout_width="320dp"
         android:layout_height="54dp"
         android:layout_marginTop="37dp"
@@ -314,10 +314,10 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView26"
         app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="@+id/imageView26"
-        app:layout_constraintTop_toBottomOf="@+id/et_Duser_name3" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Duser_phone" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_Duser_no"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -329,5 +329,5 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView26"
         app:layout_constraintStart_toStartOf="@+id/imageView26"
-        app:layout_constraintTop_toBottomOf="@+id/btn_Duser_OK" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_Duser_yes" />
 </android.support.constraint.ConstraintLayout>

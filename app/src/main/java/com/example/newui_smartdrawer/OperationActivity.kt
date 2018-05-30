@@ -29,12 +29,40 @@ class OperationActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                 }
         )
-
-
     }
 
      override fun onStart() {
         super.onStart()
                             //利用全局变量获得试剂位置并更新UI
+    }
+
+    fun changeButton(text: String) {
+        when(text) {
+            "noFocusable" -> {
+                btn_operation_into.isEnabled = false
+                btn_operation_take.isEnabled = false
+                btn_operation_return.isEnabled = true
+                btn_operation_scrap.isEnabled = false
+            }
+            "into" -> {
+                btn_operation_into.isEnabled = true
+                btn_operation_take.isEnabled = false
+                btn_operation_return.isEnabled = true
+                btn_operation_scrap.isEnabled = false
+            }
+            "take" -> {
+                btn_operation_into.isEnabled = false
+                btn_operation_take.isEnabled = true
+                btn_operation_return.isEnabled = true
+                btn_operation_scrap.isEnabled = false
+            }
+
+            "scrap" -> {
+                btn_operation_into.isEnabled = false
+                btn_operation_take.isEnabled = false
+                btn_operation_return.isEnabled = true
+                btn_operation_scrap.isEnabled = true
+            }
+        }
     }
 }
