@@ -92,7 +92,7 @@ class UserDialog(context: Context) : Dialog(context) {
             if (levelStr == "ADMIN"){
                 rg_Duser_level.check(R.id.rb_Duser_admin)
             }
-            if (levelStr == "NORMAL")
+            else if (levelStr == "NORMAL")
                 rg_Duser_level.check(R.id.rb_Duser_normal)
 
         }

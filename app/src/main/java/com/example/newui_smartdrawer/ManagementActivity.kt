@@ -18,25 +18,38 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_management)
         val managementFragment = ManagementFragment()
-        replaceFragment(R.id.fl_management,managementFragment)
-        dbManager= DBManager(this)
+        replaceFragment(R.id.fl_management, managementFragment)
+        dbManager = DBManager(this)
         ib_management_back.setOnClickListener({
             finish()
         })
         ib_management_add.setOnClickListener({
+            val dialog = UserDialog(this)
+            dialog.show()
+            dialog.setYesOnclickListener("保存", object : UserDialog.onYesOnclickListener {
+                override fun onYesClick() {
+
+
+                }
+
+            })
+            dialog.setNoOnclickListener("取消", object : UserDialog.onNoOnclickListener {
+                override fun onNoClick() {
 
 
 
+                }
+
+            })
         })
-
     }
-
     override fun deletButtonClick(text: String) {
         if(text == "deletperson") {
             val managementFragment = ManagementFragment()
             replaceFragment(R.id.fl_management, managementFragment)
         }
     }
+
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = beginTransaction()
         fragmentTransaction.func()
