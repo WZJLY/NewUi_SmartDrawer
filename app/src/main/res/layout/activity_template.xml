@@ -95,32 +95,25 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView9" />
 
     <TextView
-        android:id="@+id/textView35"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="173dp"
+        android:layout_marginTop="61dp"
         android:text="已有模板"
         android:textColor="#D2D2D2"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView9" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_template_import" />
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/fl_template"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView35">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <LinearLayout
-            android:id="@+id/template_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView35"></LinearLayout>
-    </ScrollView>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

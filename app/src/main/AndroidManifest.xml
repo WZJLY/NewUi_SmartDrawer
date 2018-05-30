@@ -37,7 +37,6 @@
             android:name=".OperationActivity"
             android:launchMode="singleTop" />
         <activity android:name=".SearchActivity" />
-        <activity android:name=".SetCabinetActivity" />
         <activity android:name=".SetDrawerActivity" />
         <activity android:name=".SubOperationActivity" />
         <activity android:name=".TemplateActivity" />
