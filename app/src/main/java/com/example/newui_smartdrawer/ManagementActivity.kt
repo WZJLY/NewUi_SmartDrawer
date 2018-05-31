@@ -29,7 +29,7 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
         })
         ib_management_add.setOnClickListener({
             val dialog = UserDialog(this)
-            dialog.show()
+
             dialog.setYesOnclickListener("保存", object : UserDialog.onYesOnclickListener {
                 override fun onYesClick() {
                     var et_name = dialog.findViewById(R.id.et_Duser_account) as EditText
@@ -60,6 +60,8 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
 
                         }
                         dbManager?.addAccount(userAccount)
+                        val managementFragment = ManagementFragment()
+                        replaceFragment(R.id.fl_management, managementFragment)
                         dialog.dismiss()
                     }
                 }
@@ -73,6 +75,7 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
                 }
 
             })
+            dialog.show()
         })
     }
     override fun deletButtonClick(text: String) {

@@ -62,7 +62,7 @@ class ManagementFragment : Fragment() {
                 args.putString("statue",statue)
                 userLineFragment.arguments = args
                 val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.add(R.id.ll_management_admin,userLineFragment)
+                fragmentTransaction.add(R.id.ll_management_user,userLineFragment)
                 fragmentTransaction.commit()
             }
         }//通过遍历用户的数据表对片断进行添加

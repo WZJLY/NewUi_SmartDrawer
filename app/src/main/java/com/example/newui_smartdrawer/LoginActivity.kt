@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
                 intent.setClass(this,MainActivity::class.java)
                 startActivity(intent)
-//                overridePendingTransition(0, 0)
+                overridePendingTransition(0, 0)
 
             } else {
                 Toast.makeText(this.applicationContext,"登陆失败", Toast.LENGTH_SHORT).show()

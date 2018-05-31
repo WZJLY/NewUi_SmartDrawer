@@ -37,14 +37,17 @@ class UserDialog(context: Context) : Dialog(context) {
         this.yesOnclickListener = onYesOnclickListener
     }
 
-    fun setEdit(account: String,password: String,password2: String,level: String,name: String,phone: String,num: String) {
-        accountStr = account
-        passwordStr = password
-        password2Str = password2
-        levelStr = level
-        nameStr = name
-        phoneStr = phone
-        numStr = num
+    fun setEdit(userAccount: UserAccount) {
+        accountStr = userAccount.userName
+        passwordStr = userAccount.userPassword
+        password2Str = userAccount.userPassword
+        nameStr = userAccount.userAccount
+        phoneStr = userAccount.phoneNumber
+        numStr = userAccount.userId
+        if(userAccount.userPower==0)
+            levelStr = "ADMIN"
+        else
+            levelStr = "NORMAL"
     }
 
 
@@ -93,8 +96,12 @@ class UserDialog(context: Context) : Dialog(context) {
             if (levelStr == "ADMIN"){
                 rg_Duser_level.check(R.id.rb_Duser_admin)
             }
-            else if (levelStr == "NORMAL")
+            else if (levelStr == "NORMAL"){
                 rg_Duser_level.check(R.id.rb_Duser_normal)
+                rb_Duser_admin.isEnabled = false
+                rb_Duser_normal.isEnabled = false
+                rg_Duser_level.setBackgroundResource(R.drawable.bg_edit_false)
+            }
 
         }
 

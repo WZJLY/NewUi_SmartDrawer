@@ -5,10 +5,14 @@ import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.SC_Const
 import com.example.newui_smartdrawer.util.UpdateAppManager
+import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
 import java.net.MalformedURLException
@@ -20,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var scApp:SCApp?=null
         private var mbackKeyPressed=false
         private var dbManager:DBManager?=null
-
+        private var userAccount:UserAccount?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -96,11 +100,58 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
         })
         ib_mainAdmin_user.setOnClickListener({
+            val dialog = UserDialog(this)
+            dialog.setEdit(dbManager!!.getUserAccountByUserName(scApp!!.userInfo.userName))
 
+            dialog.setYesOnclickListener("修改", object : UserDialog.onYesOnclickListener {
+                override fun onYesClick() {
 
+                    var et_name = dialog.findViewById(R.id.et_Duser_account) as EditText
+                    var et_num = dialog.findViewById(R.id.et_Duser_num) as EditText
+                    var et_account = dialog.findViewById(R.id.et_Duser_name) as EditText
+                    var et_password = dialog.findViewById(R.id.et_Duser_password) as EditText
+                    var et_password2 = dialog.findViewById(R.id.et_Duser_password2) as EditText
+                    var et_phone = dialog.findViewById(R.id.et_Duser_phone) as EditText
+                    var rg_Duser_level = dialog.findViewById(R.id.rg_Duser_level) as RadioGroup
+                    var selectId = dialog.findViewById(rg_Duser_level.checkedRadioButtonId) as RadioButton
+                    if (et_name.length() == 0) {
+                        Toast.makeText(this@MainActivity, "账号未填写", Toast.LENGTH_SHORT).show()
+                        } else if (et_password.length() == 0) {
+                        Toast.makeText(this@MainActivity, "密码未填写", Toast.LENGTH_SHORT).show()
+                        } else if (et_password.length() != 0 && et_password.text.toString() != et_password2.text.toString()) {
+                        Toast.makeText(this@MainActivity, "两次密码输入不同", Toast.LENGTH_SHORT).show()
+                        } else if (et_account.length() == 0) {
+                        Toast.makeText(this@MainActivity, "姓名未填写", Toast.LENGTH_SHORT).show()
+                        } else if (et_name.length() != 0 && et_account.length() != 0 && et_password.length() != 0 && et_password.length() == et_password2.length()) {
+                                if (selectId.text == "管理员") {
 
+                                    dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
+                                            0, et_account.text.toString(), et_phone.text.toString())
 
+                                } else if (selectId.text == "普通用户") {
+
+                                    dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
+                                            1, et_account.text.toString(), et_phone.text.toString())
+
+                                }
+
+                        dialog.dismiss()
+                    }
+                }
+
+            })
+            dialog.setNoOnclickListener("取消", object : UserDialog.onNoOnclickListener {
+                override fun onNoClick() {
+
+                    dialog.dismiss()
+                }
+
+            })
+            dialog.show()
         })
+
+
+
     }
 
     override fun onStart() {
