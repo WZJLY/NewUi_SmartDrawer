@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.newui_smartdrawer.R.id.tv_FuserLine_Name
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.SC_Const
 import com.example.newui_smartdrawer.util.UserAccount
@@ -53,7 +52,7 @@ class UserLineFragment : Fragment() {
         tv_FuserLine_user.text="管理员"
 
 
-        ib_FuserLine_del.setOnClickListener({
+        btn_FuserLine_del.setOnClickListener({
             dbManager?.deleteAccountByUserName( userName)
             deletbuttonClicked("deletperson")
         })

@@ -9,63 +9,67 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageView15"
-                android:layout_width="658dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="38dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/image_6_fff"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/ib_FuserLine_user"
+            android:layout_width="658dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="38dp"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/transparent"
+            android:padding="0dp"
+            android:src="@drawable/image_6_fff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/ib_FuserLine_del"
-                android:layout_width="47dp"
-                android:layout_height="47dp"
-                android:layout_marginStart="26dp"
-                android:background="@drawable/circle_fff"
-                android:src="@drawable/del_user"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                app:layout_constraintStart_toEndOf="@+id/imageView15"
-                app:layout_constraintTop_toTopOf="@+id/imageView15" />
+        <Button
+            android:id="@+id/btn_FuserLine_del"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/circle_fff"
+            android:text="启用"
+            android:textColor="#1C71B1"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_FuserLine_user"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ib_FuserLine_user"
+            app:layout_constraintTop_toTopOf="@+id/ib_FuserLine_user" />
 
-            <ImageView
-                android:id="@+id/iv_FuserLine_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:src="@drawable/ordinary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                app:layout_constraintStart_toStartOf="@+id/imageView15"
-                app:layout_constraintTop_toTopOf="@+id/imageView15" />
+        <ImageView
+            android:id="@+id/iv_FuserLine_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:src="@drawable/ordinary"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_FuserLine_user"
+            app:layout_constraintStart_toStartOf="@+id/ib_FuserLine_user"
+            app:layout_constraintTop_toTopOf="@+id/ib_FuserLine_user" />
 
-            <TextView
-                android:id="@+id/tv_FuserLine_Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
-                android:text="user"
-                android:textColor="#494949"
-                android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView15"
-                app:layout_constraintStart_toEndOf="@+id/iv_FuserLine_icon"
-                app:layout_constraintTop_toTopOf="@+id/imageView15" />
+        <TextView
+            android:id="@+id/tv_FuserLine_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:text="user"
+            android:textColor="#494949"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ib_FuserLine_user"
+            app:layout_constraintStart_toEndOf="@+id/iv_FuserLine_icon"
+            app:layout_constraintTop_toTopOf="@+id/ib_FuserLine_user" />
 
-            <TextView
-                android:id="@+id/tv_FuserLine_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="32dp"
-                android:text="普通用户"
-                android:textColor="#D2D2D2"
-                app:layout_constraintStart_toEndOf="@+id/tv_FuserLine_Name"
-                app:layout_constraintTop_toTopOf="@+id/imageView15" />
-        </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_FuserLine_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="32dp"
+            android:text="普通用户"
+            android:textColor="#D2D2D2"
+            app:layout_constraintStart_toEndOf="@+id/tv_FuserLine_Name"
+            app:layout_constraintTop_toTopOf="@+id/ib_FuserLine_user" />
+    </android.support.constraint.ConstraintLayout>
 
 </LinearLayout>
