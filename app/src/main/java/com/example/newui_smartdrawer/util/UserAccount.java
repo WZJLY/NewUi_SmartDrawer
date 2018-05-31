@@ -13,9 +13,7 @@ public class UserAccount {
     public String phoneNumber;
     public String userAccount;
     public String statue;      //“0”启用， “1”禁用
-public UserAccount(){
 
-}
     public String getUserId(){
         return this.userId;
     }

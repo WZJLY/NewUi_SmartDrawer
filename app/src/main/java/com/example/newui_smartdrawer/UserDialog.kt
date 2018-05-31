@@ -3,9 +3,9 @@ package com.example.newui_smartdrawer
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.provider.ContactsContract
+import android.widget.RadioButton
+import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.dialog_user.*
-import java.net.PasswordAuthentication
 
 class UserDialog(context: Context) : Dialog(context) {
 
@@ -19,7 +19,7 @@ class UserDialog(context: Context) : Dialog(context) {
 
     private var phoneStr: String? = null
     private var numStr: String? = null
-
+    var userAccount:UserAccount?=null
     private var noOnclickListener: onNoOnclickListener? = null//取消按钮被点击了的监听器
     private var yesOnclickListener: onYesOnclickListener? = null//确定按钮被点击了的监听器
 
@@ -46,6 +46,7 @@ class UserDialog(context: Context) : Dialog(context) {
         phoneStr = phone
         numStr = num
     }
+
 
     fun setName(name: String) {
         nameStr = name
