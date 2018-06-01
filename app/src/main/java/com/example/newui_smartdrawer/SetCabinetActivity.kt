@@ -13,6 +13,8 @@ class SetCabinetActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_cabinet)
         val setCabinetFragment = SetCabinetFragment()
+        val args = Bundle()
+//        args.putString("set")
         replaceFragment(setCabinetFragment,R.id.fl_setCabinet)
       ib_setCabinet_back.setOnClickListener({
           finish()

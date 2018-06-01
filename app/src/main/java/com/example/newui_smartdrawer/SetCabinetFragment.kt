@@ -16,5 +16,14 @@ class SetCabinetFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_set_cabinet, container, false)
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        val verticalFragment=VerticalFragment()
+        val args =Bundle()
+//        args.putString("",)
+
+
+
+    }
+
 
 }
