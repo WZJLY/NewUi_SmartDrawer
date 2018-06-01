@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView29"
         android:layout_width="634dp"
-        android:layout_height="835dp"
+        android:layout_height="830dp"
         android:src="@drawable/fc_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -323,7 +323,7 @@
         android:layout_height="54dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="69dp"
+        android:layout_marginTop="65dp"
         android:background="@drawable/btn_34_style"
         android:text="保存"
         android:textColor="#fff"
@@ -334,15 +334,15 @@
 
     <Button
         android:id="@+id/btn_Dimport_no"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="54dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:text="取消"
         android:textColor="#328BD8"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView29"
         app:layout_constraintEnd_toEndOf="@+id/imageView29"
         app:layout_constraintStart_toStartOf="@+id/imageView29"
         app:layout_constraintTop_toBottomOf="@+id/btn_Dimport_yes" />

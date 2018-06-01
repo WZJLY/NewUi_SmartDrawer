@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.RadioButton
@@ -45,113 +46,99 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
-        btn_mainAdmin_record.setOnClickListener({
+        btn_mainAdmin_record.setOnClickListener {
             val intent = Intent()
             intent.setClass(this,RecordActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        })
-        btn_mainAdmin_management.setOnClickListener({
+        }
+        btn_mainAdmin_management.setOnClickListener {
             val intent = Intent()
             intent.setClass(this,ManagementActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        })
-        btn_mainAdmin_template.setOnClickListener({
+        }
+        btn_mainAdmin_template.setOnClickListener {
             val intent = Intent()
             intent.setClass(this,TemplateActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        })
-        btn_mainAdmin_update.setOnClickListener({
+        }
+        btn_mainAdmin_update.setOnClickListener {
             val manager= UpdateAppManager(this)
             manager.getUpdateMsg()
-
-        })
-        btn_mainAdmin_back.setOnClickListener({
-            if(!mbackKeyPressed)
-                {
-                 Toast.makeText(this,"再按一次退出登陆",Toast.LENGTH_SHORT).show()
-                    mbackKeyPressed=true
-                    Timer().schedule(object :TimerTask(){
-                        override fun run() {
-                            mbackKeyPressed=false
-                        }
-                    },2000)
-                }
-            else{
+        }
+        btn_mainAdmin_back.setOnClickListener {
+            if(!mbackKeyPressed) {
+                Toast.makeText(this,"再按一次退出登陆",Toast.LENGTH_SHORT).show()
+                mbackKeyPressed=true
+                Timer().schedule(object :TimerTask(){
+                    override fun run() {
+                        mbackKeyPressed=false
+                    }
+                },2000)
+            }
+            else {
                 val intent = Intent()
                 intent.setClass(this,LoginActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
-        })
-
-        ib_mainAdmin_operation.setOnClickListener({
+        }
+        ib_mainAdmin_operation.setOnClickListener {
             val intent = Intent()
             intent.setClass(this,OperationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        })
-        ib_mainAdmin_search.setOnClickListener({
+        }
+        ib_mainAdmin_search.setOnClickListener {
             val intent = Intent()
             intent.setClass(this,SearchActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        })
-        ib_mainAdmin_user.setOnClickListener({
+        }
+        ib_mainAdmin_user.setOnClickListener {
             val dialog = UserDialog(this)
-            dialog.setEdit(dbManager!!.getUserAccountByUserName(scApp!!.userInfo.userName))
-
+            dialog.setEdit(dbManager!!.getUserAccountByUserName(scApp!!.userInfo.userName),1)
             dialog.setYesOnclickListener("修改", object : UserDialog.onYesOnclickListener {
                 override fun onYesClick() {
-
-                    var et_name = dialog.findViewById(R.id.et_Duser_account) as EditText
-                    var et_num = dialog.findViewById(R.id.et_Duser_num) as EditText
-                    var et_account = dialog.findViewById(R.id.et_Duser_name) as EditText
-                    var et_password = dialog.findViewById(R.id.et_Duser_password) as EditText
-                    var et_password2 = dialog.findViewById(R.id.et_Duser_password2) as EditText
-                    var et_phone = dialog.findViewById(R.id.et_Duser_phone) as EditText
-                    var rg_Duser_level = dialog.findViewById(R.id.rg_Duser_level) as RadioGroup
-                    var selectId = dialog.findViewById(rg_Duser_level.checkedRadioButtonId) as RadioButton
-                    if (et_name.length() == 0) {
+                    val etName = dialog.findViewById(R.id.et_Duser_account) as EditText
+                    val etNum = dialog.findViewById(R.id.et_Duser_num) as EditText
+                    val etAccount = dialog.findViewById(R.id.et_Duser_name) as EditText
+                    val etPassword = dialog.findViewById(R.id.et_Duser_password) as EditText
+                    val etPassword2 = dialog.findViewById(R.id.et_Duser_password2) as EditText
+                    val etPhone = dialog.findViewById(R.id.et_Duser_phone) as EditText
+                    val rgDuserLevel = dialog.findViewById(R.id.rg_Duser_level) as RadioGroup
+                    val selectId = dialog.findViewById(rgDuserLevel.checkedRadioButtonId) as RadioButton
+                    if (etName.length() == 0) {
                         Toast.makeText(this@MainActivity, "账号未填写", Toast.LENGTH_SHORT).show()
-                        } else if (et_password.length() == 0) {
+                        } else if (etPassword.length() == 0) {
                         Toast.makeText(this@MainActivity, "密码未填写", Toast.LENGTH_SHORT).show()
-                        } else if (et_password.length() != 0 && et_password.text.toString() != et_password2.text.toString()) {
+                        } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()) {
                         Toast.makeText(this@MainActivity, "两次密码输入不同", Toast.LENGTH_SHORT).show()
-                        } else if (et_account.length() == 0) {
+                        } else if (etAccount.length() == 0) {
                         Toast.makeText(this@MainActivity, "姓名未填写", Toast.LENGTH_SHORT).show()
-                        } else if (et_name.length() != 0 && et_account.length() != 0 && et_password.length() != 0 && et_password.length() == et_password2.length()) {
-                                if (selectId.text == "管理员") {
+                        } else if (etName.length() != 0 && etAccount.length() != 0 && etPassword.length() != 0 && etPassword.length() == etPassword2.length()) {
+                            if (selectId.text == "管理员") {
+                                dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
+                                        0, etAccount.text.toString(), etPhone.text.toString())
 
-                                    dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
-                                            0, et_account.text.toString(), et_phone.text.toString())
-
-                                } else if (selectId.text == "普通用户") {
-
-                                    dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
-                                            1, et_account.text.toString(), et_phone.text.toString())
-
-                                }
-
+                            } else if (selectId.text == "普通用户") {
+                                dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
+                                        1, etAccount.text.toString(), etPhone.text.toString())
+                            }
                         dialog.dismiss()
                     }
                 }
-
             })
             dialog.setNoOnclickListener("取消", object : UserDialog.onNoOnclickListener {
                 override fun onNoClick() {
-
                     dialog.dismiss()
                 }
-
             })
             dialog.show()
-        })
-
-
-
+            dialog.window.setGravity(Gravity.CENTER)
+        }
     }
 
     override fun onStart() {

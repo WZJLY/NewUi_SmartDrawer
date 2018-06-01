@@ -3,11 +3,20 @@ package com.example.newui_smartdrawer
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.dialog_user.*
 
 class UserDialog(context: Context) : Dialog(context) {
 
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if(null != this.currentFocus) {
+            val mInputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            return mInputMethodManager.hideSoftInputFromWindow(this.currentFocus.windowToken, 0)
+        }
+        return super.onTouchEvent(event)
+    }
     private var yesStr: String? = null
     private var noStr: String? = null
     private var accountStr: String? = null
@@ -18,6 +27,7 @@ class UserDialog(context: Context) : Dialog(context) {
 
     private var phoneStr: String? = null
     private var numStr: String? = null
+    private var stateInt: Int = 0
     var userAccount:UserAccount?=null
     private var noOnclickListener: onNoOnclickListener? = null//取消按钮被点击了的监听器
     private var yesOnclickListener: onYesOnclickListener? = null//确定按钮被点击了的监听器
@@ -36,7 +46,7 @@ class UserDialog(context: Context) : Dialog(context) {
         this.yesOnclickListener = onYesOnclickListener
     }
 
-    fun setEdit(userAccount: UserAccount) {
+    fun setEdit(userAccount: UserAccount,state :Int) {
         accountStr = userAccount.userName
         passwordStr = userAccount.userPassword
         password2Str = userAccount.userPassword
@@ -47,19 +57,7 @@ class UserDialog(context: Context) : Dialog(context) {
             levelStr = "ADMIN"
         else
             levelStr = "NORMAL"
-    }
-
-
-    fun setName(name: String) {
-        nameStr = name
-    }
-
-    fun setPhone(phone: String) {
-        phoneStr = phone
-    }
-
-    fun setNum(num: String) {
-        numStr = num
+        stateInt = state
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,9 +85,6 @@ class UserDialog(context: Context) : Dialog(context) {
             tv_Duser_title.text = "个人信息修改"
             et_Duser_account.setText(accountStr)
             et_Duser_account.isEnabled = false
-            et_Duser_account.isFocusable = false
-            et_Duser_account.isFocusable = false
-
             et_Duser_password.setText(passwordStr)
             et_Duser_password2.setText(password2Str)
             if (levelStr == "ADMIN"){
@@ -97,25 +92,22 @@ class UserDialog(context: Context) : Dialog(context) {
             }
             else if (levelStr == "NORMAL"){
                 rg_Duser_level.check(R.id.rb_Duser_normal)
-                rb_Duser_admin.isEnabled = false
-                rb_Duser_normal.isEnabled = false
-                rg_Duser_level.setBackgroundResource(R.drawable.bg_edit_false)
+                if (stateInt > 0) {
+                    rb_Duser_admin.isEnabled = false
+                    rb_Duser_normal.isEnabled = false
+                    rg_Duser_level.setBackgroundResource(R.drawable.bg_edit_false)
+                }
             }
-
         }
-
         if (nameStr != null) {
             et_Duser_name.setText(nameStr)
         }
-
         if (phoneStr != null) {
             et_Duser_phone.setText(phoneStr)
         }
-
         if (numStr != null) {
             et_Duser_num.setText(numStr)
         }
-
         //如果设置按钮的文字
         if (yesStr != null) {
             btn_Duser_yes.text = yesStr

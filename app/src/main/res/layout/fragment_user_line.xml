@@ -30,7 +30,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/circle_fff"
-            android:text="启用"
+            android:text="禁用"
             android:textColor="#1C71B1"
             android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="@+id/ib_FuserLine_user"
