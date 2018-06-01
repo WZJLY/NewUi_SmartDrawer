@@ -3,6 +3,7 @@ package com.example.newui_smartdrawer;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.lib_zxing.activity.ZXingLibrary;
 import com.example.newui_smartdrawer.util.CabinetInfo;
 import com.example.newui_smartdrawer.util.DBManager;
 import com.example.newui_smartdrawer.util.SerialPortInterface;
@@ -34,7 +35,7 @@ public class SCApp extends Application {  //全局变量
         dbManager = new DBManager(this);
         context = getApplicationContext();
         //  init ZXing lib
-//         ZXingLibrary.initDisplayOpinion(this);
+         ZXingLibrary.initDisplayOpinion(this);
     }
     public static Context getContext(){
         return context;
