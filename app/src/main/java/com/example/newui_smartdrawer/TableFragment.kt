@@ -19,6 +19,14 @@ class TableFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_table, container, false)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        if(arguments!=null)
+        {
+           val tableNum =  arguments.getInt("tableNum")
+            addNum(tableNum)
+        }
+    }
+
     fun addNum(num: Int){
         tl_Ftable.removeAllViews()
         val params = TableRow.LayoutParams(55, 55)
