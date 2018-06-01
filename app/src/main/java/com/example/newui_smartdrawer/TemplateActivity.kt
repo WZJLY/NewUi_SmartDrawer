@@ -17,7 +17,6 @@ import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.ReagentTemplate
 import com.example.newui_smartdrawer.util.SC_Const
 import kotlinx.android.synthetic.main.activity_template.*
-import kotlinx.android.synthetic.main.dialog_import.*
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
@@ -43,6 +42,7 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_template)
@@ -84,9 +84,8 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
             replaceFragment(templateLine,R.id.fl_template)
 
         })
-        btn_template_import.setOnClickListener({
+        btn_template_import.setOnClickListener{
             val dialog = ImportDialog(this)
-            dialog.show()
             dialog.onYesOnclickListener(object :ImportDialog.onYesOnclickListener{
                 override fun onYesClick() {
                     var et_name = dialog.findViewById(R.id.et_Dimport_name) as EditText
@@ -99,7 +98,6 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                     var template_density = "1"
                     var rg_Dimport_level=dialog.findViewById(R.id.rg_Dimport_level) as RadioGroup
                     var selectId=dialog.findViewById(rg_Dimport_level.checkedRadioButtonId) as RadioButton
-
                     Log.d("radiogroup",""+selectId)
                     if (et_name.length()>0) {
                         if (et_volume.length()>0) {
@@ -124,24 +122,22 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                         else
                             Toast.makeText(this@TemplateActivity, "试剂名和试剂瓶容量未填写", Toast.LENGTH_SHORT).show()
                     }
+                    val templateLine = VerticalFragment()
+                    val args = Bundle()
+                    args.putString("addtemplate","add")
+                    templateLine.arguments=args
+                    replaceFragment(templateLine,R.id.fl_template)
                     dialog.dismiss()
                 }
             })
             dialog.onNoOnclickListener(object :ImportDialog.onNoOnclickListener{
-
                 override fun onNoClick() {
-
-
                     dialog.dismiss()
-
                 }
-
             })
-
-
-        })
-
-
+            dialog.show()
+            dialog.window.setGravity(Gravity.CENTER)
+        }
     }
 
     override fun deletTemplateClick(text: String) {
@@ -196,7 +192,6 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                                 dbManager?.addReagentTemplate(lineArray[0], lineArray[1], lineArray[2], lineArray[3], lineArray[4], lineArray[5].toInt(),
                                         lineArray[6], lineArray[7], lineArray[8], lineArray[9], lineArray[10], lineArray[11])
                             }
-
                         }
                         lineNumber++
                     }
@@ -274,7 +269,6 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                             Toast.makeText(SCApp.getContext(), "试剂模板导入失败", Toast.LENGTH_SHORT).show()
 
                         } else {
-
                             Toast.makeText(SCApp.getContext(), "试剂模板导入成功", Toast.LENGTH_SHORT).show()
                             val msg = Message()
                             msg.what = 0

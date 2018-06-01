@@ -14,21 +14,18 @@ class OperationActivity : AppCompatActivity() {
 
         btn_operation_into.isEnabled = false
 
-        ib_operation_back.setOnClickListener({
-
+        ib_operation_back.setOnClickListener{
             finish()
             overridePendingTransition(0, 0)
 
-        })
+        }
 
-        ib_operation_search.setOnClickListener(
-                {
-                    val intent =Intent()
-                    intent.setClass(this,SearchActivity::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(0, 0)
-                }
-        )
+        ib_operation_search.setOnClickListener {
+            val intent =Intent()
+            intent.setClass(this,SearchActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
     }
 
      override fun onStart() {

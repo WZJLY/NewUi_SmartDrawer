@@ -89,14 +89,13 @@
         android:textColor="#282828"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup3" />
+        app:layout_constraintTop_toBottomOf="@+id/rg_setHardware_dev" />
 
     <RadioGroup
-        android:id="@+id/radioGroup3"
+        android:id="@+id/rg_setHardware_dev"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:checkedButton="@+id/rb_setHardware_ttyS1"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5">
@@ -158,16 +157,16 @@
     </RadioGroup>
 
     <RadioGroup
+        android:id="@+id/rg_setHardware_camer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:checkedButton="@+id/rb_setHardware_camer1"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <RadioButton
-            android:id="@+id/rb_setHardware_camer1"
+            android:id="@+id/rb_setHardware_camera1"
             android:layout_width="65dp"
             android:layout_height="65dp"
             android:layout_margin="15dp"

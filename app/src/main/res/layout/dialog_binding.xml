@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="634dp"
-        android:layout_height="490dp"
+        android:layout_height="515dp"
         android:src="@drawable/fc_12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,7 +23,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/btn_34_style"
-        android:text="保存"
+        android:text="绑定"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
@@ -115,5 +115,20 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/et_Dbinding_serviceCode"
         app:layout_constraintTop_toBottomOf="@+id/et_Dbinding_serviceCode" />
+
+    <Button
+        android:id="@+id/btn_Dbinding_no"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:color/transparent"
+        android:text="取消"
+        android:textColor="#328BD8"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Dbinding_yes"
+        app:layout_constraintStart_toStartOf="@+id/btn_Dbinding_yes"
+        app:layout_constraintTop_toBottomOf="@+id/btn_Dbinding_yes" />
 
 </android.support.constraint.ConstraintLayout>

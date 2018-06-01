@@ -3,7 +3,6 @@ package com.example.newui_smartdrawer
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.widget.RadioButton
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.dialog_user.*
 

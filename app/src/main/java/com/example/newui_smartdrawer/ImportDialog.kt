@@ -4,6 +4,8 @@ package com.example.newui_smartdrawer
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import kotlinx.android.synthetic.main.dialog_import.*
 
 
@@ -14,7 +16,13 @@ class ImportDialog(context: Context) : Dialog(context){
         this.noOnclickListener = onNoOnclickListener
     }
 
-
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        if(null != this.currentFocus) {
+            val mInputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            return mInputMethodManager.hideSoftInputFromWindow(this.currentFocus.windowToken, 0)
+        }
+        return super.onTouchEvent(event)
+    }
 
     fun onYesOnclickListener(onYesOnclickListener: onYesOnclickListener) {
         this.yesOnclickListener = onYesOnclickListener
