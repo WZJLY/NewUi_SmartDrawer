@@ -62,7 +62,6 @@
         android:layout_height="92dp"
         android:layout_marginTop="38dp"
         android:background="@drawable/image_login"
-        android:ems="10"
         android:inputType="textPersonName"
         android:paddingStart="86dp"
         android:shadowColor="#E2EDF6"

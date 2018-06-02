@@ -180,7 +180,7 @@ class MainActivity : AppCompatActivity() {
                         Log.e("wzj",line)
                         if (lineNumber >= 1) {     //insert to DB
                             lineArray = line.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                            if (lineArray[0] != null && lineArray[0] !== "") {
+                            if (lineArray[0] != null && lineArray[0] != "") {
                                 if (lineArray[5] == "") lineArray[5] = "1"
                                 dbManager?.addReagentTemplate(lineArray[0], lineArray[1], lineArray[2], lineArray[3], lineArray[4], lineArray[5].toInt(),
                                         lineArray[6], lineArray[7], lineArray[8], lineArray[9], lineArray[10], lineArray[11])

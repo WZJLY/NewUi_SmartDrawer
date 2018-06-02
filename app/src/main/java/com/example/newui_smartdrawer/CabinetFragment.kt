@@ -21,18 +21,20 @@ class CabinetFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_cabinet, container, false)
     }
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        if(arguments.getString("delCabinet") == "false")
-            ib_Fcabinet_del.isEnabled = false
-        if (arguments.getString("cabinetNum") != null)
-            tv_Fcabinet_num.text = arguments.getString("cabinetNum")
-        if (arguments.getString("choice") == "true"){
-            val params = LinearLayout.LayoutParams(60, 156)
-            im_Fcabinet_cabinet.layoutParams = params
-            im_Fcabinet.setBackgroundResource(R.drawable.circle_a2a2a2)
+        if(arguments!=null) {
+            if (arguments.getString("delCabinet") == "false")
+                ib_Fcabinet_del.isEnabled = false
+            if (arguments.getString("cabinetNum") != null)
+                tv_Fcabinet_num.text = arguments.getString("cabinetNum")
+            if (arguments.getString("choice") == "true") {
+                val params = LinearLayout.LayoutParams(60, 156)
+                im_Fcabinet_cabinet.layoutParams = params
+                im_Fcabinet.setBackgroundResource(R.drawable.circle_a2a2a2)
+            }
         }
-        ib_Fcabinet_del.setOnClickListener({
+        ib_Fcabinet_del.setOnClickListener{
 
-        })
+        }
     }
 
 

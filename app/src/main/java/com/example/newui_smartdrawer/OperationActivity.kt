@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.util.Log
 import android.widget.Toast
 import com.example.lib_zxing.activity.CaptureActivity
 import com.example.lib_zxing.activity.CodeUtils
@@ -136,15 +137,16 @@ class OperationActivity : AppCompatActivity() {
                     Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show()
 
                 }
-                if (stop) {
-                    val Double = scApp!!.initialWeight.toDouble()
-                    intent.putExtra("weight", (Double/10).toString())
-                }
-                else {
-                    stop = true
-                }
+//                if (stop) {
+//                    val Double = scApp!!.initialWeight.toDouble()
+//                    intent.putExtra("weight", (Double/10).toString())
+//                }
+//                else {
+//                    stop = true
+//                }
             }
         }
+
         spi?.sendLED(1,0)
         weighThread().interrupt()
         startActivity(intent)
