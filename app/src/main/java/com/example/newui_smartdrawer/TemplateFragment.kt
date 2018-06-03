@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_template.*
 class TemplateFragment : Fragment() {
     private var reagentTemplate: ReagentTemplate?=null
     private var dbManager: DBManager? = null
-    var activityCallback:TemplateFragment.deletTemplatelisten? = null
+    private var activityCallback:TemplateFragment.deletTemplatelisten? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

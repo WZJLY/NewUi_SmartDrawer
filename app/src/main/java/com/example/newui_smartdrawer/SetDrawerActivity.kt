@@ -37,6 +37,7 @@ class SetDrawerActivity : AppCompatActivity() {
                     val tableFragment = TableFragment()
                     val args = Bundle()
                     args.putInt("tableNum",3)
+                    args.putString("status","set")
                     tableFragment.arguments = args
                     replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
@@ -47,6 +48,7 @@ class SetDrawerActivity : AppCompatActivity() {
                     val tableFragment = TableFragment()
                     val args = Bundle()
                     args.putInt("tableNum",4)
+                    args.putString("status","set")
                     tableFragment.arguments = args
                     replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
@@ -57,6 +59,7 @@ class SetDrawerActivity : AppCompatActivity() {
                     val tableFragment = TableFragment()
                     val args = Bundle()
                     args.putInt("tableNum",5)
+                    args.putString("status","set")
                     tableFragment.arguments = args
                     replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
@@ -67,6 +70,7 @@ class SetDrawerActivity : AppCompatActivity() {
                     val tableFragment = TableFragment()
                     val args = Bundle()
                     args.putInt("tableNum",6)
+                    args.putString("status","set")
                     tableFragment.arguments = args
                     replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
@@ -77,6 +81,7 @@ class SetDrawerActivity : AppCompatActivity() {
                     val tableFragment = TableFragment()
                     val args = Bundle()
                     args.putInt("tableNum",7)
+                    args.putString("status","set")
                     tableFragment.arguments = args
                     replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
@@ -104,6 +109,7 @@ class SetDrawerActivity : AppCompatActivity() {
                        val tableFragment = TableFragment()
                        val args = Bundle()
                        args.putInt("tableNum",3)
+                       args.putString("status","set")
                        tableFragment.arguments = args
                        replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                    }
@@ -112,6 +118,7 @@ class SetDrawerActivity : AppCompatActivity() {
                        val tableFragment = TableFragment()
                        val args = Bundle()
                        args.putInt("tableNum",4)
+                       args.putString("status","set")
                        tableFragment.arguments = args
                        replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                    }
@@ -120,6 +127,7 @@ class SetDrawerActivity : AppCompatActivity() {
                        val tableFragment = TableFragment()
                        val args = Bundle()
                        args.putInt("tableNum",5)
+                       args.putString("status","set")
                        tableFragment.arguments = args
                        replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                    }
@@ -128,6 +136,7 @@ class SetDrawerActivity : AppCompatActivity() {
                        val tableFragment = TableFragment()
                        val args = Bundle()
                        args.putInt("tableNum",6)
+                       args.putString("status","set")
                        tableFragment.arguments = args
                        replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                    }
@@ -136,6 +145,7 @@ class SetDrawerActivity : AppCompatActivity() {
                        val tableFragment = TableFragment()
                        val args = Bundle()
                        args.putInt("tableNum",7)
+                       args.putString("status","set")
                        tableFragment.arguments = args
                        replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                    }

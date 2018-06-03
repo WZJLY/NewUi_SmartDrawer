@@ -11,7 +11,7 @@ import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.activity_set_cabinet.*
 import kotlin.math.log
 
-class SetCabinetActivity : AppCompatActivity(),SetCabinetFragment.addDrawerbuttonlisten {
+class SetCabinetActivity : AppCompatActivity(),SetCabinetFragment.addDrawerbuttonlisten,DrawerFragment.deletDrawerlisten {
     private var dbManager:DBManager?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +38,14 @@ class SetCabinetActivity : AppCompatActivity(),SetCabinetFragment.addDrawerbutto
             intent.putExtra("drawerId",sum.toString())
             startActivityForResult(intent,1)
             overridePendingTransition(0, 0)
+        }
+    }
+
+    override fun deletDrawerClick(text: String) {
+        if(text == "deletDrawer")
+        {
+            val setCabinetFragment = SetCabinetFragment()
+            replaceFragment(setCabinetFragment,R.id.fl_setCabinet)
         }
     }
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {

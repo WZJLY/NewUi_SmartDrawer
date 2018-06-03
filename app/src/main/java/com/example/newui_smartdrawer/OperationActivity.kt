@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_operation.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-class OperationActivity : AppCompatActivity() {
+class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten {
     private var scApp: SCApp? = null
     private var dbManager: DBManager? = null
     private var statue: String? = null
@@ -118,6 +118,18 @@ class OperationActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
+    }
+
+    override fun updateDrawerClick(text: String) {
+        if(text == "update")
+        {
+            finish()
+            overridePendingTransition(0, 0)
+            val intent = Intent()
+            intent.setClass(this,OperationActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
