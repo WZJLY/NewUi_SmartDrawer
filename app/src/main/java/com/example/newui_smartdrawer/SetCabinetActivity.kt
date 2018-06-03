@@ -32,10 +32,12 @@ class SetCabinetActivity : AppCompatActivity(),SetCabinetFragment.addDrawerbutto
         {
             val sum = dbManager!!.drawers.size+1
             Log.d("drawerID",sum.toString())
+            finish()
             val intent = Intent()
             intent.setClass(this@SetCabinetActivity,SetDrawerActivity::class.java)
             intent.putExtra("drawerId",sum.toString())
-            startActivity(intent)
+            startActivityForResult(intent,1)
+            overridePendingTransition(0, 0)
         }
     }
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {

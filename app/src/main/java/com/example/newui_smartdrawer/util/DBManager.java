@@ -208,8 +208,8 @@ public class DBManager {
     public void deleteDrawer(int boxId){
         db.delete("drawer", "boxId=?", new String[]{boxId + ""});
     }
-    public Drawer getDrawerByDrawerId(int strDrawerId){
-        Cursor cursor = db.query("drawer", new String[] {"drawerId", "boxId", "drawerSize","statue"}, "drawerId=?", new String[] {strDrawerId+""}, null, null, null);
+    public Drawer getDrawerByDrawerId(int strDrawerId,int strBoxID){
+        Cursor cursor = db.query("drawer", new String[] {"drawerId", "boxId", "drawerSize","statue"}, "drawerId=? AND boxId=?", new String[] {strDrawerId+"",strBoxID+""}, null, null, null);
         cursor.moveToNext();
         Drawer drawerInfo = new Drawer(
                 parseInt(cursor.getString(cursor.getColumnIndex("drawerId"))),
