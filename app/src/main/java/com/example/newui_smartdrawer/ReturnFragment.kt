@@ -24,9 +24,9 @@ class ReturnFragment : Fragment() {
             et_Freturn_code.setText(value)
             if(weight != null){
                 et_Freturn_load.setText(weight)
-                et_Freturn_residue.isFocusable = true
-                et_Freturn_residue.isFocusableInTouchMode = true
-                et_Freturn_residue.requestFocus()
+                et_Freturn_load.isFocusable = false
+                et_Freturn_load.isFocusableInTouchMode = false
+                et_Freturn_load.requestFocus()
             }
             else {
                 et_Freturn_load.isFocusable = true

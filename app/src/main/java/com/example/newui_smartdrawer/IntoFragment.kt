@@ -103,7 +103,7 @@ class IntoFragment : Fragment() {
                 val year = datePicker.year
                 val month = datePicker.month+1
                 val day = datePicker.dayOfMonth
-                tv_Finto_data.setText(""+year+"年"+month+"月"+day+"日")
+                tv_Finto_data.text = ""+year+"年"+month+"月"+day+"日"
             })
             dialog.setButton(DialogInterface.BUTTON_NEGATIVE,"取消", DialogInterface.OnClickListener { dialogInterface, i ->
                 Log.d("setDate","取消")
@@ -119,7 +119,7 @@ class IntoFragment : Fragment() {
         val year = cal.get(Calendar.YEAR)+1
         val month = cal.get(Calendar.MONTH)+1
         val day  = cal.get(Calendar.DAY_OF_MONTH)
-        tv_Finto_data.setText(""+year+"年"+month+"月"+day+"日")
+        tv_Finto_data.text = ""+year+"年"+month+"月"+day+"日"
     }
     interface intobuttonlisten {
         fun intobuttononClick(text: String)
