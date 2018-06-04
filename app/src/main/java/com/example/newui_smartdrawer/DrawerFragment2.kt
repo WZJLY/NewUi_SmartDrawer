@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_drawer2.*
+import org.greenrobot.eventbus.EventBus
 
 class DrawerFragment2 : Fragment() {
     private var scApp:SCApp?=null
@@ -50,6 +51,9 @@ class DrawerFragment2 : Fragment() {
                 val fragmentTransaction = childFragmentManager.beginTransaction()
                 fragmentTransaction.remove(tableFragment)
                 fragmentTransaction.commit()
+                val eventMessenge = BtnEvent()
+                eventMessenge.setMsg("return")
+                EventBus.getDefault().postSticky(eventMessenge)
             }
 
 

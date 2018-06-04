@@ -12,6 +12,7 @@
         android:layout_width="752dp"
         android:layout_height="80dp"
         android:layout_marginTop="34dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/background_drawer_style_6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

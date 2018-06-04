@@ -26,7 +26,7 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_operation)
-        if (!EventBus.getDefault().hasSubscriberForEvent(BtnEvent::class.java)) {
+        if (!EventBus.getDefault().hasSubscriberForEvent(OperationActivity::class.java)) {
             EventBus.getDefault().register(this)
         }
         dbManager = DBManager(applicationContext)
@@ -38,7 +38,7 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         cabinetFragment.arguments = bundle
         addFragment(R.id.ll_operation_cabinet, cabinetFragment)
         scApp = application as SCApp
-//        changeButton("noFocusable")
+        changeButton("noFocusable")
         updateDrawer()
         //打开串口
 //        if(dbManager!!.sysSeting.size > 0){
@@ -118,6 +118,7 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
+
 
     override fun updateDrawerClick(text: String) {
         if(text == "update")

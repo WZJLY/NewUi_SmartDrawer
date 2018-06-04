@@ -13,6 +13,7 @@ import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.Drawer
 import com.example.newui_smartdrawer.util.Reagent
 import kotlinx.android.synthetic.main.fragment_table.*
+import org.greenrobot.eventbus.EventBus
 
 
 class TableFragment : Fragment() {
@@ -73,6 +74,7 @@ class TableFragment : Fragment() {
                             if(reagent?.status==1) {
 
 //                                button.setBackgroundResource(R.drawable.btn_style1)
+                                //在位时得颜色
                             }
                             if(reagent?.status==2)
                             {
@@ -89,23 +91,46 @@ class TableFragment : Fragment() {
                     view.requestFocus()
                     view.requestFocusFromTouch()
                     var row = button.id.toString()
-                    val operationActivity = activity as OperationActivity
                     if(dbManager?.getReagentByPos(drawerID.toString(),row)!=null)
                     {
-//                        if(dbManager!!.getReagentByPos(drawerID.toString(),row).status==1)
-//                           operationActivity.changeMessage("style1")
-//                        else
-//                            operationActivity.changeMessage("style2")
+                        if(dbManager!!.getReagentByPos(drawerID.toString(),row).status==1)
+                        {
+                            val eventMessenge = BtnEvent()
+                            eventMessenge.setMsg("take")
+                            EventBus.getDefault().postSticky(eventMessenge)
+                        }
+                        else
+                        {
+
+                            val eventMessenge = BtnEvent()
+                            eventMessenge.setMsg("return")
+                            EventBus.getDefault().postSticky(eventMessenge)
+
+                        }
 
                         val informationFragment = InformationFragment()
                         val fragmentTrasaction = childFragmentManager.beginTransaction()
                         val arg = Bundle()
+
+                        arg.putString("showMessage","show")
                         arg.putString("tablenum",drawerID.toString())
                         arg.putString("pos",row)
                         informationFragment.arguments = arg
                         fragmentTrasaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
                         fragmentTrasaction.commit()
 
+                    }
+                    else
+                    {
+                        val eventMessenge = BtnEvent()
+                        eventMessenge.setMsg("into")
+                        EventBus.getDefault().postSticky(eventMessenge)
+                        if(childFragmentManager.findFragmentByTag("Info")!=null) {
+                            val informationFragment = childFragmentManager.findFragmentByTag("Info")
+                            val fragmentTrasaction = fragmentManager.beginTransaction()
+                            fragmentTrasaction.remove(informationFragment)
+                            fragmentTrasaction.commit()
+                        }
                     }
                 }
                 tableRow.addView(button)
