@@ -45,7 +45,7 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
                         Toast.makeText(this@ManagementActivity, "账号未填写", Toast.LENGTH_SHORT).show()
                     } else if (etPassword.length() == 0) {
                         Toast.makeText(this@ManagementActivity, "密码未填写", Toast.LENGTH_SHORT).show()
-                    } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()) {
+                    } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()){
                         Toast.makeText(this@ManagementActivity, "两次密码输入不同", Toast.LENGTH_SHORT).show()
                     } else if (etAccount.length() == 0) {
                         Toast.makeText(this@ManagementActivity, "姓名未填写", Toast.LENGTH_SHORT).show()

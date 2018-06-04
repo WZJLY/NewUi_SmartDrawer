@@ -48,7 +48,7 @@ class UserLineFragment : Fragment() {
         activityCallback?.deletButtonClick(text)
     }
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        dbManager= DBManager(context)
+        dbManager= DBManager(context.applicationContext)
         scApp = context.applicationContext as SCApp
         if(arguments!=null)
         {
@@ -175,13 +175,13 @@ class UserLineFragment : Fragment() {
         btn_FuserLine_del.setOnClickListener({
 //            dbManager?.deleteAccountByUserName( userName)
 
-            if(btn_FuserLine_del.text.toString()=="启用") {
+            if(btn_FuserLine_del.text.toString()=="禁用") {
                 dbManager?.updateStatueByUserName(userName, "1")
-                btn_FuserLine_del.text = "禁用"
+                btn_FuserLine_del.text = "启用"
             }
             else {
                 dbManager?.updateStatueByUserName(userName, "0")
-                btn_FuserLine_del.text = "启用"
+                btn_FuserLine_del.text = "禁用"
             }
 //            deletbuttonClicked("deletperson")
         })

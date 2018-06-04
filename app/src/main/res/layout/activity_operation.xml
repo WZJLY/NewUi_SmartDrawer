@@ -91,7 +91,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/btn_operation_scrap"
+                android:id="@+id/btn_operation_remove"
                 android:layout_width="154dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="29dp"

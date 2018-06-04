@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.util.Log
 import android.widget.Toast
 import com.example.lib_zxing.activity.CaptureActivity
 import com.example.lib_zxing.activity.CodeUtils
@@ -95,7 +94,7 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
             startActivityForResult(intent, REQUEST_CODE)
             overridePendingTransition(0, 0)
         }
-        btn_operation_scrap.setOnClickListener {
+        btn_operation_remove.setOnClickListener {
             //移除
             val intent =Intent()
             intent.putExtra("subOperation","Remove")
@@ -187,25 +186,25 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
                 btn_operation_into.isEnabled = false
                 btn_operation_take.isEnabled = false
                 btn_operation_return.isEnabled = true
-                btn_operation_scrap.isEnabled = false
+                btn_operation_remove.isEnabled = false
             }
             "into" -> {
                 btn_operation_into.isEnabled = true
                 btn_operation_take.isEnabled = false
                 btn_operation_return.isEnabled = true
-                btn_operation_scrap.isEnabled = false
+                btn_operation_remove.isEnabled = false
             }
             "take" -> {
                 btn_operation_into.isEnabled = false
                 btn_operation_take.isEnabled = true
                 btn_operation_return.isEnabled = true
-                btn_operation_scrap.isEnabled = false
+                btn_operation_remove.isEnabled = true
             }
-            "scrap" -> {
+            "return" -> {
                 btn_operation_into.isEnabled = false
                 btn_operation_take.isEnabled = false
                 btn_operation_return.isEnabled = true
-                btn_operation_scrap.isEnabled = true
+                btn_operation_remove.isEnabled = false
             }
         }
     }
