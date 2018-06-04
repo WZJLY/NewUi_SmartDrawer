@@ -73,7 +73,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 val informationFragment = InformationFragment()
                 val args = Bundle()
                 args.putString("operation", "operation")
-//                args.putString("state","in")
+                args.putString("state","in")
                 informationFragment.arguments = args
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
 

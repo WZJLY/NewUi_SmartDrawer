@@ -47,8 +47,8 @@ class DrawerFragment : Fragment() {
            val status =  dbManager!!.getDrawerByDrawerId(drawerID,1).getStatue()
             if(status == "1")
             {
-                tv_Fdrawer_use.text = "暂时禁止"
-//                iv_Fdrawer_use.setImageResource()
+                tv_Fdrawer_use.text = "停止使用"
+                iv_Fdrawer_use.setImageResource(R.drawable.circle_fd7f60)
                 //状态颜色由红色变为绿色
             }
 

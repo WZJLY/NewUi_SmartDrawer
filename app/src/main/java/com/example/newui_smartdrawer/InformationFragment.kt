@@ -1,13 +1,13 @@
 package com.example.newui_smartdrawer
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.newui_smartdrawer.util.DBManager
-import kotlinx.android.synthetic.main.fragment_cabinet.*
 import kotlinx.android.synthetic.main.fragment_information.*
 
 /**
@@ -31,12 +31,12 @@ class InformationFragment : Fragment() {
             }
             if (arguments.getString("operation") == "operation") {
                 ib_Finformation_jump.visibility = View.GONE
-                cl_Finformation.setBackgroundColor(R.drawable.circle_00fff)
+                cl_Finformation.setBackgroundColor(Color.TRANSPARENT)
             }
             if(arguments.getString("showMessage")=="show")
             {
                 ib_Finformation_jump.visibility = View.GONE
-                cl_Finformation.setBackgroundColor(R.drawable.circle_00fff)
+                cl_Finformation.setBackgroundColor(Color.TRANSPARENT)
                 val reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"))
                 if(reagent?.status==1)
                 {
