@@ -42,7 +42,7 @@
         android:id="@+id/password_imageView"
         android:layout_width="34dp"
         android:layout_height="36dp"
-        android:layout_marginBottom="31dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginStart="31dp"
         app:layout_constraintBottom_toBottomOf="@+id/login_view"
         app:layout_constraintStart_toStartOf="@+id/login_view"
@@ -60,8 +60,8 @@
 
     <EditText
         android:id="@+id/account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:layout_marginStart="27dp"
         android:background="@null"
         android:inputType="textPersonName"
@@ -72,8 +72,8 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
         android:layout_marginStart="27dp"
         android:background="@null"
         android:ems="10"

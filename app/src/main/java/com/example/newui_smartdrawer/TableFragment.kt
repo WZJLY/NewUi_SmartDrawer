@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
+import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.Drawer
 import com.example.newui_smartdrawer.util.Reagent
@@ -39,7 +40,8 @@ class TableFragment : Fragment() {
             }
             if(arguments.getString("status")=="op")
             {
-                tableNum=dbManager!!.getDrawerByDrawerId(arguments.getInt("drawerID"),1).drawerSize
+                drawerID=arguments.getInt("drawerID")
+                tableNum=dbManager!!.getDrawerByDrawerId(drawerID,1).drawerSize
             }
             addNum(tableNum)
 
@@ -68,17 +70,19 @@ class TableFragment : Fragment() {
                     for (m in 1..sum) {
                         reagent = arrListReagent[m - 1]
                         if(reagent!!.drawerId.toInt()==drawerID&&reagent!!.reagentPosition.toInt()==button.id)
-                        {  if(reagent!!.reagentName.length>3)
+                        {
+                            if(reagent!!.reagentName.length>3)
                             button.text = reagent!!.reagentName.subSequence(0,3)
                         else  button.text = reagent!!.reagentName
                             if(reagent?.status==1) {
 
 //                                button.setBackgroundResource(R.drawable.btn_style1)
                                 //在位时得颜色
+
                             }
                             if(reagent?.status==2)
                             {
-
+                                //取用时得颜色
 //                                button.setBackgroundResource(R.drawable.btn_style2)
                             }
 
@@ -91,6 +95,7 @@ class TableFragment : Fragment() {
                     view.requestFocus()
                     view.requestFocusFromTouch()
                     var row = button.id.toString()
+                    scApp?.touchtable=row.toInt()
                     if(dbManager?.getReagentByPos(drawerID.toString(),row)!=null)
                     {
                         if(dbManager!!.getReagentByPos(drawerID.toString(),row).status==1)
@@ -101,11 +106,9 @@ class TableFragment : Fragment() {
                         }
                         else
                         {
-
                             val eventMessenge = BtnEvent()
                             eventMessenge.setMsg("return")
                             EventBus.getDefault().postSticky(eventMessenge)
-
                         }
 
                         val informationFragment = InformationFragment()

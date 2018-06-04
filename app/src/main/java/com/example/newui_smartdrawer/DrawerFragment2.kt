@@ -31,7 +31,7 @@ class DrawerFragment2 : Fragment() {
         if(scApp?.touchdrawer==drawerId)
         {
             //改变状态栏
-            scApp?.touchdrawer=0
+//            scApp?.touchdrawer=0
             val tableFragment = TableFragment()
             val args = Bundle()
 //            args.putString("statue","drawer1")

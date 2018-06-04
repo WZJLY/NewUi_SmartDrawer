@@ -59,6 +59,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
 
         when(subOperation) {
             "Into" -> {
+                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 val informationFragment = IntoFragment()
                 val args = Bundle()
                 args.putString("scan_value", scanValue)
@@ -97,7 +98,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
         }
 
         btn_subOperation_OK.setOnClickListener {
-            val drawerID = scApp!!.touchdrawer
+            var drawerID = scApp!!.touchdrawer
             var table = scApp!!.touchtable
             when (subOperation) {
                 "Into" -> {
@@ -106,18 +107,18 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                     val residue = et_Finto_residue.text.toString()
                     if(code.isNotEmpty() && load.isNotEmpty() && residue.isNotEmpty()){
                         if (!dbManager!!.isReagentExist(code) && !dbManager!!.isScrapReagentExist(code)) {
-                            var into_drawer = checkLock(1, 1)
-                            if (into_drawer == null)
-                                Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                            else if (into_drawer != drawerID && into_drawer > 0)
-                                Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
-                            else {
-                                if (into_drawer != drawerID) {
-                                    spi?.sendOpenLock(1, drawerID)
-                                    Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                                    into_drawer = checkLock(1, 190)
-                                }
-                                if (into_drawer == drawerID) {
+//                            var into_drawer = checkLock(1, 2)
+//                            if (into_drawer == null)
+//                                Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
+//                            else if (into_drawer != drawerID && into_drawer > 0)
+//                                Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+//                            else {
+//                                if (into_drawer != drawerID) {
+//                                    spi?.sendOpenLock(1, drawerID)
+//                                    Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
+//                                    into_drawer = checkLock(1, 190)
+//                                }
+//                                if (into_drawer == drawerID) {
                                     //弹窗
                                     val dialog = BottomDialog(this)
                                     dialog.setYesOnclickListener(null ,object :BottomDialog.onYesOnclickListener {
@@ -130,16 +131,14 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             dbManager?.addReagent(code, reagentTemplate?.reagentName, "", ""
                                                     , "", 1, reagentTemplate?.reagentPurity, residue, load
                                                     , reagentTemplate?.reagentCreater, reagentTemplate?.reagentGoodsID, Unit, reagentTemplate?.reagentDensity, tv_Finto_data.text.toString()
-                                                    , "1", drawerID.toString(), scApp?.touchtable.toString(), 1, scApp!!.userInfo.getUserName())
+                                                    , "1", drawerID.toString(), table.toString(), 1, scApp!!.userInfo.getUserName())
                                             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                                             val now = sdf.format(Date())
                                             val curDate = Date(System.currentTimeMillis())
                                             val str = sdf.format(curDate)
-                                            val upload : UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                            upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"添加试剂",scApp!!.userInfo.userName,str,reagentTemplate?.reagentName)
+//                                            val upload  = UploadRecordManager(this@SubOperationActivity)
+//                                            upload.getCode("wzj","添加试剂",scApp!!.userInfo.userName,str,reagentTemplate?.reagentName)
                                             dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
-                                            val intent = Intent()
-                                            scApp?.touchtable = 0
                                             scApp?.touchtable = 0 //新加的
                                             finish()
                                             overridePendingTransition(0, 0)
@@ -153,8 +152,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     })
                                     dialog.show()
                                     dialog.window.setGravity(Gravity.BOTTOM)
-                                }
-                            }
+//                                }
+//                            }
                         } else
                             Toast.makeText(this, "该试剂编码已使用", Toast.LENGTH_SHORT).show()
                     }
@@ -181,19 +180,19 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 }
 
                 "Take" -> {
-                    var into_drawer = checkLock(1, 3)
-                    if (into_drawer == null)
-                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                    else if (into_drawer != drawerID && into_drawer > 0)
-                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
-                    else {
-                        if (into_drawer != drawerID) {
-                            spi?.sendOpenLock(1, drawerID)
-                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-//                            Thread.sleep(50)
-                            into_drawer = checkLock(1, 190)
-                        }
-                        if (into_drawer == drawerID) {
+//                    var into_drawer = checkLock(1, 2)
+//                    if (into_drawer == null)
+//                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
+//                    else if (into_drawer != drawerID && into_drawer > 0)
+//                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+//                    else {
+//                        if (into_drawer != drawerID) {
+//                            spi?.sendOpenLock(1, drawerID)
+//                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
+////                            Thread.sleep(50)
+//                            into_drawer = checkLock(1, 190)
+//                        }
+//                        if (into_drawer == drawerID) {
                             //弹窗
                             val dialog = BottomDialog(this)
                             dialog.setMessage("请将试剂从抽屉中取出")
@@ -225,8 +224,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                             dialog.show()
                             dialog.window.setGravity(Gravity.BOTTOM)
                         }
-                    }
-                }
+//                    }
+//                }
 
                 "Return" -> {
                     val code = et_Freturn_code.text.toString()
@@ -235,19 +234,19 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                         if (dbManager!!.isReagentExist(code) && !dbManager!!.isScrapReagentExist(code)) {
                             if (dbManager!!.getReagentById(code).status == 2) {
                                 if (load.isNotEmpty()) {
-                                    var into_drawer = checkLock(1, 1)
-                                    if (into_drawer == null)
-                                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                                    else if (into_drawer != drawerID && into_drawer > 0)
-                                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
-                                    else {
-                                        if (into_drawer != drawerID) {
-                                            spi?.sendOpenLock(1, drawerID)
-                                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-//                                        Thread.sleep(50)
-                                            into_drawer = checkLock(1, 190)
-                                        }
-                                        if (into_drawer == drawerID) {
+//                                    var into_drawer = checkLock(1, 2)
+//                                    if (into_drawer == null)
+//                                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
+//                                    else if (into_drawer != drawerID && into_drawer > 0)
+//                                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+//                                    else {
+//                                        if (into_drawer != drawerID) {
+//                                            spi?.sendOpenLock(1, drawerID)
+//                                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
+////                                        Thread.sleep(50)
+//                                            into_drawer = checkLock(1, 190)
+//                                        }
+//                                        if (into_drawer == drawerID) {
                                             table = dbManager?.getReagentById(code)!!.reagentPosition.toInt()
                                             var reagent = dbManager!!.getReagentById(code)
                                             //弹窗
@@ -298,8 +297,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             })
                                             dialog.show()
                                             dialog.window.setGravity(Gravity.BOTTOM)
-                                        }
-                                    }
+//                                        }
+//                                    }
                                 } else
                                     Toast.makeText(this, "称重重量未填写", Toast.LENGTH_SHORT).show()
                             } else
@@ -318,19 +317,19 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 }
 
                 "Remove" -> {
-                    var into_drawer = checkLock(1, 1)
-                    if (into_drawer == null)
-                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                    else if (into_drawer != drawerID && into_drawer > 0)
-                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
-                    else {
-                        if (into_drawer != drawerID) {
-                            spi?.sendOpenLock(1, drawerID)
-                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-//                            Thread.sleep(50)
-                            into_drawer = checkLock(1, 190)
-                        }
-                        if (into_drawer == drawerID) {
+//                    var into_drawer = checkLock(1, 2)
+//                    if (into_drawer == null)
+//                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
+//                    else if (into_drawer != drawerID && into_drawer > 0)
+//                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+//                    else {
+//                        if (into_drawer != drawerID) {
+//                            spi?.sendOpenLock(1, drawerID)
+//                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
+////                            Thread.sleep(50)
+//                            into_drawer = checkLock(1, 190)
+//                        }
+//                        if (into_drawer == drawerID) {
                             //弹窗
                             val dialog = BottomDialog(this)
                             dialog.setMessage("请将试剂从抽屉中取出")
@@ -361,8 +360,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                             dialog.show()
                             dialog.window.setGravity(Gravity.BOTTOM)
                         }
-                    }
-                }
+//                    }
+//                }
             }
         }
     }
@@ -417,7 +416,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
     }
 
     fun checkLock(DID: Int,num: Int): Int? {
-        var time:Int = 0
+        var time = 0
         for(i in 1..num) {
             val lockData = spi?.sendGetStat(DID)
             if (lockData != null) {
@@ -429,8 +428,9 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                     continue
             }
             else {
-                if (i > 1)
+                if (time > 0){
                     return null
+                }
                 else{
                     time++
                     continue
