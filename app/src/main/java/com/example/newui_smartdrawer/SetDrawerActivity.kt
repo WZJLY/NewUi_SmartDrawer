@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_set_drawer.*
 
 class SetDrawerActivity : AppCompatActivity() {
     private var num = -1
-    private var status = -1 //0-未点击，1-正常使用，2-暂时停用
+    private var status = -1 //0-正常使用，1-暂时停用
     private var dbManager:DBManager?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +27,7 @@ class SetDrawerActivity : AppCompatActivity() {
         tv_setDrawer_num.setText("柜1-抽屉"+drawerId)
         if(set_drawerId!=null)
         {
+            tv_setDrawer_num.setText("柜1-抽屉"+set_drawerId)
            val drawer =  dbManager?.getDrawerByDrawerId(set_drawerId.toInt(),1)
             when(drawer?.drawerSize)
             {
@@ -91,10 +92,12 @@ class SetDrawerActivity : AppCompatActivity() {
             {
                 "0"->
                 {
+                    status=0
                     drawerStatusGrroup.check(R.id.rb_setDrawer_use)
                 }
                 "1"->
                 {
+                    status=1
                     drawerStatusGrroup.check(R.id.rb_setDrawer_nouse)
                 }
 
@@ -186,7 +189,8 @@ class SetDrawerActivity : AppCompatActivity() {
                 Toast.makeText(this,"抽屉状态未选择",Toast.LENGTH_SHORT).show()
             if(num!=-1&&status!=-1)
             {
-                dbManager?.addDrawer(drawerId.toInt(),1,num,status.toString())
+                if(set_drawerId!=null) dbManager?.updateDrawer(set_drawerId.toInt(),1,num,status.toString())
+                else dbManager?.addDrawer(drawerId.toInt(),1,num,status.toString())
                 finish()
                 val intent = Intent()
                 intent.setClass(this,SetCabinetActivity::class.java)

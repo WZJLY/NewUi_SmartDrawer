@@ -220,19 +220,20 @@ public class DBManager {
         return drawerInfo;
     }
 
-    public void udpateDrawerStatue(int drawerId, int boxId,String statue){
-        ContentValues data=new ContentValues();
-        data.put("drawerId",drawerId);
-        data.put("boxId",boxId);
-        data.put("statue", statue);
-        db.update("drawer", data, "drawerId=? and boxId=?", new String[]{drawerId + "", boxId + ""});
-    }
+//    public void updateDrawerStatue(int drawerId, int boxId,String statue){
+//        ContentValues data=new ContentValues();
+//        data.put("drawerId",drawerId);
+//        data.put("boxId",boxId);
+//        data.put("statue", statue);
+//        db.update("drawer", data, "drawerId=? and boxId=?", new String[]{drawerId + "", boxId + ""});
+//    }
 
-    public void udpateDrawerSize(int drawerId, int boxId, int drawerSize){
+    public void updateDrawer(int drawerId, int boxId, int drawerSize,String statue){
         ContentValues data=new ContentValues();
         data.put("drawerId",drawerId);
         data.put("boxId",boxId);
         data.put("drawerSize", drawerSize);
+        data.put("statue",statue);
         db.update("drawer", data, "drawerId=? and boxId=?", new String[]{drawerId + "", boxId + ""});
     }
     //----------------------------------drawer manage end----------------------------//

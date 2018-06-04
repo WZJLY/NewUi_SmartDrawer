@@ -68,6 +68,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
             }
             "Take" -> {
+                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂取用"
                 val informationFragment = InformationFragment()
                 val args = Bundle()
@@ -78,6 +79,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
 
             }
             "Return" -> {
+                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂归还"
                 val informationFragment = ReturnFragment()
                 val args = Bundle()
@@ -87,6 +89,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
             }
             "Remove" -> {
+                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂移除"
                 val informationFragment = InformationFragment()
                 val args = Bundle()
