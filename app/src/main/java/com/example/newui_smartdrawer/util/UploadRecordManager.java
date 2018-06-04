@@ -37,7 +37,6 @@ public class UploadRecordManager {
             //构建一个json数据
 
             Log.d("wzj","json数据为:"+json1.toString());
-            Toast.makeText(context,"json数据为:"+json1.toString(),Toast.LENGTH_LONG).show();
         }catch(JSONException e) {
 
             //TODOAuto-generated catch block

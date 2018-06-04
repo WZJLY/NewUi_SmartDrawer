@@ -136,8 +136,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             val now = sdf.format(Date())
                                             val curDate = Date(System.currentTimeMillis())
                                             val str = sdf.format(curDate)
-//                                            val upload  = UploadRecordManager(this@SubOperationActivity)
-//                                            upload.getCode("wzj","添加试剂",scApp!!.userInfo.userName,str,reagentTemplate?.reagentName)
+                                            val upload  = UploadRecordManager(this@SubOperationActivity)
+                                            upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"添加试剂",scApp!!.userInfo.userName,str,reagentTemplate?.reagentName)
                                             dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
                                             scApp?.touchtable = 0 //新加的
                                             finish()

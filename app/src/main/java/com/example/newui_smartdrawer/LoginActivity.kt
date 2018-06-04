@@ -15,11 +15,14 @@ import android.webkit.JavascriptInterface
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.SC_Const
+import com.example.newui_smartdrawer.util.UploadRecordManager
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_login.*
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
+import java.text.SimpleDateFormat
+import java.util.*
 
 class LoginActivity : AppCompatActivity() {
     private var dbManager: DBManager? = null
@@ -92,8 +95,12 @@ class LoginActivity : AppCompatActivity() {
 
 
             if(userInfo?.statue!="1") {
+                val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                val curDate = Date(System.currentTimeMillis())
+                val str = formatter.format(curDate)
+                val upload :UploadRecordManager= UploadRecordManager(this)
+                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"登陆",scApp!!.userInfo.userName,str,"")
                 intent.setClass(this,MainActivity::class.java)
-                startActivity(intent)
                 saveUserName(userName)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
