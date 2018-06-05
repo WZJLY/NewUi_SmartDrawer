@@ -96,6 +96,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 args.putString("operation", "operation")
                 args.putString("state","in")
                 informationFragment.arguments = args
+
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
             }
         }
@@ -139,8 +140,10 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             val now = sdf.format(Date())
                                             val curDate = Date(System.currentTimeMillis())
                                             val str = sdf.format(curDate)
-                                            val upload  = UploadRecordManager(this@SubOperationActivity)
-                                            upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"添加试剂",scApp!!.userInfo.userName,str,reagentTemplate?.reagentName)
+//                                            if(dbManager?.cabinetNo!=null) {
+//                                                val upload = UploadRecordManager(this@SubOperationActivity)
+//                                                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "添加试剂", scApp!!.userInfo.userName, str, reagentTemplate?.reagentName)
+//                                            }
                                             dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
                                             scApp?.touchtable = 0 //新加的
                                             finish()
@@ -349,9 +352,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     val str = sdf.format(curDate)
                                     val upload : UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
                                     upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"移除试剂",scApp!!.userInfo.userName,str,reagent?.reagentName)
-                                    val intent = Intent()
-                                    intent.setClass(applicationContext, OperationActivity::class.java)
-                                    startActivity(intent)
+                                    finish()
+                                    overridePendingTransition(0, 0)
                                     dialog.dismiss()
                                 }
                             })

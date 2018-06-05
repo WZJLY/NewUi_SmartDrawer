@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.fragment_drawer2.*
 import org.greenrobot.eventbus.EventBus
 
 class DrawerFragment2 : Fragment() {
     private var scApp:SCApp?=null
     private var drawerId= 0
+    private var dbManager:DBManager?=null
     private var activityCallback:DrawerFragment2.updateDrawerlisten? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -23,18 +25,22 @@ class DrawerFragment2 : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         scApp = context.applicationContext as SCApp
+        dbManager = DBManager(context.applicationContext)
         if(arguments!=null)
         {
-           drawerId =  arguments.getInt("drawerID")
+            drawerId =  arguments.getInt("drawerID")
             tv_Fdrawer2_drawerNum.text="抽屉"+drawerId
+            val statue =  dbManager!!.getDrawerByDrawerId(drawerId,1).getStatue()
+            if(statue=="1")
+            {
+                ib_Fdrawer2_op.isEnabled=false
+                //改变底色
+            }
         }
         if(scApp?.touchdrawer==drawerId)
         {
-            //改变状态栏
-//            scApp?.touchdrawer=0
             val tableFragment = TableFragment()
             val args = Bundle()
-//            args.putString("statue","drawer1")
             args.putInt("drawerID", drawerId)
             args.putString("status","op")
             tableFragment.arguments=args
