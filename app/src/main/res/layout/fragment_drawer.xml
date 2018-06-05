@@ -77,16 +77,34 @@
         app:layout_constraintEnd_toEndOf="@+id/ib_Fdrawer_drawer"
         app:layout_constraintTop_toTopOf="@+id/ib_Fdrawer_drawer" />
 
-    <ImageButton
-        android:id="@+id/ib_Fdrawer_del"
+    <ImageView
+        android:id="@+id/imageView15"
         android:layout_width="42dp"
         android:layout_height="42dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="29dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/circle_f6f6f6"
+        android:background="@android:color/transparent"
+        android:src="@drawable/circle_f6f6f6"
+        app:layout_constraintBottom_toBottomOf="@+id/ib_Fdrawer_del"
+        app:layout_constraintEnd_toEndOf="@+id/ib_Fdrawer_del"
+        app:layout_constraintStart_toStartOf="@+id/ib_Fdrawer_del"
+        app:layout_constraintTop_toTopOf="@+id/ib_Fdrawer_del" />
+
+    <ImageButton
+        android:id="@+id/ib_Fdrawer_del"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:padding="0dp"
         android:src="@drawable/del_drawer"
         app:layout_constraintBottom_toBottomOf="@+id/ib_Fdrawer_drawer"
         app:layout_constraintEnd_toEndOf="@+id/ib_Fdrawer_drawer"
-        app:layout_constraintTop_toTopOf="@+id/ib_Fdrawer_drawer" />
+        app:layout_constraintStart_toEndOf="@+id/imageView21"
+        app:layout_constraintTop_toTopOf="@+id/ib_Fdrawer_drawer"
+        app:layout_constraintVertical_bias="0.636" />
+
 </android.support.constraint.ConstraintLayout>
