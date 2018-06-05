@@ -57,6 +57,7 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
 //            Toast.makeText(this,"请进行系统硬件设置", Toast.LENGTH_SHORT).show()
 
         ib_operation_back.setOnClickListener{
+            scApp?.touchdrawer=0
             finish()
             overridePendingTransition(0, 0)
         }

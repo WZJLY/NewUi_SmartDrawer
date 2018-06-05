@@ -71,9 +71,26 @@ class TableFragment : Fragment() {
                         reagent = arrListReagent[m - 1]
                         if(reagent!!.drawerId.toInt()==drawerID&&reagent!!.reagentPosition.toInt()==button.id)
                         {
-                            if(reagent!!.reagentName.length>3)
-                            button.text = reagent!!.reagentName.subSequence(0,3)
-                        else  button.text = reagent!!.reagentName
+                            if(scApp?.touchdrawer==drawerID&&scApp?.touchtable==button.id )
+                            {
+                                //备注：这个网格上应该有选中标点
+
+                                val informationFragment = InformationFragment()
+                                val fragmentTrasaction = childFragmentManager.beginTransaction()
+                                val arg = Bundle()
+
+                                arg.putString("showMessage","show")
+                                arg.putString("tablenum",drawerID.toString())
+                                arg.putString("pos",button.id.toString())
+                                informationFragment.arguments = arg
+                                fragmentTrasaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
+                                fragmentTrasaction.commit()
+                                scApp?.touchdrawer=0
+                                scApp?.touchtable =0
+
+                            }
+                            if(reagent!!.reagentName.length>3) button.text = reagent!!.reagentName.subSequence(0,3)
+                            else  button.text = reagent!!.reagentName
                             if(reagent?.status==1) {
 
 //                                button.setBackgroundResource(R.drawable.btn_style1)
