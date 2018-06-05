@@ -42,7 +42,7 @@ class DrawerFragment2 : Fragment() {
             val tableFragment = TableFragment()
             val args = Bundle()
             args.putInt("drawerID", drawerId)
-            args.putString("status","op")
+            args.putString("table","operation")
             tableFragment.arguments=args
             val fragmentTransaction = childFragmentManager.beginTransaction()
             fragmentTransaction.add(R.id.fl_Fdrawer2_table, tableFragment, "table")
@@ -61,10 +61,6 @@ class DrawerFragment2 : Fragment() {
                 eventMessenge.setMsg("return")
                 EventBus.getDefault().postSticky(eventMessenge)
             }
-
-
-
-
         })
     }
     interface updateDrawerlisten {

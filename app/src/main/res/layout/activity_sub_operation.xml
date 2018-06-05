@@ -21,11 +21,13 @@
             android:layout_height="match_parent">
 
             <FrameLayout
-                android:id="@+id/fl_setDrawer_table"
+                android:id="@+id/fl_subOperation_table"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:layout_editor_absoluteX="335dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
             </FrameLayout>
         </android.support.constraint.ConstraintLayout>

@@ -49,16 +49,20 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
             finish()
             overridePendingTransition(0, 0)
         })
-
         scApp = application as SCApp
         dbManager = DBManager(applicationContext)
         val subOperation: String = intent.getStringExtra("subOperation")
         val scanValue = intent.getStringExtra("scan_value")
         val weight = intent.getStringExtra("weight")
         spi =  scApp?.getSpi()
-
+        val tableFragment = TableFragment()
+        val arg = Bundle()
+        arg.putString("table","subOperation")
+        tableFragment.arguments=arg
+        replaceFragment(R.id.fl_subOperation_table,tableFragment)
         when(subOperation) {
             "Into" -> {
+                btn_subOperation_OK.text = "确认入柜"
                 tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 val informationFragment = IntoFragment()
                 val args = Bundle()
@@ -68,6 +72,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
             }
             "Take" -> {
+                btn_subOperation_OK.text = "确认取用"
                 tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂取用"
                 val informationFragment = InformationFragment()
@@ -79,6 +84,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
 
             }
             "Return" -> {
+                btn_subOperation_OK.text = "确认归还"
                 tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂归还"
                 val informationFragment = ReturnFragment()
@@ -89,6 +95,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
             }
             "Remove" -> {
+                btn_subOperation_OK.text = "确认移除"
                 tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂移除"
                 val informationFragment = InformationFragment()
@@ -96,7 +103,6 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 args.putString("operation", "operation")
                 args.putString("state","in")
                 informationFragment.arguments = args
-
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
             }
         }

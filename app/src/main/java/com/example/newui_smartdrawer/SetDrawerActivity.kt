@@ -28,75 +28,46 @@ class SetDrawerActivity : AppCompatActivity() {
         if(set_drawerId!=null)
         {
             tv_setDrawer_num.setText("柜1-抽屉"+set_drawerId)
-           val drawer =  dbManager?.getDrawerByDrawerId(set_drawerId.toInt(),1)
+            val drawer =  dbManager?.getDrawerByDrawerId(set_drawerId.toInt(),1)
+            val tableFragment = TableFragment()
+            val args = Bundle()
+            args.putString("table","setDrawer")
             when(drawer?.drawerSize)
             {
-                3->
-                {
+                3-> {
                     radioGroup2.check(R.id.rb_setDrawer_3)
                     num=3
-                    val tableFragment = TableFragment()
-                    val args = Bundle()
                     args.putInt("tableNum",3)
-                    args.putString("status","set")
-                    tableFragment.arguments = args
-                    replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
-                4->
-                {
+                4-> {
                     radioGroup2.check(R.id.rb_setDrawer_4)
                     num=4
-                    val tableFragment = TableFragment()
-                    val args = Bundle()
                     args.putInt("tableNum",4)
-                    args.putString("status","set")
-                    tableFragment.arguments = args
-                    replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
-                5->
-                {
+                5-> {
                     radioGroup2.check(R.id.rb_setDrawer_5)
                     num=5
-                    val tableFragment = TableFragment()
-                    val args = Bundle()
                     args.putInt("tableNum",5)
-                    args.putString("status","set")
-                    tableFragment.arguments = args
-                    replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
-                6->
-                {
+                6-> {
                     radioGroup2.check(R.id.rb_setDrawer_6)
                     num=6
-                    val tableFragment = TableFragment()
-                    val args = Bundle()
                     args.putInt("tableNum",6)
-                    args.putString("status","set")
-                    tableFragment.arguments = args
-                    replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
-                7->
-                {
+                7-> {
                     radioGroup2.check(R.id.rb_setDrawer_7)
                     num = 7
-                    val tableFragment = TableFragment()
-                    val args = Bundle()
                     args.putInt("tableNum",7)
-                    args.putString("status","set")
-                    tableFragment.arguments = args
-                    replaceFragment(tableFragment,R.id.fl_setDrawer_table)
                 }
-
             }
-            when(drawer?.statue)
-            {
-                "0"->
-                {
+            tableFragment.arguments = args
+            replaceFragment(tableFragment,R.id.fl_setDrawer_table)
+            when(drawer?.statue) {
+                "0"-> {
                     status=0
                     drawerStatusGrroup.check(R.id.rb_setDrawer_use)
                 }
-                "1"->
-                {
+                "1"-> {
                     status=1
                     drawerStatusGrroup.check(R.id.rb_setDrawer_nouse)
                 }
@@ -105,61 +76,34 @@ class SetDrawerActivity : AppCompatActivity() {
 
         }
         radioGroup2.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
-               when(checkedId)
-               {
-                   rb_setDrawer_3.id ->{
-                       num = 3
-                       val tableFragment = TableFragment()
-                       val args = Bundle()
-                       args.putInt("tableNum",3)
-                       args.putString("status","set")
-                       tableFragment.arguments = args
-                       replaceFragment(tableFragment,R.id.fl_setDrawer_table)
-                   }
-                   rb_setDrawer_4.id ->{
-                       num =4
-                       val tableFragment = TableFragment()
-                       val args = Bundle()
-                       args.putInt("tableNum",4)
-                       args.putString("status","set")
-                       tableFragment.arguments = args
-                       replaceFragment(tableFragment,R.id.fl_setDrawer_table)
-                   }
-                   rb_setDrawer_5.id ->{
-                       num=5
-                       val tableFragment = TableFragment()
-                       val args = Bundle()
-                       args.putInt("tableNum",5)
-                       args.putString("status","set")
-                       tableFragment.arguments = args
-                       replaceFragment(tableFragment,R.id.fl_setDrawer_table)
-                   }
-                   rb_setDrawer_6.id ->{
-                       num=6
-                       val tableFragment = TableFragment()
-                       val args = Bundle()
-                       args.putInt("tableNum",6)
-                       args.putString("status","set")
-                       tableFragment.arguments = args
-                       replaceFragment(tableFragment,R.id.fl_setDrawer_table)
-                   }
-                   rb_setDrawer_7.id ->{
-                       num=7
-                       val tableFragment = TableFragment()
-                       val args = Bundle()
-                       args.putInt("tableNum",7)
-                       args.putString("status","set")
-                       tableFragment.arguments = args
-                       replaceFragment(tableFragment,R.id.fl_setDrawer_table)
-                   }
-
-
-
-
-           }
-
-
-
+            val tableFragment = TableFragment()
+            val args = Bundle()
+            args.putString("table","setDrawer")
+            when(checkedId)
+            {
+                rb_setDrawer_3.id ->{
+                    num = 3
+                    args.putInt("tableNum",3)
+                }
+                rb_setDrawer_4.id ->{
+                    num =4
+                    args.putInt("tableNum",4)
+                }
+                rb_setDrawer_5.id ->{
+                    num=5
+                    args.putInt("tableNum",5)
+                }
+                rb_setDrawer_6.id ->{
+                    num=6
+                    args.putInt("tableNum",6)
+                }
+                rb_setDrawer_7.id ->{
+                    num=7
+                    args.putInt("tableNum",7)
+                }
+            }
+            tableFragment.arguments = args
+            replaceFragment(tableFragment,R.id.fl_setDrawer_table)
         })
         drawerStatusGrroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             when(checkedId)
@@ -170,12 +114,7 @@ class SetDrawerActivity : AppCompatActivity() {
                 rb_setDrawer_nouse.id ->{
                     status=1
                 }
-
-
             }
-
-
-
         })
         ib_setDrawer_back.setOnClickListener({
             finish()
