@@ -98,10 +98,10 @@ class LoginActivity : AppCompatActivity() {
                 val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 val curDate = Date(System.currentTimeMillis())
                 val str = formatter.format(curDate)
-//                if(dbManager?.cabinetNo!=null) {
-//                    val upload :UploadRecordManager= UploadRecordManager(this)
-//                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"登陆",scApp!!.userInfo.userName,str,"")
-//                }
+                if(dbManager!!.cabinetNo.size!=0) {
+                    val upload :UploadRecordManager= UploadRecordManager(this)
+                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"登陆",scApp!!.userInfo.userName,str,"")
+                }
 
                 intent.setClass(this,MainActivity::class.java)
                 saveUserName(userName)
