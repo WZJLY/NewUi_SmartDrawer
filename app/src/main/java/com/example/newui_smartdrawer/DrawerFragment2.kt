@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.fragment_drawer2.*
 import org.greenrobot.eventbus.EventBus
@@ -36,22 +38,26 @@ class DrawerFragment2 : Fragment() {
                 ib_Fdrawer2_op.isEnabled=false
                 //改变底色
             }
+
         }
         if(scApp?.touchdrawer==drawerId)
         {
+            scApp?.touchdrawer=0
+            Toast.makeText(context.applicationContext,""+scApp?.touchtable,Toast.LENGTH_SHORT).show()
             val tableFragment = TableFragment()
             val args = Bundle()
             args.putInt("drawerID", drawerId)
             args.putString("table","operation")
             tableFragment.arguments=args
             val fragmentTransaction = childFragmentManager.beginTransaction()
-            fragmentTransaction.add(R.id.fl_Fdrawer2_table, tableFragment, "table")
+            fragmentTransaction.add(R.id.fl_Fdrawer2_table,tableFragment,"table")
             fragmentTransaction.commit()
         }
+
         ib_Fdrawer2_op.setOnClickListener({
             if (childFragmentManager.findFragmentByTag("table") == null) {
                 scApp?.touchdrawer = drawerId
-               updateDrawerClicked("update")
+                updateDrawerClicked("update")
             } else {
                 val tableFragment = childFragmentManager.findFragmentByTag("table")
                 val fragmentTransaction = childFragmentManager.beginTransaction()

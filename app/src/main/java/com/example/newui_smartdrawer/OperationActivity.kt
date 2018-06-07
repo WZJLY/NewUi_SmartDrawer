@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.view.MotionEvent
 import android.widget.Toast
 import com.example.lib_zxing.activity.CaptureActivity
 import com.example.lib_zxing.activity.CodeUtils
@@ -22,6 +23,11 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
     var spi: SerialPortInterface? = null
     private var REQUEST_CODE = 1
     var stop = false
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        changeButton("noFocusable")
+        return super.onTouchEvent(event)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +64,13 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
 
         ib_operation_back.setOnClickListener{
             scApp?.touchdrawer=0
+            scApp?.touchtable=0
             finish()
             overridePendingTransition(0, 0)
         }
         ib_operation_search.setOnClickListener {
+            finish()
+            overridePendingTransition(0, 0)
             val intent =Intent()
             intent.setClass(this,SearchActivity::class.java)
             startActivity(intent)
@@ -79,6 +88,8 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         }
         btn_operation_take.setOnClickListener {
             //取用
+            finish()
+            overridePendingTransition(0, 0)
             val intent =Intent()
             intent.putExtra("subOperation","Take")
             intent.setClass(this,SubOperationActivity::class.java)
@@ -87,6 +98,7 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         }
         btn_operation_return.setOnClickListener {
             //归还
+
             statue = "Return"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
 //            spi?.sendLED(1, 1)
@@ -97,6 +109,8 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         }
         btn_operation_remove.setOnClickListener {
             //移除
+            finish()
+            overridePendingTransition(0, 0)
             val intent =Intent()
             intent.putExtra("subOperation","Remove")
             intent.setClass(this,SubOperationActivity::class.java)
@@ -111,10 +125,6 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         changeButton(event.getMsg())
     }
 
-    override fun onStart() {
-        super.onStart()
-                            //利用全局变量获得试剂位置并更新UI
-    }
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
@@ -134,6 +144,8 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        finish()
+        overridePendingTransition(0, 0)
         val intent = Intent()
         intent.setClass(this, SubOperationActivity::class.java)
         intent.putExtra("subOperation", statue)
@@ -207,6 +219,14 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
                 btn_operation_take.isEnabled = false
                 btn_operation_return.isEnabled = true
                 btn_operation_remove.isEnabled = false
+            }
+            "scarp"->{
+
+                btn_operation_into.isEnabled = false
+                btn_operation_take.isEnabled = false
+                btn_operation_return.isEnabled = true
+                btn_operation_remove.isEnabled = true
+
             }
         }
     }

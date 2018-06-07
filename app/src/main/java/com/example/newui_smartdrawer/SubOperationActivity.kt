@@ -46,8 +46,13 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
         setContentView(R.layout.activity_sub_operation)
 
         ib_subOperation_back.setOnClickListener({
+
             finish()
             overridePendingTransition(0, 0)
+            val intent = Intent()
+            intent.setClass(this,OperationActivity::class.java)
+            startActivity(intent)
+
         })
         scApp = application as SCApp
         dbManager = DBManager(applicationContext)
@@ -55,11 +60,13 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
         val scanValue = intent.getStringExtra("scan_value")
         val weight = intent.getStringExtra("weight")
         spi =  scApp?.getSpi()
-        val tableFragment = TableFragment()
-        val arg = Bundle()
-        arg.putString("table","subOperation")
-        tableFragment.arguments=arg
-        replaceFragment(R.id.fl_subOperation_table,tableFragment)
+        if(subOperation != "Return") {
+            val tableFragment = TableFragment()
+            val arg = Bundle()
+            arg.putString("table", "subOperation")
+            tableFragment.arguments = arg
+            replaceFragment(R.id.fl_subOperation_table, tableFragment)
+        }
         when(subOperation) {
             "Into" -> {
                 btn_subOperation_OK.text = "确认入柜"
@@ -89,7 +96,21 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                 tv_subOperation_title.text = "试剂归还"
                 val informationFragment = ReturnFragment()
                 val args = Bundle()
-                args.putString("scan_value", scanValue)
+                val scanValue = args.putString("scan_value", scanValue)
+                if(dbManager?.isReagentExist(scanValue.toString())==true)
+                {
+                    val reagent = dbManager?.getReagentById(scanValue.toString())
+                    val drawerSize =dbManager!!.getDrawerByDrawerId(reagent!!.drawerId.toInt(),1).drawerSize
+                    val tableFragment = TableFragment()
+                    val arg = Bundle()
+                    arg.putInt("drawerSize",drawerSize)
+                    arg.putString("table", "return")
+                    tableFragment.arguments = arg
+                    replaceFragment(R.id.fl_subOperation_table, tableFragment)
+
+
+                }
+
                 args.putString("weight",weight)
                 informationFragment.arguments = args
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
@@ -153,6 +174,10 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
                                             scApp?.touchtable = 0 //新加的
                                             finish()
+                                            overridePendingTransition(0, 0)
+                                            val intent = Intent()
+                                            intent.setClass(this@SubOperationActivity,OperationActivity::class.java)
+                                            startActivity(intent)
                                             overridePendingTransition(0, 0)
                                             dialog.dismiss()
                                         }
@@ -221,9 +246,15 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     dbManager?.addReagentUserRecord(reagentId,2,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"")
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
-                                    val upload : UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                    upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"取用试剂",scApp!!.userInfo.userName,str,reagent?.reagentName)
+                                    if(dbManager!!.cabinetNo.size!=0) {
+                                        val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
+                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "取用试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                    }
                                     finish()
+                                    overridePendingTransition(0, 0)
+                                    val intent = Intent()
+                                    intent.setClass(this@SubOperationActivity,OperationActivity::class.java)
+                                    startActivity(intent)
                                     overridePendingTransition(0, 0)
                                     dialog.dismiss()
                                 }
@@ -260,8 +291,17 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
 //                                        }
 //                                        if (into_drawer == drawerID) {
                                             table = dbManager?.getReagentById(code)!!.reagentPosition.toInt()
-                                            var reagent = dbManager!!.getReagentById(code)
-                                            //弹窗
+                                            val reagent = dbManager!!.getReagentById(code)
+                                            tv_subOperation_num.text="柜子1-抽屉"+reagent?.drawerId
+                                            scApp?.touchtable=reagent!!.reagentPosition.toInt()
+                                            val drawerSize = dbManager!!.getDrawerByDrawerId(reagent!!.drawerId.toInt(),1).drawerSize
+                                            val tableFragment = TableFragment()
+                                            val arg = Bundle()
+                                            arg.putInt("drawerSize",drawerSize)
+                                            arg.putString("table", "return")
+                                            tableFragment.arguments = arg
+                                            replaceFragment(R.id.fl_subOperation_table, tableFragment)
+                                    //弹窗
                                             val dialog = BottomDialog(this)
                                             dialog.setYesOnclickListener(null, object : BottomDialog.onYesOnclickListener {
                                                 override fun onYesClick() {
@@ -295,9 +335,15 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                                     }
                                                     val curDate = Date(System.currentTimeMillis())
                                                     val str = sdf.format(curDate)
-                                                    val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                                    upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "归还试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                                    if(dbManager!!.cabinetNo.size!=0) {
+                                                        val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
+                                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "归还试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                                    }
                                                     finish()
+                                                    overridePendingTransition(0, 0)
+                                                    val intent = Intent()
+                                                    intent.setClass(this@SubOperationActivity,OperationActivity::class.java)
+                                                    startActivity(intent)
                                                     overridePendingTransition(0, 0)
                                                     dialog.dismiss()
                                                 }
@@ -356,9 +402,15 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     dbManager?.addReagentUserRecord(reagentId,4,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","")
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
-                                    val upload : UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                    upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"移除试剂",scApp!!.userInfo.userName,str,reagent?.reagentName)
+                                    if(dbManager!!.cabinetNo.size!=0) {
+                                        val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
+                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "移除试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                    }
                                     finish()
+                                    overridePendingTransition(0, 0)
+                                    val intent = Intent()
+                                    intent.setClass(this@SubOperationActivity,OperationActivity::class.java)
+                                    startActivity(intent)
                                     overridePendingTransition(0, 0)
                                     dialog.dismiss()
                                 }

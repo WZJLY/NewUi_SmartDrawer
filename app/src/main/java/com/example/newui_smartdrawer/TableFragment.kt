@@ -4,11 +4,14 @@ package com.example.newui_smartdrawer
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
+import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.Drawer
 import com.example.newui_smartdrawer.util.Reagent
@@ -23,6 +26,7 @@ class TableFragment : Fragment() {
     var dbManager: DBManager? = null
     private var drawer: Drawer?=null
     private var reagent: Reagent?=null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -44,6 +48,10 @@ class TableFragment : Fragment() {
                 "operation" -> {
                     drawerID=arguments.getInt("drawerID")
                     tableNum=dbManager!!.getDrawerByDrawerId(drawerID,1).drawerSize
+                }
+                "return"->{
+                    tableNum=arguments.getInt("drawerSize")
+
                 }
             }
             addNum(tableNum)
@@ -79,6 +87,13 @@ class TableFragment : Fragment() {
                         else
                             button.setBackgroundResource(R.drawable.btn_table1)
                     }
+                    "return"->{
+                        button.isClickable = false
+                        if(scApp?.touchtable==button.id)
+                            button.setBackgroundResource(R.drawable.btn_table1_press)
+                        else
+                            button.setBackgroundResource(R.drawable.btn_table1)
+                    }
                     "operation" -> {
                         if(sum>0) {
                             for (m in 1..sum) {
@@ -88,34 +103,82 @@ class TableFragment : Fragment() {
                                 reagent = arrListReagent[m - 1]
                                 if(reagent!!.drawerId.toInt()==drawerID&&reagent!!.reagentPosition.toInt()==button.id)
                                 {
-                                    if(scApp?.touchdrawer==drawerID&&scApp?.touchtable==button.id )
+                                    if(scApp?.touchtable==button.id )
                                     {
                                         //备注：这个网格上应该有选中标点
+                                        button.isFocusable = true
+                                        button.isFocusableInTouchMode = true
+                                        button.requestFocus()
+                                        button.requestFocusFromTouch()
+//                                        button.performClick()
+                                        button.setOnFocusChangeListener { v, hasFocus ->
+                                            if(hasFocus) {
+                                                if (dbManager?.getReagentByPos(drawerID.toString(), button.id.toString()) != null) {
+                                                    if (dbManager!!.getReagentByPos(drawerID.toString(), button.id.toString()).status == 1) {
+                                                        val eventMessenge = BtnEvent()
+                                                        eventMessenge.setMsg("take")
+                                                        EventBus.getDefault().postSticky(eventMessenge)
+                                                    } else {
+                                                        val eventMessenge = BtnEvent()
+                                                        eventMessenge.setMsg("scarp")
+                                                        EventBus.getDefault().postSticky(eventMessenge)
+                                                    }
+                                                    val informationFragment = InformationFragment()
+                                                    val fragmentTransaction = childFragmentManager.beginTransaction()
+                                                    val arg = Bundle()
+                                                    arg.putString("showMessage", "show")
+                                                    arg.putString("tablenum", drawerID.toString())
+                                                    arg.putString("pos", button.id.toString())
+                                                    informationFragment.arguments = arg
+                                                    fragmentTransaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
+                                                    fragmentTransaction.addToBackStack("Info")
+                                                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                    fragmentTransaction.commit()
+
+                                                } else {
+                                                    val eventMessenge = BtnEvent()
+                                                    eventMessenge.setMsg("into")
+                                                    EventBus.getDefault().postSticky(eventMessenge)
+                                                    if (childFragmentManager.findFragmentByTag("Info") != null) {
+                                                        val informationFragment = childFragmentManager.findFragmentByTag("Info")
+                                                        val fragmentTransaction = fragmentManager.beginTransaction()
+                                                        fragmentTransaction.remove(informationFragment)
+                                                        fragmentTransaction.addToBackStack("Info")
+                                                        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                                        fragmentTransaction.commit()
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                        val eventMessenge = BtnEvent()
+                                        eventMessenge.setMsg("take")
+                                        EventBus.getDefault().postSticky(eventMessenge)
                                         val informationFragment = InformationFragment()
                                         val fragmentTrasaction = childFragmentManager.beginTransaction()
                                         val arg = Bundle()
                                         arg.putString("showMessage","show")
                                         arg.putString("tablenum",drawerID.toString())
-                                        arg.putString("op",button.id.toString())
+                                        arg.putString("pos",button.id.toString())
                                         informationFragment.arguments = arg
                                         fragmentTrasaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
                                         fragmentTrasaction.commit()
+
                                         scApp?.touchdrawer=0
                                         scApp?.touchtable =0
 
                                     }
                                     if(reagent!!.reagentName.length>3)
                                         button.text = reagent!!.reagentName.subSequence(0,3)
-                                    else
                                         button.text = reagent!!.reagentName
                                     if(reagent?.status==1) {
-                                        button.setBackgroundResource(R.drawable.btn_table2_style)
+                                        button.setBackgroundResource(R.drawable.btn_table1_style)
                                         //在位时得颜色
                                     }
                                     if(reagent?.status==2)
                                     {
                                         //取用时得颜色
-                                        button.setBackgroundResource(R.drawable.btn_table1_style)
+                                        button.setBackgroundResource(R.drawable.btn_table2_style)
                                     }
                                 }
                             }
@@ -123,6 +186,7 @@ class TableFragment : Fragment() {
                         button.setOnClickListener { view->
                             var row = button.id.toString()
                             scApp?.touchtable=row.toInt()
+                            scApp?.touchdrawer=drawerID
                             view.isFocusable = true
                             view.requestFocus()
                             view.requestFocusFromTouch()
@@ -137,18 +201,20 @@ class TableFragment : Fragment() {
                                 else
                                 {
                                     val eventMessenge = BtnEvent()
-                                    eventMessenge.setMsg("return")
+                                    eventMessenge.setMsg("scarp")
                                     EventBus.getDefault().postSticky(eventMessenge)
                                 }
                                 val informationFragment = InformationFragment()
-                                val fragmentTrasaction = childFragmentManager.beginTransaction()
+                                val fragmentTransaction = childFragmentManager.beginTransaction()
                                 val arg = Bundle()
                                 arg.putString("showMessage","show")
                                 arg.putString("tablenum",drawerID.toString())
                                 arg.putString("pos",row)
                                 informationFragment.arguments = arg
-                                fragmentTrasaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
-                                fragmentTrasaction.commit()
+                                fragmentTransaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
+                                fragmentTransaction.addToBackStack("Info")
+                                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                fragmentTransaction.commit()
 
                             }
                             else
@@ -158,9 +224,11 @@ class TableFragment : Fragment() {
                                 EventBus.getDefault().postSticky(eventMessenge)
                                 if(childFragmentManager.findFragmentByTag("Info")!=null) {
                                     val informationFragment = childFragmentManager.findFragmentByTag("Info")
-                                    val fragmentTrasaction = fragmentManager.beginTransaction()
-                                    fragmentTrasaction.remove(informationFragment)
-                                    fragmentTrasaction.commit()
+                                    val fragmentTransaction = fragmentManager.beginTransaction()
+                                    fragmentTransaction.remove(informationFragment)
+                                    fragmentTransaction.addToBackStack("Info")
+                                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    fragmentTransaction.commit()
                                 }
                             }
                         }
@@ -168,6 +236,7 @@ class TableFragment : Fragment() {
                 }
                 tableRow.addView(button)
             }
+
             tl_Ftable.addView(tableRow)
         }
     }

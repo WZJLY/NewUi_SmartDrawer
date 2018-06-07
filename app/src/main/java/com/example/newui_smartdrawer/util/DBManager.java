@@ -276,7 +276,15 @@ public class DBManager {
         }
         return false;
     }           //wzj  add
+    public boolean isReagentExist(String strDrawerId,String strReagentPos){
+        Cursor cursor = db.query("reagent",null,"drawerId=? and reagentPosition=?",new String[] { strDrawerId,strReagentPos }, null, null, null);
+        if (cursor.moveToNext())
+        {
+            return true;
+        }
+        return false;
 
+    }
     public Reagent getReagentById(String strReagentId) {
         Cursor cursor = db.rawQuery("select * from reagent where reagentId = '" + strReagentId + "'",null);
         Reagent reagent = null;
