@@ -5,14 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.os.Looper
-import android.os.Message
-import android.util.Log
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.webkit.JavascriptInterface
-import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.SC_Const
 import com.example.newui_smartdrawer.util.UploadRecordManager
@@ -23,6 +19,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.timerTask
 
 class LoginActivity : AppCompatActivity() {
     private var dbManager: DBManager? = null
@@ -81,12 +78,28 @@ class LoginActivity : AppCompatActivity() {
                 overridePendingTransition(0, 0)
 
             } else {
-                Toast.makeText(this.applicationContext,"登陆失败", Toast.LENGTH_SHORT).show()
+                val dialog = TopFalseDialog(this)
+                dialog.window.setDimAmount(0f)
+                dialog.show()
+                dialog.window.setGravity(Gravity.TOP)
+                val t = Timer()
+                t.schedule(timerTask {
+                    dialog.dismiss()
+                    t.cancel()
+                },3000)
                 return
             }
         }
         if (!dbManager!!.isAccountExist(userName, userPWD)) {
-            Toast.makeText(this.applicationContext, "登陆失败", Toast.LENGTH_SHORT).show()
+            val dialog = TopFalseDialog(this)
+            dialog.window.setDimAmount(0f)
+            dialog.show()
+            dialog.window.setGravity(Gravity.TOP)
+            val t = Timer(true)
+            t.schedule(timerTask {
+                dialog.dismiss()
+                t.cancel()
+            },3000)
         } else {
             val userInfo = dbManager?.getUserAccount(userName, userPWD)
             scApp?.userInfo = userInfo
@@ -108,10 +121,19 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
-            else
-                Toast.makeText(this,"该用户已被禁用", Toast.LENGTH_SHORT).show()
-//            finish()
-
+            else {
+                val dialog = TopFalseDialog(this)
+                dialog.setTitle("该用户已被禁用")
+                dialog.setMessage(" ")
+                dialog.window.setDimAmount(0f)
+                dialog.show()
+                dialog.window.setGravity(Gravity.TOP)
+                val t = Timer(true)
+                t.schedule(timerTask {
+                    dialog.dismiss()
+                    t.cancel()
+                },3000)
+            }
         }
     }
 
@@ -131,8 +153,5 @@ class LoginActivity : AppCompatActivity() {
         super.onDestroy()
         dbManager?.closeDB()
     }
-
-
-
 
 }

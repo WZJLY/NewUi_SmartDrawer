@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TableRow
-import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.Drawer
 import com.example.newui_smartdrawer.util.Reagent

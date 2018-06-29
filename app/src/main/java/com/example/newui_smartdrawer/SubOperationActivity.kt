@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_record.*
 import kotlinx.android.synthetic.main.fragment_return.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.timerTask
 
 class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,ReturnFragment.returnbuttonlisten {
     private var scApp: SCApp? = null
@@ -191,27 +192,108 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     dialog.window.setGravity(Gravity.BOTTOM)
 //                                }
 //                            }
-                        } else
-                            Toast.makeText(this, "该试剂编码已使用", Toast.LENGTH_SHORT).show()
+                        } else{
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("该试剂编码已使用")
+                            dialog.setMessage(" ")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
+                        }
                     }
                     else if (code.isNotEmpty()){
                         if(load.isNotEmpty()) {
-                            Toast.makeText(this, "试剂余量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂余量未填写")
+                            dialog.setMessage("请填写试剂余量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }else if (residue.isNotEmpty()) {
-                            Toast.makeText(this, "称重重量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("称重重量未填写")
+                            dialog.setMessage("请填写称重重量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }else {
-                            Toast.makeText(this, "称重重量和试剂余量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("称重重量和试剂余量未填写")
+                            dialog.setMessage("请填写试剂余量和试剂余量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }
                     }else{
                         if (load.isNotEmpty()&& residue.isNotEmpty()){
-                            Toast.makeText(this, "试剂条码未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂条码未填写")
+                            dialog.setMessage("请填写试剂条码")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }
                         if(load.isNotEmpty()) {
-                            Toast.makeText(this, "试剂条码和试剂余量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂条码和试剂余量未填写")
+                            dialog.setMessage("请填写试剂条码和试剂余量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }else if (residue.isNotEmpty()) {
-                            Toast.makeText(this, "试剂条码和称重重量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂条码和称重重量未填写")
+                            dialog.setMessage("请填写试剂条码和称重重量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }else {
-                            Toast.makeText(this, "试剂条码、称重重量和试剂余量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂条码、称重重量和试剂余量未填写")
+                            dialog.setMessage("请填写试剂条码、称重重量和试剂余量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }
                     }
                 }
@@ -357,19 +439,72 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             dialog.window.setGravity(Gravity.BOTTOM)
 //                                        }
 //                                    }
-                                } else
-                                    Toast.makeText(this, "称重重量未填写", Toast.LENGTH_SHORT).show()
-                            } else
-                                Toast.makeText(this, "该试剂在位", Toast.LENGTH_SHORT).show()
-                        } else
-                            Toast.makeText(this, "无该试剂", Toast.LENGTH_SHORT).show()
+                                } else{
+                                    val dialog = TopFalseDialog(this)
+                                    dialog.window.setDimAmount(0f)
+                                    dialog.setTitle("称重重量未填写")
+                                    dialog.setMessage("请填写称重重量")
+                                    dialog.show()
+                                    dialog.window.setGravity(Gravity.TOP)
+                                    val t = Timer()
+                                    t.schedule(timerTask {
+                                        dialog.dismiss()
+                                        t.cancel()
+                                    },3000)
+                                }
+                            } else{
+                                val dialog = TopFalseDialog(this)
+                                dialog.window.setDimAmount(0f)
+                                dialog.setTitle("该试剂在位")
+                                dialog.setMessage(" ")
+                                dialog.show()
+                                dialog.window.setGravity(Gravity.TOP)
+                                val t = Timer()
+                                t.schedule(timerTask {
+                                    dialog.dismiss()
+                                    t.cancel()
+                                },3000)
+                            }
+                        } else{
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("无该试剂")
+                            dialog.setMessage(" ")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
+                        }
                     }
                     else {
                         if (load.isNotEmpty()){
-                            Toast.makeText(this, "试剂条码未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂条码未填写")
+                            dialog.setMessage("请填写试剂条码")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }
                         else{
-                            Toast.makeText(this, "试剂条码和称重重量未填写", Toast.LENGTH_SHORT).show()
+                            val dialog = TopFalseDialog(this)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂条码和称重重量未填写")
+                            dialog.setMessage("请填写试剂条码和称重重量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         }
                     }
                 }
@@ -451,7 +586,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
             if (null != data) {
                 val bundle = data.extras
                 if (bundle == null) {
-                    Toast.makeText(this, "EMPTY", Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this, "EMPTY", Toast.LENGTH_LONG).show()
                     return
                 }
                 if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {

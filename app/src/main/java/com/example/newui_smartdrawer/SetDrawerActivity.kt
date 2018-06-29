@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
-import android.util.Log
-import android.widget.RadioButton
+import android.view.Gravity
 import android.widget.RadioGroup
-import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.activity_set_drawer.*
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class SetDrawerActivity : AppCompatActivity() {
     private var num = -1
@@ -122,12 +122,43 @@ class SetDrawerActivity : AppCompatActivity() {
         })
 
         btn_setDrawer_OK.setOnClickListener({
-            if(num == -1 )
-                Toast.makeText(this,"行列数未选择",Toast.LENGTH_SHORT).show()
-            if(status== -1)
-                Toast.makeText(this,"抽屉状态未选择",Toast.LENGTH_SHORT).show()
-            if(num!=-1&&status!=-1)
-            {
+            if(num == -1&&status== -1) {
+                val dialog = TopFalseDialog(this)
+                dialog.window.setDimAmount(0f)
+                dialog.setTitle("行列数和抽屉状态未选择")
+                dialog.setMessage("请选择行列数和抽屉状态")
+                dialog.show()
+                dialog.window.setGravity(Gravity.TOP)
+                val t = Timer()
+                t.schedule(timerTask {
+                    dialog.dismiss()
+                    t.cancel()
+                },3000)
+            } else if (num == -1) {
+                val dialog = TopFalseDialog(this)
+                dialog.window.setDimAmount(0f)
+                dialog.setTitle("行列数未选择")
+                dialog.setMessage("请选择行列数")
+                dialog.show()
+                dialog.window.setGravity(Gravity.TOP)
+                val t = Timer()
+                t.schedule(timerTask {
+                    dialog.dismiss()
+                    t.cancel()
+                },3000)
+            }else if(status== -1){
+                val dialog = TopFalseDialog(this)
+                dialog.window.setDimAmount(0f)
+                dialog.setTitle("抽屉状态未选择")
+                dialog.setMessage("请选择抽屉状态")
+                dialog.show()
+                dialog.window.setGravity(Gravity.TOP)
+                val t = Timer()
+                t.schedule(timerTask {
+                    dialog.dismiss()
+                    t.cancel()
+                },3000)
+            } else {
                 if(set_drawerId!=null) dbManager?.updateDrawer(set_drawerId.toInt(),1,num,status.toString())
                 else dbManager?.addDrawer(drawerId.toInt(),1,num,status.toString())
                 finish()

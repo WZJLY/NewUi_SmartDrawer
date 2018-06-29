@@ -36,7 +36,7 @@ public class UploadRecordManager {
             json1.put("reagentName",reagentName);
             //构建一个json数据
 
-            Log.d("wzj","json数据为:"+json1.toString());
+//            Log.d("wzj","json数据为:"+json1.toString());
         }catch(JSONException e) {
 
             //TODOAuto-generated catch block

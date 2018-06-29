@@ -4,12 +4,11 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.activity_setting.*
-import kotlinx.android.synthetic.main.dialog_binding.*
+import java.util.*
+import kotlin.concurrent.timerTask
 
 
 class SettingActivity : AppCompatActivity() {
@@ -54,13 +53,46 @@ class SettingActivity : AppCompatActivity() {
                             if (serviceCode.length() > 0) {
                                 dbManager?.addCabinetNo(cabinetNo.text.toString(), serviceCode.text.toString())
                                 dialog.dismiss()
-                            } else
-                                Toast.makeText(applicationContext, "服务码未填写", Toast.LENGTH_SHORT).show()
+                            } else {
+                                val dialog = TopFalseDialog(applicationContext)
+                                dialog.window.setDimAmount(0f)
+                                dialog.setTitle("服务码未填写")
+                                dialog.setMessage("请填写服务码")
+                                dialog.show()
+                                dialog.window.setGravity(Gravity.TOP)
+                                val t = Timer()
+                                t.schedule(timerTask {
+                                    dialog.dismiss()
+                                    t.cancel()
+                                },3000)
+                            }
                         } else {
-                            if (serviceCode.length() > 0)
-                                Toast.makeText(applicationContext, "智能柜编号未填写", Toast.LENGTH_SHORT).show()
-                            else
-                                Toast.makeText(applicationContext, "智能柜编号和服务码未填写", Toast.LENGTH_SHORT).show()
+                            if (serviceCode.length() > 0){
+                                val dialog = TopFalseDialog(applicationContext)
+                                dialog.window.setDimAmount(0f)
+                                dialog.setTitle("智能柜编号未填写")
+                                dialog.setMessage("请填写智能柜编号")
+                                dialog.show()
+                                dialog.window.setGravity(Gravity.TOP)
+                                val t = Timer()
+                                t.schedule(timerTask {
+                                    dialog.dismiss()
+                                    t.cancel()
+                                },3000)
+                            }
+                            else {
+                                val dialog = TopFalseDialog(applicationContext)
+                                dialog.window.setDimAmount(0f)
+                                dialog.setTitle("智能柜编号和服务码未填写")
+                                dialog.setMessage("请填写智能柜编号和服务码")
+                                dialog.show()
+                                dialog.window.setGravity(Gravity.TOP)
+                                val t = Timer()
+                                t.schedule(timerTask {
+                                    dialog.dismiss()
+                                    t.cancel()
+                                },3000)
+                            }
                         }
                     }
                 }

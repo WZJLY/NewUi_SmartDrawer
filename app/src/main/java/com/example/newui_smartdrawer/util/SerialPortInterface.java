@@ -169,7 +169,6 @@ public class SerialPortInterface extends AppCompatActivity {
         }
         String str = String.format("%02x", DID).toUpperCase() + "21" + drawerData;
         String sendData = ":" + str + Lrc(str);
-        Log.d("data", sendData);
         UART_Send(sendData);
         return 1;
     }
@@ -198,7 +197,6 @@ public class SerialPortInterface extends AppCompatActivity {
     public int sendLED(int DID, int data) {
         String str = String.format("%02x", DID) + "41" + String.format("%02x", data);
         String sendData = ":" + str + Lrc(str);
-        Log.d("data", sendData);
         UART_Send(sendData);
         return 1;
     }
@@ -266,7 +264,6 @@ public class SerialPortInterface extends AppCompatActivity {
                                     byte[] result = hexStringToBytes(crc);
                                     if (buffer[head+7] == result[0]&&buffer[head+8] == result[1]) {
                                         int load = (buffer[head+4]&0xff)+((buffer[head+3]&0xff)<<8)+((buffer[head+6]&0xff)<<16)+((buffer[head+5]&0xff)<<32);
-                                        Log.d("Load","Load");
                                         return load;
                                     }
                                     else{
@@ -330,7 +327,6 @@ public class SerialPortInterface extends AppCompatActivity {
                                     lrc = new String(buffer3);
                                     if (lrc.equals(Lrc(readDatas))) {
                                         String str = readDatas.substring(4);
-                                        Log.d("serialPort",str);
                                         return str;
                                     } else {
                                         return Error;

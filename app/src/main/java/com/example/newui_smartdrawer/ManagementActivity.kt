@@ -9,11 +9,11 @@ import android.view.Gravity
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_management.*
-import kotlinx.android.synthetic.main.dialog_user.*
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonlisten {
     private var dbManager:DBManager?=null
@@ -42,13 +42,53 @@ class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonliste
                     val rgDuserLevel = dialog.findViewById(R.id.rg_Duser_level) as RadioGroup
                     val selectId = dialog.findViewById(rgDuserLevel.checkedRadioButtonId) as RadioButton
                     if (etName.length() == 0) {
-                        Toast.makeText(this@ManagementActivity, "账号未填写", Toast.LENGTH_SHORT).show()
+                        val dialog = TopFalseDialog(this@ManagementActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("账号未填写")
+                        dialog.setMessage("请填写账号")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
                     } else if (etPassword.length() == 0) {
-                        Toast.makeText(this@ManagementActivity, "密码未填写", Toast.LENGTH_SHORT).show()
+                        val dialog = TopFalseDialog(this@ManagementActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("密码未填写")
+                        dialog.setMessage("请填写密码")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
                     } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()){
-                        Toast.makeText(this@ManagementActivity, "两次密码输入不同", Toast.LENGTH_SHORT).show()
+                        val dialog = TopFalseDialog(this@ManagementActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("两次密码输入不同")
+                        dialog.setMessage("请确认密码")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
                     } else if (etAccount.length() == 0) {
-                        Toast.makeText(this@ManagementActivity, "姓名未填写", Toast.LENGTH_SHORT).show()
+                        val dialog = TopFalseDialog(this@ManagementActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("姓名未填写")
+                        dialog.setMessage("请填写姓名")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
                     } else if (etName.length() != 0 && etAccount.length() != 0 && etPassword.length() != 0 && etPassword.length() == etPassword2.length()) {
                         if (selectId.text == "管理员") {
                             userAccount = UserAccount(etNum.text.toString(), etName.text.toString(), etPassword.text.toString(),

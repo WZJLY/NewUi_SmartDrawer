@@ -20,6 +20,8 @@ import kotlinx.android.synthetic.main.activity_template.*
 import java.io.*
 import java.net.MalformedURLException
 import java.net.URL
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplatelisten {
     private var dbManager:DBManager?=null
@@ -32,7 +34,7 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                 0 -> {
                     //在这里得到数据，并且可以直接更新UI
                     val data = msg.obj as String
-                    Toast.makeText(this@TemplateActivity,data,Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@TemplateActivity,data,Toast.LENGTH_SHORT).show()
                     val templateLine = VerticalFragment()
                     val args = Bundle()
                     args.putString("addtemplate","add")
@@ -113,14 +115,47 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                                         et_code.text.toString(),"ml",template_density)
                             }
                         }
-                        else
-                            Toast.makeText(this@TemplateActivity,"试剂瓶容量未填写",Toast.LENGTH_SHORT).show()
+                        else{
+                            val dialog = TopFalseDialog(this@TemplateActivity)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂瓶容量未填写")
+                            dialog.setMessage("请填写试剂瓶容量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
+                        }
                     }
                     else {
-                        if (et_volume.length()>0)
-                            Toast.makeText(this@TemplateActivity, "试剂名未填写", Toast.LENGTH_SHORT).show()
-                        else
-                            Toast.makeText(this@TemplateActivity, "试剂名和试剂瓶容量未填写", Toast.LENGTH_SHORT).show()
+                        if (et_volume.length()>0){
+                            val dialog = TopFalseDialog(this@TemplateActivity)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂名未填写")
+                            dialog.setMessage("请填写试剂名")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
+                        }
+                        else {
+                            val dialog = TopFalseDialog(this@TemplateActivity)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂名和试剂瓶容量未填写")
+                            dialog.setMessage("请填写试剂名和试剂瓶容量")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
+                        }
                     }
                     val templateLine = VerticalFragment()
                     val args = Bundle()
@@ -262,10 +297,7 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                         val requestUrl = URL(urlStr)
                         output.writeBytes(requestUrl.readBytes())
                         Toast.makeText(SCApp.getContext(), "模板下载成功", Toast.LENGTH_SHORT).show()
-
-
                         if (templateToDB(pathName) == "") {
-
                             Toast.makeText(SCApp.getContext(), "试剂模板导入失败", Toast.LENGTH_SHORT).show()
 
                         } else {

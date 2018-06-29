@@ -20,6 +20,7 @@ import java.net.MalformedURLException
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.concurrent.timerTask
 
 class MainActivity : AppCompatActivity() {
     private var scApp:SCApp?=null
@@ -111,22 +112,62 @@ class MainActivity : AppCompatActivity() {
                     val rgDuserLevel = dialog.findViewById(R.id.rg_Duser_level) as RadioGroup
                     val selectId = dialog.findViewById(rgDuserLevel.checkedRadioButtonId) as RadioButton
                     if (etName.length() == 0) {
-                        Toast.makeText(this@MainActivity, "账号未填写", Toast.LENGTH_SHORT).show()
-                        } else if (etPassword.length() == 0) {
-                        Toast.makeText(this@MainActivity, "密码未填写", Toast.LENGTH_SHORT).show()
-                        } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()) {
-                        Toast.makeText(this@MainActivity, "两次密码输入不同", Toast.LENGTH_SHORT).show()
-                        } else if (etAccount.length() == 0) {
-                        Toast.makeText(this@MainActivity, "姓名未填写", Toast.LENGTH_SHORT).show()
-                        } else if (etName.length() != 0 && etAccount.length() != 0 && etPassword.length() != 0 && etPassword.length() == etPassword2.length()) {
-                            if (selectId.text == "管理员") {
-                                dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
-                                        0, etAccount.text.toString(), etPhone.text.toString())
+                        val dialog = TopFalseDialog(this@MainActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("账号未填写")
+                        dialog.setMessage("请填写账号")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
+                    } else if (etPassword.length() == 0) {
+                        val dialog = TopFalseDialog(this@MainActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("密码未填写")
+                        dialog.setMessage("请填写密码")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
+                    } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()) {
+                        val dialog = TopFalseDialog(this@MainActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("两次密码输入不同")
+                        dialog.setMessage("请确认密码")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
+                    } else if (etAccount.length() == 0) {
+                        val dialog = TopFalseDialog(this@MainActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("姓名未填写")
+                        dialog.setMessage("请填写姓名")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
+                    } else if (etName.length() != 0 && etAccount.length() != 0 && etPassword.length() != 0 && etPassword.length() == etPassword2.length()) {
+                        if (selectId.text == "管理员") {
+                            dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
+                                    0, etAccount.text.toString(), etPhone.text.toString())
 
-                            } else if (selectId.text == "普通用户") {
-                                dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
-                                        1, etAccount.text.toString(), etPhone.text.toString())
-                            }
+                        } else if (selectId.text == "普通用户") {
+                            dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
+                                    1, etAccount.text.toString(), etPhone.text.toString())
+                        }
                         dialog.dismiss()
                     }
                 }
@@ -258,9 +299,17 @@ class MainActivity : AppCompatActivity() {
 
 
                         if (templateToDB(pathName) == "") {
-
-                            Toast.makeText(SCApp.getContext(), "试剂模板导入失败", Toast.LENGTH_SHORT).show()
-
+                            val dialog = TopFalseDialog(this@MainActivity)
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂模板导入失败")
+                            dialog.setMessage(" ")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         } else {
 
                             Toast.makeText(SCApp.getContext(), "试剂模板导入成功", Toast.LENGTH_SHORT).show()
@@ -274,11 +323,18 @@ class MainActivity : AppCompatActivity() {
                         e.printStackTrace()
 
                     } catch (e: IOException) {
-
-                        Toast.makeText(SCApp.getContext(), "该试剂模板编码不存在", Toast.LENGTH_LONG).show()
-
+                        val dialog = TopFalseDialog(this@MainActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("该试剂模板编码不存在")
+                        dialog.setMessage("请输入正确的试剂模板编码")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
                         e.printStackTrace()
-
                     } finally {
                         try {
 
@@ -317,12 +373,12 @@ class MainActivity : AppCompatActivity() {
                 0 -> {
                     //在这里得到数据，并且可以直接更新UI
                     val data = msg.obj as String
-                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
 
                 }
                 2 -> {
                     val data = msg.obj as String
-                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
                 }
                 3->{
                     val formatter = SimpleDateFormat("HH:mm")

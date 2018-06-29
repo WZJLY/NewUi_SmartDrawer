@@ -43,7 +43,6 @@ class DrawerFragment2 : Fragment() {
         if(scApp?.touchdrawer==drawerId)
         {
             scApp?.touchdrawer=0
-            Toast.makeText(context.applicationContext,""+scApp?.touchtable,Toast.LENGTH_SHORT).show()
             val tableFragment = TableFragment()
             val args = Bundle()
             args.putInt("drawerID", drawerId)

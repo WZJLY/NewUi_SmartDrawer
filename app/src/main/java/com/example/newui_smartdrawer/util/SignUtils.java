@@ -74,7 +74,7 @@ public class SignUtils {
 		String fileMd5 = getMd5ByFile(file);
 
 		if (DEBUG) {
-			Log.d(TAG, String.format("file's md5=%s, real md5=%s", fileMd5, md5));
+//			Log.d(TAG, String.format("file's md5=%s, real md5=%s", fileMd5, md5));
 		}
 
 		if (md5.equals(fileMd5)) {
