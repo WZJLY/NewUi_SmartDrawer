@@ -56,10 +56,8 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
         templateLine.arguments=args
         replaceFragment(templateLine,R.id.fl_template)
         ib_Template_back.setOnClickListener({
-
             finish()
             overridePendingTransition(0, 0)
-
         })
         btn_template_batchImport.setOnClickListener({
             val edit= EditText(this)
@@ -231,15 +229,12 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                         lineNumber++
                     }
                     instream.close()
-
                 }
             } catch (e: Exception) {
                 Log.e("TestFile", e.message)
                 ret = "导入模板失败"
             }
-
         }
-
         return ret
     }
 
@@ -298,8 +293,17 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                         output.writeBytes(requestUrl.readBytes())
                         Toast.makeText(SCApp.getContext(), "模板下载成功", Toast.LENGTH_SHORT).show()
                         if (templateToDB(pathName) == "") {
-                            Toast.makeText(SCApp.getContext(), "试剂模板导入失败", Toast.LENGTH_SHORT).show()
-
+                            val dialog = TopFalseDialog(SCApp.getContext())
+                            dialog.window.setDimAmount(0f)
+                            dialog.setTitle("试剂模板导入失败")
+                            dialog.setMessage(" ")
+                            dialog.show()
+                            dialog.window.setGravity(Gravity.TOP)
+                            val t = Timer()
+                            t.schedule(timerTask {
+                                dialog.dismiss()
+                                t.cancel()
+                            },3000)
                         } else {
                             Toast.makeText(SCApp.getContext(), "试剂模板导入成功", Toast.LENGTH_SHORT).show()
                             val msg = Message()
@@ -308,22 +312,25 @@ class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplateliste
                             mHandler.sendMessage(msg)
                         }
                     } catch (e: MalformedURLException) {
-
                         e.printStackTrace()
-
                     } catch (e: IOException) {
-
-                        Toast.makeText(SCApp.getContext(), "该试剂模板编码不存在", Toast.LENGTH_LONG).show()
-
+                        val dialog = TopFalseDialog(SCApp.getContext())
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("该试剂模板编码不存在")
+                        dialog.setMessage("请输入正确的试剂模板编码")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        },3000)
                         e.printStackTrace()
-
                     } finally {
                         try {
 
                         } catch (e: IOException) {
-
                             e.printStackTrace()
-
                         }
                         Looper.loop()
                     }

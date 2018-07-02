@@ -218,7 +218,7 @@ class MainActivity : AppCompatActivity() {
                     var lineArray: Array<String>? = null
                     while ( line != null) {
                         line=buffreader.readLine()
-                        Log.e("wzj",line)
+//                        Log.e("wzj",line)
                         if (lineNumber >= 1) {     //insert to DB
                             lineArray = line.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                             if (lineArray[0] != null && lineArray[0] != "") {

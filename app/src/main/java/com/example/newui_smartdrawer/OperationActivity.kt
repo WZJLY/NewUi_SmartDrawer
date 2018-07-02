@@ -47,20 +47,20 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
         changeButton("noFocusable")
         updateDrawer()
         //打开串口
-//        if(dbManager!!.sysSeting.size > 0){
-//            val serialPortNum = dbManager!!.sysSeting[0].serialNum.toInt()
-//            var serialPortID:String ?= null
-//            when (serialPortNum){
-//                0 -> serialPortID = "/dev/ttyS1"
-//                1 -> serialPortID = "/dev/ttyS2"
-//                2 -> serialPortID = "/dev/ttyS3"
-//                3 -> serialPortID = "/dev/ttyS4"
-//            }
-//            spi = SerialPortInterface(this.applicationContext, serialPortID)
-//            scApp?.setSpi(spi)
-//        }
-//        else
-//            Toast.makeText(this,"请进行系统硬件设置", Toast.LENGTH_SHORT).show()
+        if(dbManager!!.sysSeting.size > 0){
+            val serialPortNum = dbManager!!.sysSeting[0].serialNum.toInt()
+            var serialPortID:String ?= null
+            when (serialPortNum){
+                0 -> serialPortID = "/dev/ttyS1"
+                1 -> serialPortID = "/dev/ttyS2"
+                2 -> serialPortID = "/dev/ttyS3"
+                3 -> serialPortID = "/dev/ttyS4"
+            }
+            spi = SerialPortInterface(this.applicationContext, serialPortID)
+            scApp?.setSpi(spi)
+        }
+        else
+            Toast.makeText(this,"请进行系统硬件设置", Toast.LENGTH_SHORT).show()
 
         ib_operation_back.setOnClickListener{
             scApp?.touchdrawer=0
@@ -80,8 +80,8 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
             //入柜
             statue = "Into"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
-//            spi?.sendLED(1, 1)
-//            weighThread().start()
+            spi?.sendLED(1, 1)
+            weighThread().start()
             var intent = Intent(this, CaptureActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
             overridePendingTransition(0, 0)
@@ -101,8 +101,8 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
 
             statue = "Return"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
-//            spi?.sendLED(1, 1)
-//            weighThread().start()
+            spi?.sendLED(1, 1)
+            weighThread().start()
             var intent = Intent(this, CaptureActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
             overridePendingTransition(0, 0)
@@ -162,13 +162,13 @@ class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten
                     Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show()
 
                 }
-//                if (stop) {
-//                    val Double = scApp!!.initialWeight.toDouble()
-//                    intent.putExtra("weight", (Double/10).toString())
-//                }
-//                else {
-//                    stop = true
-//                }
+                if (stop) {
+                    val Double = scApp!!.initialWeight.toDouble()
+                    intent.putExtra("weight", (Double/10).toString())
+                }
+                else {
+                    stop = true
+                }
             }
         }
 
