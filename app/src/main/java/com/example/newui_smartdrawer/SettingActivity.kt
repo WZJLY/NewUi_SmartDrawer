@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.activity_setting.*
 import java.util.*
 import kotlin.concurrent.timerTask
 
-
 class SettingActivity : AppCompatActivity() {
     private var dbManager: DBManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {

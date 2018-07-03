@@ -20,7 +20,6 @@ import com.example.newui_smartdrawer.util.SerialPortInterface
 import com.example.newui_smartdrawer.util.UploadRecordManager
 import kotlinx.android.synthetic.main.activity_sub_operation.*
 import kotlinx.android.synthetic.main.fragment_into.*
-import kotlinx.android.synthetic.main.fragment_record.*
 import kotlinx.android.synthetic.main.fragment_return.*
 import java.text.SimpleDateFormat
 import java.util.*

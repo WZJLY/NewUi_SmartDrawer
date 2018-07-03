@@ -2,7 +2,6 @@ package com.example.newui_smartdrawer
 
 import android.app.Dialog
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.dialog_bottom.*
 

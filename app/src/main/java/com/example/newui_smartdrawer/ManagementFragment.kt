@@ -3,15 +3,11 @@ package com.example.newui_smartdrawer
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.UserAccount
-import kotlinx.android.synthetic.main.activity_management.*
 
 class ManagementFragment : Fragment() {
     private var dbManager: DBManager?=null

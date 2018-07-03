@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentTransaction
 import android.util.Log
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.activity_set_cabinet.*
-import kotlin.math.log
 
 class SetCabinetActivity : AppCompatActivity(),SetCabinetFragment.addDrawerbuttonlisten,DrawerFragment.deletDrawerlisten {
     private var dbManager:DBManager?=null

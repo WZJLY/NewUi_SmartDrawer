@@ -1,6 +1,5 @@
 package com.example.newui_smartdrawer
 
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -14,9 +13,6 @@ import com.example.newui_smartdrawer.util.SC_Const
 import com.example.newui_smartdrawer.util.UploadRecordManager
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_login.*
-import java.io.*
-import java.net.MalformedURLException
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.timerTask
