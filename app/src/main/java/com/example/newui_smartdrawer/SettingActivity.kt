@@ -10,12 +10,8 @@ import kotlinx.android.synthetic.main.activity_setting.*
 import java.util.*
 import kotlin.concurrent.timerTask
 
-<<<<<<< HEAD
-
-class SettingActivity : BaseActivity() {
-=======
 class SettingActivity : AppCompatActivity() {
->>>>>>> 9f8ed300edab52c3dc5d7c97a4333aa5123264f7
+
     private var dbManager: DBManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,6 +104,14 @@ class SettingActivity : AppCompatActivity() {
             })
             dialog.show()
             dialog.window.setGravity(Gravity.CENTER)
+        }
+
+        btn_setting_video.setOnClickListener {
+
+        }
+
+        btn_setting_update.setOnClickListener {
+
         }
     }
 }

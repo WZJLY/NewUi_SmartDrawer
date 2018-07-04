@@ -7,6 +7,32 @@
     android:layout_height="match_parent"
     tools:context=".SettingActivity">
 
+    <Button
+        android:id="@+id/btn_setting_update"
+        android:layout_width="220dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_drawer_style_39"
+        android:text="系统升级"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_setting_binding" />
+
+    <Button
+        android:id="@+id/btn_setting_video"
+        android:layout_width="220dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_drawer_style_39"
+        android:text="监控视频"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView11" />
+
     <ImageView
         android:id="@+id/imageView32"
         android:layout_width="wrap_content"
@@ -64,14 +90,14 @@
         android:id="@+id/btn_setting_cabinet"
         android:layout_width="220dp"
         android:layout_height="64dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/btn_drawer_style_39"
         android:text="智能柜设置"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView11" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_setting_video" />
 
     <Button
         android:id="@+id/btn_setting_hardware"
