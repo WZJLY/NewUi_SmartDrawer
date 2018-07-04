@@ -11,7 +11,7 @@ import java.util.*
 import kotlin.concurrent.timerTask
 
 
-class SettingActivity : AppCompatActivity() {
+class SettingActivity : BaseActivity() {
     private var dbManager: DBManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

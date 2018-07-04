@@ -11,7 +11,7 @@ import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.activity_set_cabinet.*
 import kotlin.math.log
 
-class SetCabinetActivity : AppCompatActivity(),SetCabinetFragment.addDrawerbuttonlisten,DrawerFragment.deletDrawerlisten {
+class SetCabinetActivity : BaseActivity(),SetCabinetFragment.addDrawerbuttonlisten,DrawerFragment.deletDrawerlisten {
     private var dbManager:DBManager?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

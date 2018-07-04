@@ -553,4 +553,6 @@ public ReagentUserRecord getReagentUseRecordByDate(String strdate)
     public void addSysSeting(String serialNum,String cameraVersion) {
         db.execSQL("INSERT INTO sysSeting VALUES(null,?,?)", new Object[]{serialNum,cameraVersion});
     }
+
+
 }

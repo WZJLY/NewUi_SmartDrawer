@@ -11,7 +11,7 @@ import com.example.newui_smartdrawer.util.OperationRecord
 import com.example.newui_smartdrawer.util.ReagentUserRecord
 import kotlinx.android.synthetic.main.activity_record.*
 
-class RecordActivity : AppCompatActivity() {
+class RecordActivity : BaseActivity() {
     private var dbManager:DBManager?=null
     private var record:ReagentUserRecord?=null
     override fun onCreate(savedInstanceState: Bundle?) {

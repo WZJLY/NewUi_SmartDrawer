@@ -25,6 +25,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.view.SurfaceHolder;
 
+import com.example.newui_smartdrawer.util.DBManager;
+
 import java.io.IOException;
 
 /**
@@ -43,6 +45,7 @@ public final class CameraManager {
     private static CameraManager cameraManager;
 
     static final int SDK_INT; // Later we can use Build.VERSION.SDK_INT
+
 
     static {
         int sdkInt;
@@ -63,6 +66,7 @@ public final class CameraManager {
     private boolean initialized;
     private boolean previewing;
     private final boolean useOneShotPreviewCallback;
+
     /**
      * Preview frames are delivered here, which we pass on to the registered handler. Make sure to
      * clear the handler so it will only receive one message.
@@ -123,7 +127,6 @@ public final class CameraManager {
                 throw new IOException();
             }
             camera.setPreviewDisplay(holder);
-
             if (!initialized) {
                 initialized = true;
                 configManager.initFromCameraParameters(camera);

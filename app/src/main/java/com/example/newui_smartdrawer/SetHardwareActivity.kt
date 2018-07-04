@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_set_hardware.*
 import com.example.newui_smartdrawer.util.DBManager
 
 
-class SetHardwareActivity : AppCompatActivity() {
+class SetHardwareActivity : BaseActivity() {
     private var dbManager: DBManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_management.*
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class ManagementActivity : AppCompatActivity(),UserLineFragment.deletbuttonlisten {
+class ManagementActivity : BaseActivity(),UserLineFragment.deletbuttonlisten {
     private var dbManager:DBManager?=null
     private var userAccount: UserAccount? = null
 

@@ -1,6 +1,11 @@
 package com.example.newui_smartdrawer
 
+import android.app.Activity
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
+import android.net.Uri
 import android.os.*
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -22,85 +27,105 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class MainActivity : AppCompatActivity() {
-    private var scApp:SCApp?=null
-        private var mbackKeyPressed=false
-        private var dbManager:DBManager?=null
-        private var userAccount:UserAccount?=null
+class MainActivity : BaseActivity() {
+    private var scApp: SCApp? = null
+    private var mbackKeyPressed = false
+    private var dbManager: DBManager? = null
+    private var userAccount: UserAccount? = null
+    //    private var service:MyService?=null
+//    private var bound = false
+//    private var sc = MyseriviceConnection()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        dbManager= DBManager(this)
+//        val intent1 = Intent(this,MyService::class.java)
+//        bindService(intent1,sc, Context.BIND_AUTO_CREATE)
+        dbManager = DBManager(this)
         TimeThread().start()
-        scApp=application as SCApp
-        tv_mainAdmin_user.text=scApp!!.userInfo.userName
+        scApp = application as SCApp
+        tv_mainAdmin_user.text = scApp!!.userInfo.userName
         val power = scApp!!.userInfo.userPower
-        if(power==SC_Const.NORMAL)
-        {
-            btn_mainAdmin_setting.visibility= View.GONE
-            btn_mainAdmin_management.visibility= View.GONE
+        if (power == SC_Const.NORMAL) {
+            btn_mainAdmin_setting.visibility = View.GONE
+            btn_mainAdmin_management.visibility = View.GONE
+        }
+        btn_mainAdmin_video.setOnClickListener {
+
+        val parentFlie = File(Environment.getExternalStorageDirectory().toString()
+                +"/SmartCabinet/Video/")
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.setDataAndType(Uri.fromFile(parentFlie),"video/*")
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivity(intent)
+
+
+
 
         }
         btn_mainAdmin_setting.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this,SettingActivity::class.java)
+            intent.setClass(this, SettingActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
         btn_mainAdmin_record.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this,RecordActivity::class.java)
+            intent.setClass(this, RecordActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
         btn_mainAdmin_management.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this,ManagementActivity::class.java)
+            intent.setClass(this, ManagementActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
         btn_mainAdmin_template.setOnClickListener {
+            service!!.createWindowView()
+            service!!.startVideo()
             val intent = Intent()
-            intent.setClass(this,TemplateActivity::class.java)
+            intent.setClass(this, TemplateActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
         btn_mainAdmin_update.setOnClickListener {
-            val manager= UpdateAppManager(this)
+            val manager = UpdateAppManager(this)
             manager.getUpdateMsg()
         }
         btn_mainAdmin_back.setOnClickListener {
-            if(!mbackKeyPressed) {
-                Toast.makeText(this,"再按一次退出登陆",Toast.LENGTH_SHORT).show()
-                mbackKeyPressed=true
-                Timer().schedule(object :TimerTask(){
+            if (!mbackKeyPressed) {
+                Toast.makeText(this, "再按一次退出登陆", Toast.LENGTH_SHORT).show()
+                mbackKeyPressed = true
+                Timer().schedule(object : TimerTask() {
                     override fun run() {
-                        mbackKeyPressed=false
+                        mbackKeyPressed = false
+
                     }
-                },2000)
-            }
-            else {
+                }, 2000)
+            } else {
+                val it = Intent(this, MyService::class.java)
+                stopService(it)
                 val intent = Intent()
-                intent.setClass(this,LoginActivity::class.java)
+                intent.setClass(this, LoginActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
         }
         ib_mainAdmin_operation.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this,OperationActivity::class.java)
+            intent.setClass(this, OperationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
         ib_mainAdmin_search.setOnClickListener {
             val intent = Intent()
-            intent.setClass(this,SearchActivity::class.java)
+            intent.setClass(this, SearchActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
         }
         ib_mainAdmin_user.setOnClickListener {
             val dialog = UserDialog(this)
-            dialog.setEdit(dbManager!!.getUserAccountByUserName(scApp!!.userInfo.userName),1)
+            dialog.setEdit(dbManager!!.getUserAccountByUserName(scApp!!.userInfo.userName), 1)
             dialog.setYesOnclickListener("修改", object : UserDialog.onYesOnclickListener {
                 override fun onYesClick() {
                     val etName = dialog.findViewById(R.id.et_Duser_account) as EditText
@@ -122,7 +147,7 @@ class MainActivity : AppCompatActivity() {
                         t.schedule(timerTask {
                             dialog.dismiss()
                             t.cancel()
-                        },3000)
+                        }, 3000)
                     } else if (etPassword.length() == 0) {
                         val dialog = TopFalseDialog(this@MainActivity)
                         dialog.window.setDimAmount(0f)
@@ -134,7 +159,7 @@ class MainActivity : AppCompatActivity() {
                         t.schedule(timerTask {
                             dialog.dismiss()
                             t.cancel()
-                        },3000)
+                        }, 3000)
                     } else if (etPassword.length() != 0 && etPassword.text.toString() != etPassword2.text.toString()) {
                         val dialog = TopFalseDialog(this@MainActivity)
                         dialog.window.setDimAmount(0f)
@@ -146,7 +171,7 @@ class MainActivity : AppCompatActivity() {
                         t.schedule(timerTask {
                             dialog.dismiss()
                             t.cancel()
-                        },3000)
+                        }, 3000)
                     } else if (etAccount.length() == 0) {
                         val dialog = TopFalseDialog(this@MainActivity)
                         dialog.window.setDimAmount(0f)
@@ -158,14 +183,14 @@ class MainActivity : AppCompatActivity() {
                         t.schedule(timerTask {
                             dialog.dismiss()
                             t.cancel()
-                        },3000)
+                        }, 3000)
                     } else if (etName.length() != 0 && etAccount.length() != 0 && etPassword.length() != 0 && etPassword.length() == etPassword2.length()) {
                         if (selectId.text == "管理员") {
-                            dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
+                            dbManager?.updateAccountByUserName(etName.text.toString(), etNum.text.toString(), etPassword.text.toString(),
                                     0, etAccount.text.toString(), etPhone.text.toString())
 
                         } else if (selectId.text == "普通用户") {
-                            dbManager?.updateAccountByUserName(etName.text.toString(),etNum.text.toString(),  etPassword.text.toString(),
+                            dbManager?.updateAccountByUserName(etName.text.toString(), etNum.text.toString(), etPassword.text.toString(),
                                     1, etAccount.text.toString(), etPhone.text.toString())
                         }
                         dialog.dismiss()
@@ -185,18 +210,16 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         val power = scApp!!.userInfo.userPower
-        if(power==SC_Const.NORMAL)
-        {
-            btn_mainAdmin_setting.visibility= View.GONE
-            btn_mainAdmin_management.visibility= View.GONE
+        if (power == SC_Const.NORMAL) {
+            btn_mainAdmin_setting.visibility = View.GONE
+            btn_mainAdmin_management.visibility = View.GONE
 
-        }
-        else
-        {
-            btn_mainAdmin_setting.visibility= View.VISIBLE
-            btn_mainAdmin_management.visibility= View.VISIBLE
+        } else {
+            btn_mainAdmin_setting.visibility = View.VISIBLE
+            btn_mainAdmin_management.visibility = View.VISIBLE
         }
     }
+
     fun templateToDB(filePath: String?): String {
         var ret = ""
         //打开文件
@@ -213,11 +236,11 @@ class MainActivity : AppCompatActivity() {
                 if (instream != null) {
                     val inputreader = InputStreamReader(instream)
                     val buffreader = BufferedReader(inputreader)
-                    var line =buffreader.readLine()
+                    var line = buffreader.readLine()
                     var lineNumber = 1
                     var lineArray: Array<String>? = null
-                    while ( line != null) {
-                        line=buffreader.readLine()
+                    while (line != null) {
+                        line = buffreader.readLine()
 //                        Log.e("wzj",line)
                         if (lineNumber >= 1) {     //insert to DB
                             lineArray = line.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -242,6 +265,7 @@ class MainActivity : AppCompatActivity() {
 
         return ret
     }
+
     fun downLoad() {                    //下载线程
         object : Thread() {
             override fun run() {
@@ -256,9 +280,7 @@ class MainActivity : AppCompatActivity() {
                     msg.what = 0
                     msg.obj = "更新成功"
                     mHandler.sendMessage(msg)
-                }
-                else
-                {
+                } else {
                     try {
                         /*
                          * 通过URL取得HttpURLConnection
@@ -309,7 +331,7 @@ class MainActivity : AppCompatActivity() {
                             t.schedule(timerTask {
                                 dialog.dismiss()
                                 t.cancel()
-                            },3000)
+                            }, 3000)
                         } else {
 
                             Toast.makeText(SCApp.getContext(), "试剂模板导入成功", Toast.LENGTH_SHORT).show()
@@ -333,7 +355,7 @@ class MainActivity : AppCompatActivity() {
                         t.schedule(timerTask {
                             dialog.dismiss()
                             t.cancel()
-                        },3000)
+                        }, 3000)
                         e.printStackTrace()
                     } finally {
                         try {
@@ -366,8 +388,9 @@ class MainActivity : AppCompatActivity() {
             } while (true)
         }
     }
+
     var mHandler: Handler = object : Handler() {
-        override  fun handleMessage(msg: Message) {
+        override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             when (msg.what) {
                 0 -> {
@@ -380,11 +403,11 @@ class MainActivity : AppCompatActivity() {
                     val data = msg.obj as String
 //                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
                 }
-                3->{
+                3 -> {
                     val formatter = SimpleDateFormat("HH:mm")
                     val curDate = Date(System.currentTimeMillis())
                     val str = formatter.format(curDate)
-                    tv_mainAdmin_time.text=str
+                    tv_mainAdmin_time.text = str
                 }
 
             }
@@ -392,3 +415,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+

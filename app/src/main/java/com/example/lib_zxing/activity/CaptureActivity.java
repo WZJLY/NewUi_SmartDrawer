@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -18,7 +19,6 @@ import com.example.newui_smartdrawer.R;
  * 默认的二维码扫描Activity
  */
 public class CaptureActivity extends AppCompatActivity {
-
     ImageButton backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,9 @@ public class CaptureActivity extends AppCompatActivity {
             return true;
         return super.onKeyDown(keyCode, event);
     }
+
+
+
     /**
      * 二维码解析回调函数
      */

@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-class SearchActivity : AppCompatActivity(){
+class SearchActivity : BaseActivity(){
     private var dbManager:DBManager?=null
     private var scApp:SCApp?=null
     private var reagent: Reagent?=null
@@ -22,6 +22,7 @@ class SearchActivity : AppCompatActivity(){
         if (!EventBus.getDefault().hasSubscriberForEvent(SearchActivity::class.java)) {
             EventBus.getDefault().register(this)
         }
+
         scApp = application as SCApp
         dbManager = DBManager(this)
 

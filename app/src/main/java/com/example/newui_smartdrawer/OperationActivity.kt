@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_operation.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
-class OperationActivity : AppCompatActivity(),DrawerFragment2.updateDrawerlisten {
+class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
     private var scApp: SCApp? = null
     private var dbManager: DBManager? = null
     private var statue: String? = null

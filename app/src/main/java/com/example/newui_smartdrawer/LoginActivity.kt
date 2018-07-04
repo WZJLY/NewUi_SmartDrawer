@@ -1,9 +1,8 @@
 package com.example.newui_smartdrawer
 
-import android.app.PendingIntent.getActivity
+
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.MotionEvent
@@ -14,38 +13,38 @@ import com.example.newui_smartdrawer.util.SC_Const
 import com.example.newui_smartdrawer.util.UploadRecordManager
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_login.*
-import java.io.*
-import java.net.MalformedURLException
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity :BaseActivity() {
     private var dbManager: DBManager? = null
     private var scApp: SCApp? = null
     private val LOGINNAME = "smart_cabinet)smart_cabinet_login_name"
     private val NAME = "name"
-
+    //    private var service:MyService?=null
+//    private var bound = false
+//    private var sc = MyseriviceConnection()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        dbManager= DBManager(this)
+
+        dbManager = DBManager(this)
         dbManager?.tableUpgrade()
         scApp = application as SCApp
         val lastname = getLastLoginName()
         account.setText(lastname)
         loginButton.setOnClickListener {
-
-            login(account.text.toString(),password.text.toString())
+            login(account.text.toString(), password.text.toString())
         }
-        delet_Button.setOnClickListener({
+        delet_Button.setOnClickListener {
             password.setText("")
-        })
+        }
 
     }
+
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        if(null != this.currentFocus) {
+        if (null != this.currentFocus) {
             val mInputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             return mInputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0)
         }
@@ -68,14 +67,15 @@ class LoginActivity : AppCompatActivity() {
                 val strAccount = "admin"
                 val strPassword = "admin"
                 val iPower = SC_Const.ADMIN
-                val account = UserAccount(strUserId, strAccount, strPassword, iPower,"admin","","0")
+                val account = UserAccount(strUserId, strAccount, strPassword, iPower, "admin", "", "0")
                 dbManager?.addAccount(account)
-                scApp?.setUserInfo(strUserId, strAccount, strPassword, iPower,"admin","","0")
+                scApp?.setUserInfo(strUserId, strAccount, strPassword, iPower, "admin", "", "0")
                 saveUserName(strAccount)
-
-                intent.setClass(this,MainActivity::class.java)
+                intent.setClass(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
+                service!!.createWindowView()
+                service!!.startVideo()
 
             } else {
                 val dialog = TopFalseDialog(this)
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
                 t.schedule(timerTask {
                     dialog.dismiss()
                     t.cancel()
-                },3000)
+                }, 3000)
                 return
             }
         }
@@ -99,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
             t.schedule(timerTask {
                 dialog.dismiss()
                 t.cancel()
-            },3000)
+            }, 3000)
         } else {
             val userInfo = dbManager?.getUserAccount(userName, userPWD)
             scApp?.userInfo = userInfo
@@ -107,21 +107,24 @@ class LoginActivity : AppCompatActivity() {
             //upload user login record to server
 
 
-            if(userInfo?.statue!="1") {
+            if (userInfo?.statue != "1") {
                 val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 val curDate = Date(System.currentTimeMillis())
                 val str = formatter.format(curDate)
-                if(dbManager!!.cabinetNo.size!=0) {
-                    val upload :UploadRecordManager= UploadRecordManager(this)
-                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo,"登陆",scApp!!.userInfo.userName,str,"")
-                }
+                if (dbManager!!.cabinetNo.size != 0) {
+                    val upload: UploadRecordManager = UploadRecordManager(this)
+                    upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "登陆", scApp!!.userInfo.userName, str,
+                            "", "", "", "", "", "")
 
-                intent.setClass(this,MainActivity::class.java)
+                }
+                val it = Intent(this, MyService::class.java)
+                startService(it)
+                intent.setClass(this, MainActivity::class.java)
                 saveUserName(userName)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
-            }
-            else {
+
+            } else {
                 val dialog = TopFalseDialog(this)
                 dialog.setTitle("该用户已被禁用")
                 dialog.setMessage(" ")
@@ -132,7 +135,7 @@ class LoginActivity : AppCompatActivity() {
                 t.schedule(timerTask {
                     dialog.dismiss()
                     t.cancel()
-                },3000)
+                }, 3000)
             }
         }
     }
@@ -143,6 +146,7 @@ class LoginActivity : AppCompatActivity() {
         password.text = null
 
     }
+
     @JavascriptInterface
     fun getLastLoginName(): String {
         val sharedPreferences = this.getSharedPreferences(LOGINNAME, MODE_PRIVATE)
@@ -153,5 +157,6 @@ class LoginActivity : AppCompatActivity() {
         super.onDestroy()
         dbManager?.closeDB()
     }
+
 
 }

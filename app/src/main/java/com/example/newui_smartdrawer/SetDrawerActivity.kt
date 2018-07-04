@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_set_drawer.*
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class SetDrawerActivity : AppCompatActivity() {
+class SetDrawerActivity : BaseActivity() {
     private var num = -1
     private var status = -1 //0-正常使用，1-暂时停用
     private var dbManager:DBManager?= null

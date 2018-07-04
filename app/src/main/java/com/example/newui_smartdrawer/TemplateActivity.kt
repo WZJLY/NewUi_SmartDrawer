@@ -23,7 +23,7 @@ import java.net.URL
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class TemplateActivity : AppCompatActivity(),TemplateFragment.deletTemplatelisten {
+class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
     private var dbManager:DBManager?=null
     private var reagentTemplate: ReagentTemplate?=null
     private var scApp: SCApp? = null

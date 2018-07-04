@@ -21,6 +21,7 @@ public class SCApp extends Application {  //全局变量
     private int Touchdrawer;
     private int Touchtable;
     private int TemplateNum;
+    private int CabintNum = 1 ;
     private String reagentID;
     private String serialPortID;
     SerialPortInterface spi;
@@ -92,6 +93,8 @@ public class SCApp extends Application {  //全局变量
     {
         return TemplateNum;
     }
+    public void setTouchCabint(int cabintNum){ this.CabintNum= cabintNum;}
+    public int getTouchCabint(){return CabintNum;}
 
     public void setSpi(SerialPortInterface serialPort) {
         this.spi = serialPort;
@@ -132,5 +135,6 @@ public class SCApp extends Application {  //全局变量
     public int getInitialWeight() {
         return initialWeight;
     }
+
 
 }

@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.timerTask
 
-class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,ReturnFragment.returnbuttonlisten {
+class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,ReturnFragment.returnbuttonlisten {
     private var scApp: SCApp? = null
     private var dbManager: DBManager?=null
     var spi: SerialPortInterface?= null
@@ -132,6 +132,7 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
         btn_subOperation_OK.setOnClickListener {
             var drawerID = scApp!!.touchdrawer
             var table = scApp!!.touchtable
+            var CabinetId = scApp!!.touchCabint
             when (subOperation) {
                 "Into" -> {
                     val code = et_Finto_code.text.toString()
@@ -163,14 +164,15 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                             dbManager?.addReagent(code, reagentTemplate?.reagentName, "", ""
                                                     , "", 1, reagentTemplate?.reagentPurity, residue, load
                                                     , reagentTemplate?.reagentCreater, reagentTemplate?.reagentGoodsID, Unit, reagentTemplate?.reagentDensity, tv_Finto_data.text.toString()
-                                                    , "1", drawerID.toString(), table.toString(), 1, scApp!!.userInfo.getUserName())
+                                                    , CabinetId.toString(), drawerID.toString(), table.toString(), 1, scApp!!.userInfo.getUserName())
                                             val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                                             val now = sdf.format(Date())
                                             val curDate = Date(System.currentTimeMillis())
                                             val str = sdf.format(curDate)
                                             if(dbManager!!.cabinetNo.size!=0) {
                                                 val upload = UploadRecordManager(this@SubOperationActivity)
-                                                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "添加试剂", scApp!!.userInfo.userName, str, reagentTemplate?.reagentName)
+                                                upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "添加试剂", scApp!!.userInfo.userName, str, reagentTemplate?.reagentName,code,load+"g",residue+reagentTemplate?.reagentUnit,
+                                                        "",""+CabinetId+","+drawerID+","+table)
                                             }
                                             dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
                                             scApp?.touchtable = 0 //新加的
@@ -329,7 +331,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     val str = sdf.format(curDate)
                                     if(dbManager!!.cabinetNo.size!=0) {
                                         val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "取用试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "取用试剂", scApp!!.userInfo.userName, str, reagent?.reagentName,reagentId,reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,""
+                                        ,reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                     }
                                     finish()
                                     overridePendingTransition(0, 0)
@@ -390,6 +393,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                                     var density = "1"
                                                     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                                                     val now = sdf.format(Date())
+                                                    var size3:Double?=0.0
+                                                    var unit:String?=null
                                                     Log.d("suboperationReturn", density)
                                                     if (reagent.reagentDensity.length > 0) {
                                                         density = reagent.reagentDensity
@@ -398,17 +403,19 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                                     if (weight > reagent.reagentTotalSize.toInt()) {
                                                         weight -= reagent.reagentTotalSize.toInt()
                                                         var size = reagent.reagentSize.toDouble() - (weight / density.toDouble())
+                                                        size3=size
                                                         dbManager?.updateReagentSize(code, size.toString(),load)
 
-                                                        var unit = "g"
+                                                         unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
                                                         dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", size.toString() + unit, (weight / density.toDouble()).toString())
                                                     } else {
                                                         weight = reagent.reagentTotalSize.toInt() - weight
                                                         var size1 = reagent.reagentSize.toDouble() - (weight / density.toDouble())
+                                                        size3=size1
                                                         dbManager?.updateReagentSize(code, size1.toString(),load)
-                                                        var unit = "g"
+                                                         unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
                                                         dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", size1.toString() + unit, (weight / density.toDouble()).toString())
@@ -417,7 +424,8 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                                     val str = sdf.format(curDate)
                                                     if(dbManager!!.cabinetNo.size!=0) {
                                                         val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "归还试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "归还试剂", scApp!!.userInfo.userName, str, reagent?.reagentName
+                                                        ,reagent!!.reagentId,load + "g", size3.toString() + unit, (weight / density.toDouble()).toString(),reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                                     }
                                                     finish()
                                                     overridePendingTransition(0, 0)
@@ -534,9 +542,14 @@ class SubOperationActivity : AppCompatActivity(),IntoFragment.intobuttonlisten,R
                                     dbManager?.addReagentUserRecord(reagentId,4,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","")
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
+                                    var unit = "g"
+                                    if (reagent?.reagentUnit == 2)
+                                        unit = "ml"
                                     if(dbManager!!.cabinetNo.size!=0) {
                                         val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
-                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "移除试剂", scApp!!.userInfo.userName, str, reagent?.reagentName)
+                                        upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "移除试剂", scApp!!.userInfo.userName, str, reagent?.reagentName
+                                        ,reagentId,reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,""
+                                                ,reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                     }
                                     finish()
                                     overridePendingTransition(0, 0)
