@@ -1,6 +1,9 @@
 package com.example.newui_smartdrawer
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9f8ed300edab52c3dc5d7c97a4333aa5123264f7
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle

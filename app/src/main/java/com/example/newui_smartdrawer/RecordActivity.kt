@@ -1,13 +1,11 @@
 package com.example.newui_smartdrawer
 
-import android.icu.text.AlphabeticIndex
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
 import com.example.newui_smartdrawer.util.DBManager
-import com.example.newui_smartdrawer.util.OperationRecord
 import com.example.newui_smartdrawer.util.ReagentUserRecord
 import kotlinx.android.synthetic.main.activity_record.*
 

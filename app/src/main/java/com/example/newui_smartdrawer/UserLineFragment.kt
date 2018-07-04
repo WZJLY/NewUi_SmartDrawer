@@ -1,6 +1,5 @@
 package com.example.newui_smartdrawer
 
-
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,7 +16,6 @@ import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.fragment_user_line.*
 import java.util.*
 import kotlin.concurrent.timerTask
-
 
 class UserLineFragment : Fragment() {
     var activityCallback:UserLineFragment.deletbuttonlisten? = null

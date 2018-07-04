@@ -1,6 +1,5 @@
 package com.example.newui_smartdrawer
 
-
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
