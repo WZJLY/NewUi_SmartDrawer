@@ -8,7 +8,7 @@ public class SysSeting {
     public String CameraVersion;
     public String SerialNum;
     public String getCameraVersion() {
-        return CameraVersion;
+        return this.CameraVersion;
     }
     public String getSerialNum(){return SerialNum;}
     public  SysSeting(String serialNum,String cameraVersion) {

@@ -55,3 +55,4 @@ freeline/
 freeline_project_description.json
 app/src/main/java/com/example/newui_smartdrawer/LoginActivity.kt
 app/src/main/java/com/example/newui_smartdrawer/SetHardwareActivity.kt
+app/src/main/java/com/example/newui_smartdrawer/SettingActivity.kt

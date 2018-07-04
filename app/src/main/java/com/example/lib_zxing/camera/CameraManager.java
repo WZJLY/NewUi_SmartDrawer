@@ -16,6 +16,8 @@
 
 package com.example.lib_zxing.camera;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
@@ -23,8 +25,10 @@ import android.graphics.Rect;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Handler;
+import android.util.Log;
 import android.view.SurfaceHolder;
 
+import com.example.newui_smartdrawer.SCApp;
 import com.example.newui_smartdrawer.util.DBManager;
 
 import java.io.IOException;
@@ -35,15 +39,13 @@ import java.io.IOException;
  * both preview and decoding.
  */
 public final class CameraManager {
-
+    private DBManager dbManager;
+    private SCApp scApp;
     private static final String TAG = CameraManager.class.getSimpleName();
-
     public static int FRAME_WIDTH = -1;
     public static int FRAME_HEIGHT = -1;
     public static int FRAME_MARGINTOP = -1;
-
     private static CameraManager cameraManager;
-
     static final int SDK_INT; // Later we can use Build.VERSION.SDK_INT
 
 
@@ -85,6 +87,7 @@ public final class CameraManager {
     public static void init(Context context) {
         if (cameraManager == null) {
             cameraManager = new CameraManager(context);
+
         }
     }
 
@@ -101,14 +104,12 @@ public final class CameraManager {
 
         this.context = context;
         this.configManager = new CameraConfigurationManager(context);
-
         // Camera.setOneShotPreviewCallback() has a race condition in Cupcake, so we use the older
         // Camera.setPreviewCallback() on 1.5 and earlier. For Donut and later, we need to use
         // the more efficient one shot callback, as the older one can swamp the system and cause it
         // to run out of memory. We can't use SDK_INT because it was introduced in the Donut SDK.
         //useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > Build.VERSION_CODES.CUPCAKE;
         useOneShotPreviewCallback = Integer.parseInt(Build.VERSION.SDK) > 3; // 3 = Cupcake
-
         previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
         autoFocusCallback = new AutoFocusCallback();
     }
@@ -121,8 +122,19 @@ public final class CameraManager {
      */
     public void openDriver(SurfaceHolder holder) throws IOException {
         if (camera == null) {
+            dbManager = new DBManager(this.context);
+           if(dbManager.getSysSeting().get(0).getCameraVersion().equals("0"))
+            {
+                Log.d("cameraId","camera1");
+                camera = Camera.open(0);
 
-            camera = Camera.open(0);
+            }
+            else
+            {
+                Log.d("cameraId","camera2");
+                camera = Camera.open(1);
+
+            }
             if (camera == null) {
                 throw new IOException();
             }

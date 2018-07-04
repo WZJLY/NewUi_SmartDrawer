@@ -15,6 +15,7 @@ import android.view.Gravity
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.WindowManager
+import com.example.newui_smartdrawer.util.DBManager
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,6 +31,7 @@ class MyService : Service()  {
     private var binder = MyBinder()
     private val TAG = "MyService"
     private var sSurfaceHolder: SurfaceHolder? = null
+    private var dbManager:DBManager?=null
     override fun onBind(intent: Intent): IBinder {
         Log.w(TAG,"on bind")
         return binder
@@ -106,7 +108,12 @@ class MyService : Service()  {
             try {
                 if(Camera.getNumberOfCameras()==2)
                 {
-                    camera2 = Camera.open(1)
+                    dbManager =DBManager(applicationContext)
+                    if (dbManager!!.sysSeting[0].CameraVersion == "0") {
+                        camera2 = Camera.open(1)
+                    } else {
+                        camera2 = Camera.open(0)
+                    }
                     startVideo()
                 }
             } catch (e: Exception) {
