@@ -22,7 +22,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.database.Cursor
 
-9
 class SettingActivity : BaseActivity() {
 
     private var dbManager: DBManager? = null

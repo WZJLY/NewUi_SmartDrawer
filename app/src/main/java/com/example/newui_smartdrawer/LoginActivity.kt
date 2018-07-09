@@ -27,7 +27,6 @@ class LoginActivity :BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
         dbManager = DBManager(this)
         dbManager?.tableUpgrade()
         scApp = application as SCApp
@@ -70,12 +69,10 @@ class LoginActivity :BaseActivity() {
                 dbManager?.addAccount(account)
                 scApp?.setUserInfo(strUserId, strAccount, strPassword, iPower, "admin", "", "0")
                 saveUserName(strAccount)
+
                 intent.setClass(this@LoginActivity, MainActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
-                service!!.createWindowView()
-                service!!.startVideo()
-
             } else {
                 val dialog = TopFalseDialog(this)
                 dialog.window.setDimAmount(0f)

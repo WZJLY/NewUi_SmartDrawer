@@ -28,6 +28,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val it = Intent(this@MainActivity, MyService::class.java)
+        startService(it)
         dbManager = DBManager(this)
         TimeThread().start()
         scApp = application as SCApp
