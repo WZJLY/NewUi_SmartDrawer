@@ -80,7 +80,7 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
             //入柜
             statue = "Into"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
-            spi?.sendLED(1, 1)
+//            spi?.sendLED(1, 1)
             weighThread().start()
             var intent = Intent(this, CaptureActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
@@ -101,7 +101,7 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
 
             statue = "Return"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
-            spi?.sendLED(1, 1)
+//            spi?.sendLED(1, 1)
             weighThread().start()
             var intent = Intent(this, CaptureActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
@@ -172,7 +172,7 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
             }
         }
 
-        spi?.sendLED(1,0)
+//        spi?.sendLED(1,0)
         weighThread().interrupt()
         startActivity(intent)
     }
