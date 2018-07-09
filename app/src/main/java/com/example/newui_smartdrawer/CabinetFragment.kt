@@ -25,7 +25,7 @@ class CabinetFragment : Fragment() {
                 tv_Fcabinet_num.text = arguments.getString("cabinetNum")
             if (arguments.getString("choice") == "true") {
                 val params = LinearLayout.LayoutParams(60, 156)
-                im_Fcabinet_cabinet.layoutParams = params
+                btn_Fcabinet_cabinet.layoutParams = params
                 im_Fcabinet.setBackgroundResource(R.drawable.circle_a2a2a2)
             }
         }

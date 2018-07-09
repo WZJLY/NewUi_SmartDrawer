@@ -575,7 +575,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
 
     override fun intobuttononClick(text: String) {
         if (text == "scan") {
-            spi?.sendLED(1,1)
+//            spi?.sendLED(1,1)
             var intent = Intent(this,CaptureActivity::class.java)
             startActivityForResult(intent,REQUEST_CODE)
         }
@@ -583,14 +583,14 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
 
     override fun returnbuttonClick(text: String) {
         if (text == "scan") {
-            spi?.sendLED(1,1)
+//            spi?.sendLED(1,1)
             var intent = Intent(this,CaptureActivity::class.java)
             startActivityForResult(intent,REQUEST_CODE)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        spi?.sendLED(1,0)
+//        spi?.sendLED(1,0)
         if (requestCode == REQUEST_CODE) {
             if (null != data) {
                 val bundle = data.extras

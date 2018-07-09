@@ -37,12 +37,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/im_Fcabinet_cabinet"
+            <Button
+                android:id="@+id/btn_Fcabinet_cabinet"
                 android:layout_width="54dp"
                 android:layout_height="141dp"
                 android:layout_marginTop="8dp"
-                android:src="@drawable/cabinet"
+                android:background="@drawable/cabinet"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_Fcabinet_num" />
@@ -55,9 +55,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/circle_00fff"
-                app:layout_constraintEnd_toEndOf="@+id/im_Fcabinet_cabinet"
-                app:layout_constraintStart_toStartOf="@+id/im_Fcabinet_cabinet"
-                app:layout_constraintTop_toBottomOf="@+id/im_Fcabinet_cabinet" />
+                app:layout_constraintEnd_toEndOf="@+id/btn_Fcabinet_cabinet"
+                app:layout_constraintStart_toStartOf="@+id/btn_Fcabinet_cabinet"
+                app:layout_constraintTop_toBottomOf="@+id/btn_Fcabinet_cabinet" />
         </LinearLayout>
 
         <ImageButton
