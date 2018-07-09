@@ -85,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="131dp"
         android:layout_marginTop="25dp"
-        android:text="摄像头型号"
+        android:text="扫码摄像头编号"
         android:textColor="#282828"
         android:textSize="26sp"
         app:layout_constraintStart_toStartOf="parent"
