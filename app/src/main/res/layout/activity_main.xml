@@ -124,32 +124,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
-    <Button
-        android:id="@+id/btn_mainAdmin_update"
-        android:layout_width="98dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="60dp"
-        android:layout_marginEnd="44dp"
-        android:background="@drawable/btn_21_fff_style"
-        android:text="系统升级"
-        android:textColor="#494949"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/btn_mainAdmin_video"
-        android:layout_width="98dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="60dp"
-        android:layout_marginStart="44dp"
-        android:background="@drawable/btn_21_fff_style"
-        android:text="监控视频"
-        android:textColor="#494949"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"

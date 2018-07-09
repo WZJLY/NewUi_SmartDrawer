@@ -1,13 +1,7 @@
 package com.example.newui_smartdrawer
 
-import android.app.Activity
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
-import android.net.Uri
 import android.os.*
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Gravity
 import android.view.View
@@ -17,7 +11,6 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.SC_Const
-import com.example.newui_smartdrawer.util.UpdateAppManager
 import com.example.newui_smartdrawer.util.UserAccount
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.*
@@ -32,14 +25,9 @@ class MainActivity : BaseActivity() {
     private var mbackKeyPressed = false
     private var dbManager: DBManager? = null
     private var userAccount: UserAccount? = null
-    //    private var service:MyService?=null
-//    private var bound = false
-//    private var sc = MyseriviceConnection()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val intent1 = Intent(this,MyService::class.java)
-//        bindService(intent1,sc, Context.BIND_AUTO_CREATE)
         dbManager = DBManager(this)
         TimeThread().start()
         scApp = application as SCApp
@@ -48,19 +36,6 @@ class MainActivity : BaseActivity() {
         if (power == SC_Const.NORMAL) {
             btn_mainAdmin_setting.visibility = View.GONE
             btn_mainAdmin_management.visibility = View.GONE
-        }
-        btn_mainAdmin_video.setOnClickListener {
-
-        val parentFlie = File(Environment.getExternalStorageDirectory().toString()
-                +"/SmartCabinet/Video/")
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.setDataAndType(Uri.fromFile(parentFlie),"video/*")
-        intent.addCategory(Intent.CATEGORY_OPENABLE)
-        startActivity(intent)
-
-
-
-
         }
         btn_mainAdmin_setting.setOnClickListener {
             val intent = Intent()
@@ -81,16 +56,10 @@ class MainActivity : BaseActivity() {
             overridePendingTransition(0, 0)
         }
         btn_mainAdmin_template.setOnClickListener {
-            service!!.createWindowView()
-            service!!.startVideo()
             val intent = Intent()
             intent.setClass(this, TemplateActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        }
-        btn_mainAdmin_update.setOnClickListener {
-            val manager = UpdateAppManager(this)
-            manager.getUpdateMsg()
         }
         btn_mainAdmin_back.setOnClickListener {
             if (!mbackKeyPressed) {
@@ -389,6 +358,8 @@ class MainActivity : BaseActivity() {
         }
     }
 
+
+    //标题栏时间显示
     var mHandler: Handler = object : Handler() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
@@ -396,12 +367,10 @@ class MainActivity : BaseActivity() {
                 0 -> {
                     //在这里得到数据，并且可以直接更新UI
                     val data = msg.obj as String
-//                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
 
                 }
                 2 -> {
                     val data = msg.obj as String
-//                    Toast.makeText(this@MainActivity,data,Toast.LENGTH_SHORT).show()
                 }
                 3 -> {
                     val formatter = SimpleDateFormat("HH:mm")
