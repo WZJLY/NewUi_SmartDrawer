@@ -89,7 +89,16 @@ public class DBHelper extends SQLiteOpenHelper {
                 "drawerId VARCHAR, reagentPosition VARCHAR, status INTEGER, reagentUser VARCHAR)");
         db.execSQL("CREATE TABLE IF NOT EXISTS sysSeting"+
                 "(_id INTEGER PRIMARY KEY, serialNum VARCHAR, cameraVersion VARCHAR)");
+
+
+        //初始重量表      （2018/7/10创建)
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS initialWeight"+
+                "(_id INTEGER PRIMARY KEY, weight  VARCHAR)");
     }
+
+
+
 
 
 

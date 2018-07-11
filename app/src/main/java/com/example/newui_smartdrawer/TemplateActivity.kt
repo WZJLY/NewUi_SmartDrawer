@@ -97,20 +97,46 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
                     var et_anotherName = dialog.findViewById(R.id.et_Dimport_anotherName) as EditText
                     var template_density = "1"
                     var rg_Dimport_level=dialog.findViewById(R.id.rg_Dimport_level) as RadioGroup
-                    var selectId=dialog.findViewById(rg_Dimport_level.checkedRadioButtonId) as RadioButton
-                    Log.d("radiogroup",""+selectId)
                     if (et_name.length()>0) {
                         if (et_volume.length()>0) {
                             if(et_density.length()>0)
                                 template_density = et_density.text.toString()
-                            if (selectId.text.toString() == "固体") {
-                                dbManager?.addReagentTemplate("",et_name.text.toString(),et_anotherName.text.toString(),"","",
-                                        1,et_purity.text.toString(),et_volume.text.toString(),et_manfactor.text.toString(),
-                                        et_code.text.toString(),"g",template_density)
-                            } else if (selectId.text.toString() == "液体") {
-                                dbManager?.addReagentTemplate("",et_name.text.toString(),et_anotherName.text.toString(),"","",
-                                       2,et_purity.text.toString(),et_volume.text.toString(),et_manfactor.text.toString(),
-                                        et_code.text.toString(),"ml",template_density)
+                            if (rg_Dimport_level.checkedRadioButtonId  > 0) {
+                                var selectId=dialog.findViewById(rg_Dimport_level.checkedRadioButtonId) as RadioButton
+                                if (selectId.text.toString() == "固体") {
+                                    dbManager?.addReagentTemplate("", et_name.text.toString(), et_anotherName.text.toString(), "", "",
+                                            1, et_purity.text.toString(), et_volume.text.toString(), et_manfactor.text.toString(),
+                                            et_code.text.toString(), "g", template_density)
+                                    val templateLine = VerticalFragment()
+                                    val args = Bundle()
+                                    args.putString("addtemplate","add")
+                                    templateLine.arguments=args
+                                    replaceFragment(templateLine,R.id.fl_template)
+                                    dialog.dismiss()
+                                } else if (selectId.text.toString() == "液体") {
+                                    dbManager?.addReagentTemplate("", et_name.text.toString(), et_anotherName.text.toString(), "", "",
+                                            2, et_purity.text.toString(), et_volume.text.toString(), et_manfactor.text.toString(),
+                                            et_code.text.toString(), "ml", template_density)
+                                    val templateLine = VerticalFragment()
+                                    val args = Bundle()
+                                    args.putString("addtemplate","add")
+                                    templateLine.arguments=args
+                                    replaceFragment(templateLine,R.id.fl_template)
+                                    dialog.dismiss()
+                                }
+                            }
+                            else {
+                                val dialog = TopFalseDialog(this@TemplateActivity)
+                                dialog.window.setDimAmount(0f)
+                                dialog.setTitle("试剂形态未填写")
+                                dialog.setMessage("请填写试剂形态")
+                                dialog.show()
+                                dialog.window.setGravity(Gravity.TOP)
+                                val t = Timer()
+                                t.schedule(timerTask {
+                                    dialog.dismiss()
+                                    t.cancel()
+                                },3000)
                             }
                         }
                         else{
@@ -155,12 +181,6 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
                             },3000)
                         }
                     }
-                    val templateLine = VerticalFragment()
-                    val args = Bundle()
-                    args.putString("addtemplate","add")
-                    templateLine.arguments=args
-                    replaceFragment(templateLine,R.id.fl_template)
-                    dialog.dismiss()
                 }
             })
             dialog.onNoOnclickListener(object :ImportDialog.onNoOnclickListener{

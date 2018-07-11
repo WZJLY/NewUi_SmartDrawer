@@ -143,16 +143,14 @@ class UserLineFragment : Fragment() {
                             if (selectId.text == "管理员") {
                                 dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
                                         0, et_account.text.toString(), et_phone.text.toString())
-
                             } else if (selectId.text == "普通用户") {
-
                                 dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
                                         1, et_account.text.toString(), et_phone.text.toString())
                             }
+                            deletbuttonClicked("update")
                             dialog.dismiss()
                         }
                     }
-
                 })
                 dialog.setNoOnclickListener("取消", object : UserDialog.onNoOnclickListener {
                     override fun onNoClick() {
@@ -253,7 +251,6 @@ class UserLineFragment : Fragment() {
 
         btn_FuserLine_del.setOnClickListener({
 //            dbManager?.deleteAccountByUserName( userName)
-
             if(btn_FuserLine_del.text.toString()=="禁用") {
                 dbManager?.updateStatueByUserName(userName, "1")
                 btn_FuserLine_del.text = "启用"

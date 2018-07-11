@@ -115,9 +115,15 @@ class ManagementActivity : BaseActivity(),UserLineFragment.deletbuttonlisten {
         }
     }
     override fun deletButtonClick(text: String) {
-        if(text == "deletperson") {
-            val managementFragment = ManagementFragment()
-            replaceFragment(R.id.fl_management, managementFragment)
+        when(text) {
+            "deletperson" -> {
+                val managementFragment = ManagementFragment()
+                replaceFragment(R.id.fl_management, managementFragment)
+            }
+            "update" -> {
+                val managementFragment = ManagementFragment()
+                replaceFragment(R.id.fl_management, managementFragment)
+            }
         }
     }
 

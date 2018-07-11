@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.view.Gravity
 import android.view.MotionEvent
 import android.widget.Toast
 import com.example.lib_zxing.activity.CaptureActivity
@@ -15,6 +16,8 @@ import com.example.newui_smartdrawer.util.SerialPortInterface
 import kotlinx.android.synthetic.main.activity_operation.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.util.*
+import kotlin.concurrent.timerTask
 
 class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
     private var scApp: SCApp? = null
@@ -58,6 +61,45 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
             }
             spi = SerialPortInterface(this.applicationContext, serialPortID)
             scApp?.setSpi(spi)
+            val Weight = spi!!.GetLoad()
+            if (Weight == -1) {
+                val dialog = TopFalseDialog(this@OperationActivity)
+                dialog.window.setDimAmount(0f)
+                dialog.setTitle("称重错误")
+                dialog.setMessage("未连接电子秤")
+                dialog.show()
+                dialog.window.setGravity(Gravity.TOP)
+                val t = Timer()
+                t.schedule(timerTask {
+                    dialog.dismiss()
+                    t.cancel()
+                }, 3000)
+            }else {
+                if (dbManager!!.initialWeight.size > 0) {
+                    val initialWeight = dbManager!!.initialWeight[0].weight.toInt()
+                    if (Weight >= initialWeight && Weight - initialWeight < 100) {
+                        scApp?.initialWeight = Weight
+                    } else if (Weight < initialWeight && initialWeight - Weight < 100) {
+                        scApp?.initialWeight = Weight
+                    } else {
+                        scApp?.initialWeight = initialWeight
+                        val dialog = TopFalseDialog(this@OperationActivity)
+                        dialog.window.setDimAmount(0f)
+                        dialog.setTitle("秤盘上有物体")
+                        dialog.setMessage("请先移走物体或进行称重校准")
+                        dialog.show()
+                        dialog.window.setGravity(Gravity.TOP)
+                        val t = Timer()
+                        t.schedule(timerTask {
+                            dialog.dismiss()
+                            t.cancel()
+                        }, 3000)
+                    }
+                }else {
+                    scApp?.initialWeight = Weight
+                    dbManager?.addInitialWeight(Weight.toString())
+                }
+            }
         }
         else
             Toast.makeText(this,"请进行系统硬件设置", Toast.LENGTH_SHORT).show()
@@ -80,8 +122,6 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
             //入柜
             statue = "Into"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
-//            spi?.sendLED(1, 1)
-            weighThread().start()
             var intent = Intent(this, CaptureActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
             overridePendingTransition(0, 0)
@@ -98,11 +138,8 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
         }
         btn_operation_return.setOnClickListener {
             //归还
-
             statue = "Return"
             Toast.makeText(this, "请将试剂放到电子秤上", Toast.LENGTH_SHORT).show()
-//            spi?.sendLED(1, 1)
-            weighThread().start()
             var intent = Intent(this, CaptureActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE)
             overridePendingTransition(0, 0)
@@ -162,18 +199,9 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
                     Toast.makeText(this, "解析二维码失败", Toast.LENGTH_LONG).show()
 
                 }
-                if (stop) {
-                    val Double = scApp!!.initialWeight.toDouble()
-                    intent.putExtra("weight", (Double/10).toString())
-                }
-                else {
-                    stop = true
-                }
             }
         }
 
-//        spi?.sendLED(1,0)
-        weighThread().interrupt()
         startActivity(intent)
     }
 
@@ -270,7 +298,7 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
                                     for (i in 0..4) {
                                         load += weight[i]
                                     }
-                                    scApp?.initialWeight = load / 5 - scApp!!.initialWeight
+                                    scApp?.weight = load / 5 - scApp!!.initialWeight
                                     stop = true
                                 }
                                 else

@@ -239,6 +239,7 @@ public class SerialPortInterface extends AppCompatActivity {
             return -1;
         }
         int load = readLoad();
+        Log.d("load", String.valueOf(load));
         return load;
     }
 

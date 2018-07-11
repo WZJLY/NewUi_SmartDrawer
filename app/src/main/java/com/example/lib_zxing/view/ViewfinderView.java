@@ -93,10 +93,10 @@ public final class ViewfinderView extends View {
         }
 
         // 扫描框的宽度
-        CameraManager.FRAME_WIDTH = (int) ta.getDimension(R.styleable.ViewfinderView_inner_width, DisplayUtil.screenWidthPx / 2);
+        CameraManager.FRAME_WIDTH = (int) ta.getDimension(R.styleable.ViewfinderView_inner_width, (int)(DisplayUtil.screenWidthPx / 1.5));
 
         // 扫描框的高度
-        CameraManager.FRAME_HEIGHT = (int) ta.getDimension(R.styleable.ViewfinderView_inner_height, DisplayUtil.screenWidthPx / 2);
+        CameraManager.FRAME_HEIGHT = (int) ta.getDimension(R.styleable.ViewfinderView_inner_height, (int)(DisplayUtil.screenWidthPx / 1.5));
 
         // 扫描框边角颜色
         innercornercolor = ta.getColor(R.styleable.ViewfinderView_inner_corner_color, Color.parseColor("#45DDDD"));
@@ -113,7 +113,7 @@ public final class ViewfinderView extends View {
         // 扫描控件
         scanLight = BitmapFactory.decodeResource(getResources(), ta.getResourceId(R.styleable.ViewfinderView_inner_scan_bitmap, R.drawable.scan_light));
         // 扫描速度
-        SCAN_VELOCITY = ta.getInt(R.styleable.ViewfinderView_inner_scan_speed, 5);
+        SCAN_VELOCITY = ta.getInt(R.styleable.ViewfinderView_inner_scan_speed, 1);
 
         isCircle = ta.getBoolean(R.styleable.ViewfinderView_inner_scan_iscircle, true);
 

@@ -31,6 +31,7 @@ public class SCApp extends Application {  //全局变量
     private String editPerson;
     private int touchDrawer;
     private int initialWeight = 0;
+    private int Weight = 0;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -134,6 +135,12 @@ public class SCApp extends Application {  //全局变量
     }
     public int getInitialWeight() {
         return initialWeight;
+    }
+    public void setWeight(int weight){
+        Weight = weight;
+    }
+    public int getWeight() {
+        return Weight;
     }
 
 

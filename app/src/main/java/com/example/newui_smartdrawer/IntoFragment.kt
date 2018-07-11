@@ -35,7 +35,6 @@ class IntoFragment : Fragment() {
         scApp = context.applicationContext as SCApp
         dbManager = DBManager(context.applicationContext)
         val value = arguments.getString("scan_value")
-        val weight = arguments.getString("weight")
         val data_list = ArrayAdapter<String>(context, R.layout.information_spinner_style)
         val arrListReagentTemplate = dbManager?.reagentTemplate
         val sum = arrListReagentTemplate!!.size
@@ -69,29 +68,20 @@ class IntoFragment : Fragment() {
         }
         if(value != null) {
             et_Finto_code.setText(value)
-            if(weight != null){
-
-                et_Finto_load.setText(weight)
-                et_Finto_residue.isFocusable = true
-                et_Finto_residue.isFocusableInTouchMode = true
-                et_Finto_residue.requestFocus()
-            }
-            else{
                 et_Finto_load.isFocusable = true
                 et_Finto_load.isFocusableInTouchMode = true
                 et_Finto_load.requestFocus()
-            }
         }
         else{
             et_Finto_code.isFocusable = true
             et_Finto_code.isFocusableInTouchMode = true
             et_Finto_code.requestFocus()
-            if(weight != null) {
-                et_Finto_load.setText(weight)
-            }
         }
         btn_Finto_code.setOnClickListener{
             activityCallback?.intobuttononClick("scan")
+        }
+        btn_Finto_weight.setOnClickListener {
+            activityCallback?.intobuttononClick("weight")
         }
 
         tv_Finto_data.setOnClickListener {

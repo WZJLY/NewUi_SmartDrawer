@@ -7,19 +7,6 @@
     android:background="#fff"
     tools:context=".SetCabinetActivity">
 
-    <ImageView
-        android:id="@+id/imageView19"
-        android:layout_width="match_parent"
-        android:layout_height="258dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:background="#f6f6f6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView4"
-        app:srcCompat="@android:color/transparent" />
-
     <android.support.v7.widget.CardView
         android:id="@+id/cardView4"
         android:layout_width="match_parent"
@@ -77,52 +64,10 @@
         android:id="@+id/fl_setCabinet"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView19">
-
-    </FrameLayout>
-
-    <Button
-        android:id="@+id/ib_setCabinet_addDrawer"
-        android:layout_width="752dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/image_6_f6f6f6"
-        android:drawableLeft="@drawable/btn_add_drawer"
-        android:paddingEnd="312dp"
-        android:paddingStart="312dp"
-        android:text="添加抽屉"
-        android:textColor="#AAAAAA"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fl_setCabinet" />
-
-    <ImageButton
-        android:id="@+id/ib_setCabinet_cabinet"
-        android:layout_width="71dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView19"
-        app:layout_constraintTop_toTopOf="@+id/imageView19"
-        app:srcCompat="@drawable/btn_addcabinet_style" />
-
-    <FrameLayout
-        android:id="@+id/fl_setCabinet_cabinet"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView19"
-        app:layout_constraintEnd_toEndOf="@+id/imageView19"
-        app:layout_constraintStart_toStartOf="@+id/imageView19"
-        app:layout_constraintTop_toTopOf="@+id/imageView19">
+        app:layout_constraintTop_toBottomOf="@+id/cardView4">
 
     </FrameLayout>
 

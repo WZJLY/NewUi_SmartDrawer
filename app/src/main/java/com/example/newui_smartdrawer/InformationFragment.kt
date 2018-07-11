@@ -32,7 +32,8 @@ class InformationFragment : Fragment() {
         if (arguments != null) {
             if (arguments.getString("state") == "in") {
                 var reagent =  dbManager?.getReagentByPos(scApp?.touchdrawer.toString(),scApp?.touchtable.toString())
-                tv_Finformation_use.visibility = View.GONE
+                tv_Finformation_use.text = "在位"
+                tv_Finformation_use.setBackgroundResource(R.drawable.image_18_39e85d)
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
                 tv_Finformation_data.text=reagent?.reagentInvalidDate
@@ -52,7 +53,8 @@ class InformationFragment : Fragment() {
                 var reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"))
                 if(reagent?.status==1)
                 {
-                    tv_Finformation_use.visibility=View.GONE
+                    tv_Finformation_use.text = "在位"
+                    tv_Finformation_use.setBackgroundResource(R.drawable.image_18_39e85d)
                 }
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
@@ -70,7 +72,8 @@ class InformationFragment : Fragment() {
                 var searchreagent = dbManager?.getReagentById(reagentId)
                 if(searchreagent?.status==1)
                 {
-                    tv_Finformation_use.visibility=View.GONE
+                    tv_Finformation_use.text = "在位"
+                    tv_Finformation_use.setBackgroundResource(R.drawable.image_18_39e85d)
                 }
                 tv_Finforation_name.text=searchreagent?.reagentName
                 tv_Finformation_manufactor.text=searchreagent?.reagentCreater

@@ -46,6 +46,7 @@ class MainActivity : BaseActivity() {
         if (power == SC_Const.NORMAL) {
             btn_mainAdmin_setting.visibility = View.GONE
             btn_mainAdmin_management.visibility = View.GONE
+            btn_mainAdmin_video.visibility = View.GONE
         }
         btn_mainAdmin_setting.setOnClickListener {
             val intent = Intent()
