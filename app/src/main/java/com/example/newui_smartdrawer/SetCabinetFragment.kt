@@ -25,10 +25,15 @@ class SetCabinetFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         dbManager= DBManager(context)
         updateDrawer()
-        ib_FsetCabinet_addDrawer.setOnClickListener({
+        ib_FsetCabinet_addDrawer.setOnClickListener{
             addDrawerbuttonClicked("addDrawer")
 
-        })
+        }
+        ib_FsetCabinet_cabinet.setOnClickListener{
+
+            addDrawerbuttonClicked("addCabinet")
+
+        }
     }
     fun updateDrawer()
     {

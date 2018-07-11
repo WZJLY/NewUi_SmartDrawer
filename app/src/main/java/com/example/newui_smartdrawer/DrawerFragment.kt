@@ -53,19 +53,19 @@ class DrawerFragment : Fragment() {
             }
 
         }
-        ib_Fdrawer_drawer.setOnClickListener({
+        ib_Fdrawer_drawer.setOnClickListener{
             val intent = Intent()
             intent.setClass(context,SetDrawerActivity::class.java)
             intent.putExtra("set_drawerId",drawerID.toString())
             startActivityForResult(intent,1)
 
 
-        })
-        ib_Fdrawer_del.setOnClickListener({
+        }
+        ib_Fdrawer_del.setOnClickListener{
 
             deletDrawer()
 
-        })
+        }
 
 
     }

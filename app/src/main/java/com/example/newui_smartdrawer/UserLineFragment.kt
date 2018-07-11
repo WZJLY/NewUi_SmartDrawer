@@ -73,10 +73,11 @@ class UserLineFragment : Fragment() {
             btn_FuserLine_del.visibility = View.GONE   //对可删除的用户就行了判断
         if(account?.userName!="admin"&&user?.userPower==0)
             btn_FuserLine_del.visibility = View.GONE
-        if(user?.userPower==SC_Const.ADMIN)
-            tv_FuserLine_user.text="管理员"
-
-        ib_FuserLine_user.setOnClickListener({
+        if(user?.userPower==SC_Const.ADMIN) {
+            tv_FuserLine_user.text = "管理员"
+            iv_FuserLine_icon.setImageResource(R.drawable.admin)
+        }
+        ib_FuserLine_user.setOnClickListener{
             if(account?.userName=="admin")
             {
                 val dialog = UserDialog(context)
@@ -249,9 +250,9 @@ class UserLineFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
-        btn_FuserLine_del.setOnClickListener({
+        btn_FuserLine_del.setOnClickListener{
 //            dbManager?.deleteAccountByUserName( userName)
 
             if(btn_FuserLine_del.text.toString()=="禁用") {
@@ -263,7 +264,7 @@ class UserLineFragment : Fragment() {
                 btn_FuserLine_del.text = "禁用"
             }
 //            deletbuttonClicked("deletperson")
-        })
+        }
     }
 
 

@@ -12,13 +12,14 @@ public class ReagentUserRecord {
     public String reagentTotalSize;
     public String reagentSize;
     public String consumption;
+    public String reagentName;
     public ReagentUserRecord(String strReagentId, int strOperationType, String strOperationTime,
                    String strOperator,String strReagentTotalSize,String strReagentSize,
-                   String strConsumption){
+                   String strConsumption,String strReagentName){
         /*
         * 试剂ID，操作类型（1-入柜、2-取用、3-归还、4-移除），操作时间；
         * 操作者，称重值，余量；
-        * 消耗量；
+        * 消耗量；试剂名称
       *
         * */
         this.reagentId = strReagentId;
@@ -31,6 +32,7 @@ public class ReagentUserRecord {
         this.reagentTotalSize = strReagentTotalSize;
         this.consumption = strConsumption;
 
+        this.reagentName = strReagentName;
     }
     public  int getOperationType()
     {

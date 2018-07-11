@@ -36,13 +36,13 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten {
             EventBus.getDefault().register(this)
         }
         dbManager = DBManager(applicationContext)
-        val cabinetFragment = CabinetFragment()
-        val bundle = Bundle()
-        bundle.putString("delCabinet","false")
-        bundle.putString("choice","true")
-        bundle.putString("cabinetNum","柜1")
-        cabinetFragment.arguments = bundle
-        addFragment(R.id.ll_operation_cabinet, cabinetFragment)
+        val subcabinetFragment = HorizontalFragment()
+//        val args = Bundle()
+//        args.putString("delCabinet","false")
+//        args.putString("choice","true")
+//        bundle.putString("cabinetNum","柜1")
+//        subcabinetFragment.arguments = bundle
+        addFragment(R.id.ll_operation_cabinet, subcabinetFragment)
         scApp = application as SCApp
         changeButton("noFocusable")
         updateDrawer()

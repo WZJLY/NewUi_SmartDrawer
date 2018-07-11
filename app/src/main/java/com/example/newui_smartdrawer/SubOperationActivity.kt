@@ -45,7 +45,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sub_operation)
 
-        ib_subOperation_back.setOnClickListener({
+        ib_subOperation_back.setOnClickListener{
 
             finish()
             overridePendingTransition(0, 0)
@@ -53,7 +53,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
             intent.setClass(this,OperationActivity::class.java)
             startActivity(intent)
 
-        })
+        }
         scApp = application as SCApp
         dbManager = DBManager(applicationContext)
         val subOperation: String = intent.getStringExtra("subOperation")
@@ -576,6 +576,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
     override fun intobuttononClick(text: String) {
         if (text == "scan") {
 //            spi?.sendLED(1,1)
+            statue="into"
             var intent = Intent(this,CaptureActivity::class.java)
             startActivityForResult(intent,REQUEST_CODE)
         }
@@ -584,6 +585,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
     override fun returnbuttonClick(text: String) {
         if (text == "scan") {
 //            spi?.sendLED(1,1)
+            statue="return"
             var intent = Intent(this,CaptureActivity::class.java)
             startActivityForResult(intent,REQUEST_CODE)
         }

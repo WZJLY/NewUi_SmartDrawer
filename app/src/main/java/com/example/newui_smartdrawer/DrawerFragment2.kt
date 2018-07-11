@@ -50,7 +50,7 @@ class DrawerFragment2 : Fragment() {
             fragmentTransaction.commit()
         }
 
-        ib_Fdrawer2_op.setOnClickListener({
+        ib_Fdrawer2_op.setOnClickListener{
             if (childFragmentManager.findFragmentByTag("table") == null) {
                 scApp?.touchdrawer = drawerId
                 updateDrawerClicked("update")
@@ -63,7 +63,7 @@ class DrawerFragment2 : Fragment() {
                 eventMessenge.setMsg("return")
                 EventBus.getDefault().postSticky(eventMessenge)
             }
-        })
+        }
     }
     interface updateDrawerlisten {
         fun updateDrawerClick(text: String)

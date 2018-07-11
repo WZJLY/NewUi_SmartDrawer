@@ -44,7 +44,7 @@ class TemplateFragment : Fragment() {
         {
             addTemplateLine()
         }
-        ib_Ftemplate_del.setOnClickListener({
+        ib_Ftemplate_del.setOnClickListener{
             //单条删除试剂
             var unit:String? = null
             var purity:String? = null
@@ -60,7 +60,7 @@ class TemplateFragment : Fragment() {
             delettemplateClicked("delet_template")
 
 
-        })
+        }
     }
 
     fun addTemplateLine(){

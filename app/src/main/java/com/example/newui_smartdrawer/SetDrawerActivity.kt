@@ -17,10 +17,12 @@ class SetDrawerActivity : BaseActivity() {
     private var num = -1
     private var status = -1 //0-正常使用，1-暂时停用
     private var dbManager:DBManager?= null
+    private var scApp:SCApp?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_drawer)
         dbManager = DBManager(this)
+        scApp = application as SCApp
         val intent = intent
         val drawerId  = intent.getStringExtra("drawerId")
         val set_drawerId = intent.getStringExtra("set_drawerId")
@@ -28,7 +30,7 @@ class SetDrawerActivity : BaseActivity() {
         if(set_drawerId!=null)
         {
             tv_setDrawer_num.setText("柜1-抽屉"+set_drawerId)
-            val drawer =  dbManager?.getDrawerByDrawerId(set_drawerId.toInt(),1)
+            val drawer =  dbManager?.getDrawerByDrawerId(set_drawerId.toInt(),scApp!!.boxId)
             val tableFragment = TableFragment()
             val args = Bundle()
             args.putString("table","setDrawer")
@@ -116,12 +118,12 @@ class SetDrawerActivity : BaseActivity() {
                 }
             }
         })
-        ib_setDrawer_back.setOnClickListener({
+        ib_setDrawer_back.setOnClickListener{
             finish()
             overridePendingTransition(0, 0)
-        })
+        }
 
-        btn_setDrawer_OK.setOnClickListener({
+        btn_setDrawer_OK.setOnClickListener{
             if(num == -1&&status== -1) {
                 val dialog = TopFalseDialog(this)
                 dialog.window.setDimAmount(0f)
@@ -160,14 +162,14 @@ class SetDrawerActivity : BaseActivity() {
                 },3000)
             } else {
                 if(set_drawerId!=null) dbManager?.updateDrawer(set_drawerId.toInt(),1,num,status.toString())
-                else dbManager?.addDrawer(drawerId.toInt(),1,num,status.toString())
+                else dbManager?.addDrawer(drawerId.toInt(),scApp!!.boxId,num,status.toString())
                 finish()
                 val intent = Intent()
                 intent.setClass(this,SetCabinetActivity::class.java)
                 startActivity(intent)
                 overridePendingTransition(0, 0)
             }
-        })
+        }
     }
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
         val fragmentTransaction = beginTransaction()
