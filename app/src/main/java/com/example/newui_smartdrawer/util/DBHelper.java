@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "smart_cabinet_0926.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 4;  //理工的为3版本
 
     public DBHelper(Context context) {
 
@@ -43,7 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 db.execSQL("ALTER TABLE reagentUserRecord add column reagentName VARCHAR");
                 db.execSQL("CREATE TABLE IF NOT EXISTS initialWeight"+
                         "(_id INTEGER PRIMARY KEY, weight  VARCHAR)");
-
         }
     }
 
@@ -95,9 +94,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE IF NOT EXISTS initialWeight"+
                 "(_id INTEGER PRIMARY KEY, weight  VARCHAR)");
     }
-
-
-
 
 
 

@@ -16,6 +16,7 @@ class DrawerFragment : Fragment() {
     private  var drawerID  = 0
     private  var dbManager:DBManager?=null
     private  var reagent:Reagent?=null
+    private  var scApp:SCApp?=null
     var activityCallback:DrawerFragment.deletDrawerlisten? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -40,11 +41,12 @@ class DrawerFragment : Fragment() {
     }
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         dbManager= DBManager(context.applicationContext)
+        scApp = context.applicationContext as SCApp
         if(arguments!=null)
         {
             drawerID = arguments.getInt("drawerID")
             tv_Fdrawer_drawerNum.text=("抽屉"+drawerID)
-           val status =  dbManager!!.getDrawerByDrawerId(drawerID,1).getStatue()
+            val status =  dbManager!!.getDrawerByDrawerId(drawerID,scApp!!.boxId).statue
             if(status == "1")
             {
                 tv_Fdrawer_use.text = "停止使用"
@@ -53,19 +55,19 @@ class DrawerFragment : Fragment() {
             }
 
         }
-        ib_Fdrawer_drawer.setOnClickListener({
+        ib_Fdrawer_drawer.setOnClickListener{
             val intent = Intent()
             intent.setClass(context,SetDrawerActivity::class.java)
             intent.putExtra("set_drawerId",drawerID.toString())
             startActivityForResult(intent,1)
 
 
-        })
-        ib_Fdrawer_del.setOnClickListener({
+        }
+        ib_Fdrawer_del.setOnClickListener{
 
             deletDrawer()
 
-        })
+        }
 
 
     }
@@ -76,24 +78,24 @@ class DrawerFragment : Fragment() {
         var isReagent = -1
         if(sum>0) {
             for (m in 1..sum) {
-                reagent = arrListReagent[m - 1]         //修改
-                if(reagent!!.drawerId.toInt()==drawerID)
+                reagent = arrListReagent[m - 1]         //修改    判断该列柜子这个抽屉试剂是否存在
+                if(reagent!!.drawerId.toInt()==drawerID&&reagent!!.reagentCabinetId.toInt() == scApp?.boxId)
                 {
                     isReagent=1
                     break
                 }
 
             }
-            if(isReagent!=1&&dbManager!!.drawers.size==drawerID)
+            if(isReagent!=1&&dbManager!!.getReagentByboxID(scApp!!.boxId.toString()).size==drawerID)
             {
-                dbManager?.deleteDrawer(drawerID,1)
+                dbManager?.deleteDrawer(drawerID,scApp!!.boxId)
                 delettemplateClicked("deletDrawer")
             }
         }
         else
         {
-            if(dbManager!!.drawers.size==drawerID)
-                dbManager?.deleteDrawer(drawerID,1)
+            if(dbManager!!.getReagentByboxID(scApp!!.boxId.toString()).size==drawerID)
+                dbManager?.deleteDrawer(drawerID,scApp!!.boxId)
             delettemplateClicked("deletDrawer") //如果没有不存在试剂，则也只能从最后一个开始删除抽屉
 
         }

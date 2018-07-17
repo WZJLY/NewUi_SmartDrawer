@@ -41,11 +41,11 @@ class TableFragment : Fragment() {
                     tableNum = arguments.getInt("tableNum")
                 }
                 "subOperation" -> {
-                    tableNum=dbManager!!.getDrawerByDrawerId(scApp!!.touchdrawer,1).drawerSize
+                    tableNum=dbManager!!.getDrawerByDrawerId(scApp!!.touchdrawer,scApp!!.boxId).drawerSize
                 }
                 "operation" -> {
                     drawerID=arguments.getInt("drawerID")
-                    tableNum=dbManager!!.getDrawerByDrawerId(drawerID,1).drawerSize
+                    tableNum=dbManager!!.getDrawerByDrawerId(drawerID,scApp!!.boxId).drawerSize
                 }
                 "return"->{
                     tableNum=arguments.getInt("drawerSize")
@@ -99,7 +99,7 @@ class TableFragment : Fragment() {
                             }
                             for (m in 1..sum) {
                                 reagent = arrListReagent[m - 1]
-                                if(reagent!!.drawerId.toInt()==drawerID&&reagent!!.reagentPosition.toInt()==button.id)
+                                if(reagent!!.drawerId.toInt()==drawerID&&reagent!!.reagentPosition.toInt()==button.id&&reagent!!.reagentCabinetId.toInt()==scApp!!.boxId)
                                 {
                                     if(scApp?.touchtable==button.id )
                                     {
@@ -111,8 +111,8 @@ class TableFragment : Fragment() {
 //                                        button.performClick()
                                         button.setOnFocusChangeListener { v, hasFocus ->
                                             if(hasFocus) {
-                                                if (dbManager?.getReagentByPos(drawerID.toString(), button.id.toString()) != null) {
-                                                    if (dbManager!!.getReagentByPos(drawerID.toString(), button.id.toString()).status == 1) {
+                                                if (dbManager?.getReagentByPos(drawerID.toString(), button.id.toString(),scApp!!.boxId.toString()) != null) {
+                                                    if (dbManager!!.getReagentByPos(drawerID.toString(), button.id.toString(),scApp!!.boxId.toString()).status == 1) {
                                                         val eventMessenge = BtnEvent()
                                                         eventMessenge.setMsg("take")
                                                         EventBus.getDefault().postSticky(eventMessenge)
@@ -188,9 +188,9 @@ class TableFragment : Fragment() {
                             view.isFocusable = true
                             view.requestFocus()
                             view.requestFocusFromTouch()
-                            if(dbManager?.getReagentByPos(drawerID.toString(),row)!=null)
+                            if(dbManager?.getReagentByPos(drawerID.toString(),row,scApp!!.boxId.toString())!=null)
                             {
-                                if(dbManager!!.getReagentByPos(drawerID.toString(),row).status==1)
+                                if(dbManager!!.getReagentByPos(drawerID.toString(),row,scApp!!.boxId.toString()).status==1)
                                 {
                                     val eventMessenge = BtnEvent()
                                     eventMessenge.setMsg("take")

@@ -31,9 +31,8 @@ class InformationFragment : Fragment() {
         scApp= context.applicationContext as SCApp
         if (arguments != null) {
             if (arguments.getString("state") == "in") {
-                var reagent =  dbManager?.getReagentByPos(scApp?.touchdrawer.toString(),scApp?.touchtable.toString())
-                tv_Finformation_use.text = "在位"
-                tv_Finformation_use.setBackgroundResource(R.drawable.image_18_39e85d)
+                var reagent =  dbManager?.getReagentByPos(scApp?.touchdrawer.toString(),scApp?.touchtable.toString(),scApp?.boxId.toString())
+                tv_Finformation_use.visibility = View.GONE
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
                 tv_Finformation_data.text=reagent?.reagentInvalidDate
@@ -50,11 +49,10 @@ class InformationFragment : Fragment() {
             {
                 ib_Finformation_jump.visibility = View.GONE
                 cl_Finformation.setBackgroundColor(Color.TRANSPARENT)
-                var reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"))
+                var reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"),scApp?.boxId.toString())
                 if(reagent?.status==1)
                 {
-                    tv_Finformation_use.text = "在位"
-                    tv_Finformation_use.setBackgroundResource(R.drawable.image_18_39e85d)
+                    tv_Finformation_use.visibility=View.GONE
                 }
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
@@ -72,8 +70,7 @@ class InformationFragment : Fragment() {
                 var searchreagent = dbManager?.getReagentById(reagentId)
                 if(searchreagent?.status==1)
                 {
-                    tv_Finformation_use.text = "在位"
-                    tv_Finformation_use.setBackgroundResource(R.drawable.image_18_39e85d)
+                    tv_Finformation_use.visibility=View.GONE
                 }
                 tv_Finforation_name.text=searchreagent?.reagentName
                 tv_Finformation_manufactor.text=searchreagent?.reagentCreater
@@ -91,6 +88,7 @@ class InformationFragment : Fragment() {
             var reagent =  dbManager?.getReagentById(tv_Finformation_id.text.toString())
             scApp?.touchdrawer=reagent!!.drawerId.toInt()
             scApp?.touchtable=reagent!!.reagentPosition.toInt()
+            scApp?.boxId = reagent!!.reagentCabinetId.toInt()
             var eventMessenge = SerachEvent()
             eventMessenge.setMsg("update")
             EventBus.getDefault().postSticky(eventMessenge)

@@ -77,7 +77,7 @@ class MyService : Service()  {
         //设置Window Type
         params!!.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
         //设置悬浮框不可触摸
-        params!!.flags = WiadminndowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager
+        params!!.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or WindowManager
                 .LayoutParams.FLAG_NOT_FOCUSABLE
         //悬浮框不可触摸，不接受任何时间，同时不影响后面得时间响应
         params!!.format = PixelFormat.RGB_888

@@ -2,6 +2,7 @@ package com.example.newui_smartdrawer
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.example.newui_smartdrawer.util.Reagent
 class VerticalFragment : Fragment() {
     private var dbManager:DBManager?=null
     private var reagent:Reagent?=null
+    private var scApp:SCApp?=null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -19,7 +21,8 @@ class VerticalFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        dbManager= DBManager(context)
+        dbManager= DBManager(context.applicationContext)
+        scApp = context.applicationContext as SCApp
         if(arguments.getString("addtemplate")=="add")
         {
             val arrListReagentTemplate = dbManager?.reagentTemplate
@@ -47,8 +50,6 @@ class VerticalFragment : Fragment() {
                 val sum = arrayListReagent.size
                 if(sum>0) {
                     for (i in 1..sum) {
-
-
                         reagent = arrayListReagent?.get(i - 1)
                         val fragment = childFragmentManager.beginTransaction()
                         val informationFragment = InformationFragment()
@@ -63,10 +64,37 @@ class VerticalFragment : Fragment() {
                     }
                 }
             }
+        }
 
+        if(arguments.getString("drawer")=="addDrawer")
+        {
+
+            updateDrawer()
 
         }
 
+    }
+    fun updateDrawer()      //根据选中的列数进行更新
+    {
+        val arrListDrawers = dbManager?.getDrawersByboxID(scApp?.boxId.toString())
+        val sum = arrListDrawers!!.size
+        Log.d("sum",""+sum)
+        if(sum > 0)
+        {
+            for (i in 1..sum){
+                    val fragment = childFragmentManager.beginTransaction()
+                    val drawerFragment = DrawerFragment()
+                    val args = Bundle()
+                    args.putInt("drawerID", i)
+                    drawerFragment.arguments = args
+                    fragment.add(R.id.ll_Fvertical, drawerFragment)
+                    fragment.commit()
+            }
+        }
+        else
+        {
+            Toast.makeText(context, "请添加抽屉", Toast.LENGTH_SHORT).show()
+        }
     }
 
 

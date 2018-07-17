@@ -32,10 +32,10 @@ class SearchActivity : BaseActivity(){
         verticalFragment.arguments=args
         replaceFragment(verticalFragment,R.id.reagent_area)
 
-        ib_search_back.setOnClickListener({
+        ib_search_back.setOnClickListener{
             finish()
            overridePendingTransition(0, 0)
-        })
+        }
 
 
 

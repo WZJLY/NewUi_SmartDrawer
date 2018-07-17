@@ -36,8 +36,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val it = Intent(this@MainActivity, MyService::class.java)
-        startService(it)
+//        val it = Intent(this@MainActivity, MyService::class.java)
+//        startService(it)
         dbManager = DBManager(this)
         TimeThread().start()
         scApp = application as SCApp
@@ -46,7 +46,6 @@ class MainActivity : BaseActivity() {
         if (power == SC_Const.NORMAL) {
             btn_mainAdmin_setting.visibility = View.GONE
             btn_mainAdmin_management.visibility = View.GONE
-            btn_mainAdmin_video.visibility = View.GONE
         }
         btn_mainAdmin_setting.setOnClickListener {
             val intent = Intent()
@@ -83,8 +82,8 @@ class MainActivity : BaseActivity() {
                     }
                 }, 2000)
             } else {
-                val it = Intent(this, MyService::class.java)
-                stopService(it)
+//                val it = Intent(this, MyService::class.java)
+//                stopService(it)
                 val intent = Intent()
                 intent.setClass(this, LoginActivity::class.java)
                 startActivity(intent)
@@ -92,7 +91,7 @@ class MainActivity : BaseActivity() {
             }
         }
         btn_mainAdmin_video.setOnClickListener {
-            val parentFlie = File(Environment.getExternalStorageDirectory().toString()+"/SmartCabint/Video/")
+            val parentFlie = File(Environment.getExternalStorageDirectory().toString())//+"/SmartCabint/Video/"
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.setDataAndType(Uri.fromFile(parentFlie),"video/*")
             intent.addCategory(Intent.CATEGORY_OPENABLE)

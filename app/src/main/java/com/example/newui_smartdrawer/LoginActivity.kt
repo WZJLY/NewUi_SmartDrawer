@@ -113,8 +113,8 @@ class LoginActivity :BaseActivity() {
                             "", "", "", "", "", "")
 
                 }
-                val it = Intent(this, MyService::class.java)
-                startService(it)
+//                val it = Intent(this, MyService::class.java)
+//                startService(it)
                 intent.setClass(this, MainActivity::class.java)
                 saveUserName(userName)
                 startActivity(intent)

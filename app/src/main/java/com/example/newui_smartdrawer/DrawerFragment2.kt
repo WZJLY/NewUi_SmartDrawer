@@ -29,7 +29,7 @@ class DrawerFragment2 : Fragment() {
         {
             drawerId =  arguments.getInt("drawerID")
             tv_Fdrawer2_drawerNum.text="抽屉"+drawerId
-            val statue =  dbManager!!.getDrawerByDrawerId(drawerId,1).getStatue()
+            val statue =  dbManager!!.getDrawerByDrawerId(drawerId,scApp!!.boxId).getStatue()
             if(statue=="1")
             {
                 ib_Fdrawer2_op.isEnabled=false
@@ -50,7 +50,7 @@ class DrawerFragment2 : Fragment() {
             fragmentTransaction.commit()
         }
 
-        ib_Fdrawer2_op.setOnClickListener({
+        ib_Fdrawer2_op.setOnClickListener{
             if (childFragmentManager.findFragmentByTag("table") == null) {
                 scApp?.touchdrawer = drawerId
                 updateDrawerClicked("update")
@@ -63,7 +63,7 @@ class DrawerFragment2 : Fragment() {
                 eventMessenge.setMsg("return")
                 EventBus.getDefault().postSticky(eventMessenge)
             }
-        })
+        }
     }
     interface updateDrawerlisten {
         fun updateDrawerClick(text: String)

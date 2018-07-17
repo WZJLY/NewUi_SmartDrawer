@@ -188,8 +188,8 @@ public class DBManager {
 
 
     //----------------------------------drawer manage begin----------------------------//
-    public ArrayList<Drawer> getDrawers(){
-        Cursor cursor = db.rawQuery("select * from drawer",null);
+    public ArrayList<Drawer> getDrawersByboxID(String strBoxId){
+        Cursor cursor = db.rawQuery("select * from drawer where boxId = ?",new String[]{strBoxId});     //2018/7/12   修改
         ArrayList<Drawer> arrListDrawers = new ArrayList<>();
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
@@ -205,10 +205,11 @@ public class DBManager {
     public void deleteDrawer(int drawerId, int boxId){
         db.delete("drawer", "drawerId=? AND boxId=?", new String[]{drawerId + "", boxId + ""});
     }
+
     public void deleteDrawer(int boxId){
         db.delete("drawer", "boxId=?", new String[]{boxId + ""});
     }
-    public Drawer getDrawerByDrawerId(int strDrawerId,int strBoxID){
+    public Drawer getDrawerByDrawerId(int strDrawerId, int strBoxID){
         Cursor cursor = db.query("drawer", new String[] {"drawerId", "boxId", "drawerSize","statue"}, "drawerId=? AND boxId=?", new String[] {strDrawerId+"",strBoxID+""}, null, null, null);
         cursor.moveToNext();
         Drawer drawerInfo = new Drawer(
@@ -304,8 +305,50 @@ public class DBManager {
         return reagent;
     }
 
-    public Reagent getReagentByPos(String strDrawerId,String strReagentPos) {       //新增一个搜索选项
-        Cursor cursor =  db.query("reagent", null, "drawerId=? and reagentPosition=? and cabinetId=?", new String[] { strDrawerId,strReagentPos }, null, null, null);
+
+//    public Reagent getReagentByboxID(String strBoxId){
+//        Cursor cursor = db.rawQuery("select * from reagent where cabinetId = '" + strBoxId + "'",null);
+//        Reagent reagent = null;
+//        ArrayList<Reagent> arrListReagents = new ArrayList<>();
+//        if (cursor.moveToFirst()) {
+//            if (!cursor.isAfterLast()) {
+//                reagent = new Reagent(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getString(cursor.getColumnIndex("reagentName")), cursor.getString(cursor.getColumnIndex("reagentAlias")),
+//                        cursor.getString(cursor.getColumnIndex("reagentFormalName")), cursor.getString(cursor.getColumnIndex("reagentChemName")), cursor.getInt(cursor.getColumnIndex("reagentType")),
+//                        cursor.getString(cursor.getColumnIndex("reagentPurity")), cursor.getString(cursor.getColumnIndex("reagentSize")), cursor.getString(cursor.getColumnIndex("reagentTotalSize")),
+//                        cursor.getString(cursor.getColumnIndex("reagentCreater")), cursor.getString(cursor.getColumnIndex("reagentGoodsID")), cursor.getInt(cursor.getColumnIndex("reagentUnit")),
+//                        cursor.getString(cursor.getColumnIndex("reagentDensity")), cursor.getString(cursor.getColumnIndex("reagentInvalidDate")), cursor.getString(cursor.getColumnIndex("cabinetId")),
+//                        cursor.getString(cursor.getColumnIndex("drawerId")), cursor.getString(cursor.getColumnIndex("reagentPosition")),
+//                        cursor.getInt(cursor.getColumnIndex("status")), cursor.getString(cursor.getColumnIndex("reagentUser")));
+//                return reagent;
+//            }
+//        }
+//        return reagent;
+//
+//
+//    }
+    public ArrayList<Reagent> getReagentByboxID(String strBoxId){
+        Cursor cursor = db.rawQuery("select * from reagent where cabinetId = '" + strBoxId + "'",null);
+        ArrayList<Reagent> arrListReagent = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+              Reagent reagent = new Reagent(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getString(cursor.getColumnIndex("reagentName")), cursor.getString(cursor.getColumnIndex("reagentAlias")),
+                        cursor.getString(cursor.getColumnIndex("reagentFormalName")), cursor.getString(cursor.getColumnIndex("reagentChemName")), cursor.getInt(cursor.getColumnIndex("reagentType")),
+                        cursor.getString(cursor.getColumnIndex("reagentPurity")), cursor.getString(cursor.getColumnIndex("reagentSize")), cursor.getString(cursor.getColumnIndex("reagentTotalSize")),
+                        cursor.getString(cursor.getColumnIndex("reagentCreater")), cursor.getString(cursor.getColumnIndex("reagentGoodsID")), cursor.getInt(cursor.getColumnIndex("reagentUnit")),
+                        cursor.getString(cursor.getColumnIndex("reagentDensity")), cursor.getString(cursor.getColumnIndex("reagentInvalidDate")), cursor.getString(cursor.getColumnIndex("cabinetId")),
+                        cursor.getString(cursor.getColumnIndex("drawerId")), cursor.getString(cursor.getColumnIndex("reagentPosition")),
+                        cursor.getInt(cursor.getColumnIndex("status")), cursor.getString(cursor.getColumnIndex("reagentUser")));
+                arrListReagent.add(reagent);
+                cursor.moveToNext();
+            }
+        }
+        return arrListReagent;
+    }
+
+
+
+    public Reagent getReagentByPos(String strDrawerId, String strReagentPos, String strBoxId) {
+        Cursor cursor =  db.query("reagent", null, "drawerId=? and reagentPosition=? and cabinetId = ?", new String[] { strDrawerId,strReagentPos,strBoxId }, null, null, null);
         Reagent reagent = null;
         if (cursor.moveToFirst()) {
             if (!cursor.isAfterLast()) {
@@ -359,7 +402,7 @@ public class DBManager {
 
     public void backReagent(String strReagentId, String strSize){
         ContentValues data=new ContentValues();
-        data.put("status",SC_Const.EXIST);
+        data.put("status", SC_Const.EXIST);
         data.put("reagentSize", strSize);
         data.put("reagentUser", "");
         db.update("reagent", data, "reagentId=?", new String[]{strReagentId + ""});
@@ -486,21 +529,20 @@ public class DBManager {
     public void addReagentUserRecord(String reagentId, int operationType, String operationTime,String operator,String reagentTotalSize,String reagentSize,String consumption,String reagentName){
         db.execSQL("INSERT INTO reagentUserRecord VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)", new Object[]{reagentId, operationType, operationTime,operator,reagentTotalSize,reagentSize,consumption,reagentName});
     }
-    public ReagentUserRecord getReagentUseRecordByDate(String strdate)
-    {
-        Cursor cursor =  db.query("reagentUserRecord", null, "operationTime=?", new String[] { strdate }, null, null, null);
-        ReagentUserRecord reagentUserRecord = null;
-        if (cursor.moveToFirst()) {
-            if (!cursor.isAfterLast()) {
-                reagentUserRecord = new ReagentUserRecord(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getInt(cursor.getColumnIndex("operationType")), cursor.getString(cursor.getColumnIndex("operationTime")),
-                        cursor.getString(cursor.getColumnIndex("operator")), cursor.getString(cursor.getColumnIndex("reagentTotalSize")), cursor.getString(cursor.getColumnIndex("reagentSize")),
-                        cursor.getString(cursor.getColumnIndex("consumption")), cursor.getString(cursor.getColumnIndex("reagentName")));
-                return reagentUserRecord;
-            }
+public ReagentUserRecord getReagentUseRecordByDate(String strdate)
+{
+    Cursor cursor =  db.query("reagentUserRecord", null, "operationTime=?", new String[] { strdate }, null, null, null);
+    ReagentUserRecord reagentUserRecord = null;
+    if (cursor.moveToFirst()) {
+        if (!cursor.isAfterLast()) {
+            reagentUserRecord = new ReagentUserRecord(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getInt(cursor.getColumnIndex("operationType")), cursor.getString(cursor.getColumnIndex("operationTime")),
+                    cursor.getString(cursor.getColumnIndex("operator")), cursor.getString(cursor.getColumnIndex("reagentTotalSize")), cursor.getString(cursor.getColumnIndex("reagentSize")),
+                    cursor.getString(cursor.getColumnIndex("consumption")), cursor.getString(cursor.getColumnIndex("reagentName")));
+            return reagentUserRecord;
         }
-        return reagentUserRecord;
     }
-
+    return reagentUserRecord;
+}
 
     //----------------------------------drawer manage end----------------------------//
     public void addSrapReagent(String strReagentId, String strReagentName, String strReagentAlias,
@@ -559,24 +601,5 @@ public class DBManager {
         db.execSQL("INSERT INTO sysSeting VALUES(null,?,?)", new Object[]{serialNum,cameraVersion});
     }
 
-    public ArrayList<InitialWeight> getInitialWeight() {
-        Cursor cursor = db.rawQuery("select * from initialWeight",null);
-        ArrayList<InitialWeight> arrListweight = new ArrayList<>();
-        if (cursor.moveToFirst()) {
-            if (!cursor.isAfterLast()) {
-                InitialWeight intialWeight = new InitialWeight(cursor.getString(cursor.getColumnIndex("weight")));
-                arrListweight.add(intialWeight);
-                cursor.moveToNext();
-            }
-        }
-        return arrListweight;
-    }
-    public void deleteAllInitialWeight()
-    {
-        db.execSQL("DELETE FROM initialWeight");
-    }
-    public void addInitialWeight(String strWeight) {
-        db.execSQL("INSERT INTO initialWeight VALUES(null,?)", new Object[]{strWeight});
-    }
 
 }
