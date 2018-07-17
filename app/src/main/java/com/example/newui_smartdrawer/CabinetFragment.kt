@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.fragment_cabinet.*
-import kotlinx.android.synthetic.main.fragment_set_cabinet.*
 
 
 class CabinetFragment : Fragment() {

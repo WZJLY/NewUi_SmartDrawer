@@ -62,10 +62,10 @@
 
         <ImageButton
             android:id="@+id/ib_Fcabinet_del"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginEnd="60dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="15dp"
             android:background="@android:color/transparent"
             android:src="@drawable/btn_cabinet_del_style"
             app:layout_constraintEnd_toEndOf="parent"
