@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "smart_cabinet_0926.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     public DBHelper(Context context) {
 
@@ -39,7 +39,10 @@ public class DBHelper extends SQLiteOpenHelper {
             case 2:
                 db.execSQL("ALTER TABLE user add column statue VARCHAR");
                 db.execSQL("ALTER TABLE drawer add column statue VARCHAR");//人员和chou抽屉状态
-
+            case 3://需要新增加一张称重的表，试剂记录需要多一列试剂名
+                db.execSQL("ALTER TABLE reagentUserRecord add column reagentName VARCHAR");
+                db.execSQL("CREATE TABLE IF NOT EXISTS initialWeight"+
+                        "(_id INTEGER PRIMARY KEY, weight  VARCHAR)");
 
         }
     }
@@ -75,10 +78,10 @@ public class DBHelper extends SQLiteOpenHelper {
         //存放试剂编号
         db.execSQL("CREATE TABLE IF NOT EXISTS cabinet_no" +
                 "(_id INTEGER PRIMARY KEY,cabinet_no VARCHAR,cabinet_serviceCode VARCHAR)");
-        //试剂使用记录表
+        //试剂使用记录表       //加一列试剂名(2018/7/11)
         db.execSQL("CREATE TABLE IF NOT EXISTS reagentUserRecord" +
                 "(_id INTEGER PRIMARY KEY, reagentId VARCHAR,operationType INTEGER, operationTime VARCHAR, " +
-                "operator VARCHAR, reagentTotalSize VARCHAR, reagentSize VARCHAR, consumption VARCHAR)");
+                "operator VARCHAR, reagentTotalSize VARCHAR, reagentSize VARCHAR, consumption VARCHAR,reagentName VARCHAR)");
         //试剂报废表
         db.execSQL("CREATE TABLE IF NOT EXISTS scrapReagent" +
                 "(_id INTEGER PRIMARY KEY, reagentId VARCHAR, reagentName VARCHAR, reagentAlias VARCHAR, " +
@@ -89,10 +92,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "drawerId VARCHAR, reagentPosition VARCHAR, status INTEGER, reagentUser VARCHAR)");
         db.execSQL("CREATE TABLE IF NOT EXISTS sysSeting"+
                 "(_id INTEGER PRIMARY KEY, serialNum VARCHAR, cameraVersion VARCHAR)");
-
-
-        //初始重量表      （2018/7/10创建)
-
         db.execSQL("CREATE TABLE IF NOT EXISTS initialWeight"+
                 "(_id INTEGER PRIMARY KEY, weight  VARCHAR)");
     }

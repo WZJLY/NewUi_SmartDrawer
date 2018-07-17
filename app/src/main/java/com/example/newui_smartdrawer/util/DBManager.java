@@ -304,8 +304,8 @@ public class DBManager {
         return reagent;
     }
 
-    public Reagent getReagentByPos(String strDrawerId,String strReagentPos) {
-        Cursor cursor =  db.query("reagent", null, "drawerId=? and reagentPosition=?", new String[] { strDrawerId,strReagentPos }, null, null, null);
+    public Reagent getReagentByPos(String strDrawerId,String strReagentPos) {       //新增一个搜索选项
+        Cursor cursor =  db.query("reagent", null, "drawerId=? and reagentPosition=? and cabinetId=?", new String[] { strDrawerId,strReagentPos }, null, null, null);
         Reagent reagent = null;
         if (cursor.moveToFirst()) {
             if (!cursor.isAfterLast()) {
@@ -473,29 +473,34 @@ public class DBManager {
         ArrayList<ReagentUserRecord> arrListReagentUserRecords= new ArrayList<>();
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                arrListReagentUserRecords.add(new ReagentUserRecord(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getInt(cursor.getColumnIndex("operationType")),cursor.getString(cursor.getColumnIndex("operationTime")),cursor.getString(cursor.getColumnIndex("operator")),cursor.getString(cursor.getColumnIndex("reagentTotalSize")),cursor.getString(cursor.getColumnIndex("reagentSize")),cursor.getString(cursor.getColumnIndex("consumption"))));
+                arrListReagentUserRecords.add(new ReagentUserRecord(cursor.getString(cursor.getColumnIndex("reagentId")),
+                        cursor.getInt(cursor.getColumnIndex("operationType")),cursor.getString(cursor.getColumnIndex("operationTime")),
+                        cursor.getString(cursor.getColumnIndex("operator")),cursor.getString(cursor.getColumnIndex("reagentTotalSize")),
+                        cursor.getString(cursor.getColumnIndex("reagentSize")),cursor.getString(cursor.getColumnIndex("consumption")),
+                        cursor.getString(cursor.getColumnIndex("reagentName"))));
                 cursor.moveToNext();
             }
         }
         return arrListReagentUserRecords;
     }
-    public void addReagentUserRecord(String reagentId, int operationType, String operationTime,String operator,String reagentTotalSize,String reagentSize,String consumption){
-        db.execSQL("INSERT INTO reagentUserRecord VALUES(null, ?, ?, ?, ?, ?, ?, ?)", new Object[]{reagentId, operationType, operationTime,operator,reagentTotalSize,reagentSize,consumption});
+    public void addReagentUserRecord(String reagentId, int operationType, String operationTime,String operator,String reagentTotalSize,String reagentSize,String consumption,String reagentName){
+        db.execSQL("INSERT INTO reagentUserRecord VALUES(null, ?, ?, ?, ?, ?, ?, ?, ?)", new Object[]{reagentId, operationType, operationTime,operator,reagentTotalSize,reagentSize,consumption,reagentName});
     }
-public ReagentUserRecord getReagentUseRecordByDate(String strdate)
-{
-    Cursor cursor =  db.query("reagentUserRecord", null, "operationTime=?", new String[] { strdate }, null, null, null);
-    ReagentUserRecord reagentUserRecord = null;
-    if (cursor.moveToFirst()) {
-        if (!cursor.isAfterLast()) {
-            reagentUserRecord = new ReagentUserRecord(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getInt(cursor.getColumnIndex("operationType")), cursor.getString(cursor.getColumnIndex("operationTime")),
-                    cursor.getString(cursor.getColumnIndex("operator")), cursor.getString(cursor.getColumnIndex("reagentTotalSize")), cursor.getString(cursor.getColumnIndex("reagentSize")),
-                    cursor.getString(cursor.getColumnIndex("consumption")));
-            return reagentUserRecord;
+    public ReagentUserRecord getReagentUseRecordByDate(String strdate)
+    {
+        Cursor cursor =  db.query("reagentUserRecord", null, "operationTime=?", new String[] { strdate }, null, null, null);
+        ReagentUserRecord reagentUserRecord = null;
+        if (cursor.moveToFirst()) {
+            if (!cursor.isAfterLast()) {
+                reagentUserRecord = new ReagentUserRecord(cursor.getString(cursor.getColumnIndex("reagentId")), cursor.getInt(cursor.getColumnIndex("operationType")), cursor.getString(cursor.getColumnIndex("operationTime")),
+                        cursor.getString(cursor.getColumnIndex("operator")), cursor.getString(cursor.getColumnIndex("reagentTotalSize")), cursor.getString(cursor.getColumnIndex("reagentSize")),
+                        cursor.getString(cursor.getColumnIndex("consumption")), cursor.getString(cursor.getColumnIndex("reagentName")));
+                return reagentUserRecord;
+            }
         }
+        return reagentUserRecord;
     }
-    return reagentUserRecord;
-}
+
 
     //----------------------------------drawer manage end----------------------------//
     public void addSrapReagent(String strReagentId, String strReagentName, String strReagentAlias,

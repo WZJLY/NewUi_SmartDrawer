@@ -167,7 +167,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                                 upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "添加试剂", scApp!!.userInfo.userName, str, reagentTemplate?.reagentName,code,load+"g",residue+reagentTemplate?.reagentUnit,
                                                         "",""+CabinetId+","+drawerID+","+table)
                                             }
-                                            dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
+                                            dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"",reagentTemplate?.reagentName)
                                             scApp?.touchtable = 0 //新加的
                                             finish()
                                             overridePendingTransition(0, 0)
@@ -319,7 +319,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                     var unit = "g"
                                     if(reagent?.reagentUnit==2)
                                         unit = "ml"
-                                    dbManager?.addReagentUserRecord(reagentId,2,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"")
+                                    dbManager?.addReagentUserRecord(reagentId,2,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"",reagent?.reagentName)
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
                                     if(dbManager!!.cabinetNo.size!=0) {
@@ -403,7 +403,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                                          unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
-                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", size.toString() + unit, (weight / density.toDouble()).toString())
+                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", size.toString() + unit, (weight / density.toDouble()).toString(),reagent?.reagentName)
                                                     } else {
                                                         weight = reagent.reagentTotalSize.toDouble() - weight
                                                         var size1 = reagent.reagentSize.toDouble() - (weight / density.toDouble())
@@ -412,7 +412,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                                          unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
-                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.2f",size1) + unit, (weight / density.toDouble()).toString())
+                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.2f",size1) + unit, (weight / density.toDouble()).toString(),reagent?.reagentName)
                                                     }
                                                     val curDate = Date(System.currentTimeMillis())
                                                     val str = sdf.format(curDate)
@@ -533,7 +533,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                     val reagent = dbManager?.getReagentById(reagentId)
                                     dbManager?.addSrapReagent(reagent?.reagentId,reagent?.reagentName,"","","",reagent!!.reagentType.toInt(),reagent?.reagentPurity,reagent?.reagentSize,reagent?.reagentTotalSize,reagent?.reagentCreater,"",reagent?.reagentUnit,reagent?.reagentDensity,reagent?.reagentInvalidDate,reagent?.reagentCabinetId,drawerID.toString(),reagent?.reagentPosition,4,scApp!!.userInfo.getUserName())
                                     dbManager?.deleteReagentById(reagentId)
-                                    dbManager?.addReagentUserRecord(reagentId,4,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","")
+                                    dbManager?.addReagentUserRecord(reagentId,4,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","",reagent?.reagentName)
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
                                     var unit = "g"

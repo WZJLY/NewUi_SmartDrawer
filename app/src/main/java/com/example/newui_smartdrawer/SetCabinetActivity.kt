@@ -19,10 +19,10 @@ class SetCabinetActivity : BaseActivity(),SetCabinetFragment.addDrawerbuttonlist
         val setCabinetFragment = SetCabinetFragment()
         replaceFragment(setCabinetFragment,R.id.fl_setCabinet)
 
-      ib_setCabinet_back.setOnClickListener({
+      ib_setCabinet_back.setOnClickListener{
           finish()
           overridePendingTransition(0, 0)
-      })
+      }
     }
 
     override fun addDrawerButtonClick(text: String) {
