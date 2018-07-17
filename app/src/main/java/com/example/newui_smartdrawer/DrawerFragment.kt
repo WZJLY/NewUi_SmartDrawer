@@ -86,7 +86,7 @@ class DrawerFragment : Fragment() {
                 }
 
             }
-            if(isReagent!=1&&dbManager!!.getReagentByboxID(scApp!!.boxId.toString()).size==drawerID)
+            if(isReagent!=1&&dbManager!!.getDrawersByboxID(scApp!!.boxId.toString()).size==drawerID)
             {
                 dbManager?.deleteDrawer(drawerID,scApp!!.boxId)
                 delettemplateClicked("deletDrawer")
@@ -94,7 +94,7 @@ class DrawerFragment : Fragment() {
         }
         else
         {
-            if(dbManager!!.getReagentByboxID(scApp!!.boxId.toString()).size==drawerID)
+            if(dbManager!!.getDrawersByboxID(scApp!!.boxId.toString()).size==drawerID)
                 dbManager?.deleteDrawer(drawerID,scApp!!.boxId)
             delettemplateClicked("deletDrawer") //如果没有不存在试剂，则也只能从最后一个开始删除抽屉
 

@@ -60,11 +60,12 @@ class CabinetFragment : Fragment() {
             }
         }
         ib_Fcabinet_del.setOnClickListener{             //删除必须最后一个且没有试剂存在
-            val cabinetID = tv_Fcabinet_num.text.substring(1,2)
+
+            val cabinetID = tv_Fcabinet_num.text.substring(1,tv_Fcabinet_num.text.length)
             if(dbManager!!.getReagentByboxID(cabinetID).size<=0)
             {
                 if(cabinetID.toInt()==dbManager!!.boxes.size) {
-                    dbManager?.deleteBox(tv_Fcabinet_num.text.substring(1, 2).toInt())
+                    dbManager?.deleteBox(tv_Fcabinet_num.text.substring(1, tv_Fcabinet_num.text.length).toInt())
                     deletCabinetClicked("deletCabinet")
                 }
                 else{
@@ -81,7 +82,7 @@ class CabinetFragment : Fragment() {
         }
 
         btn_Fcabinet_cabinet.setOnClickListener {
-            scApp?.boxId=tv_Fcabinet_num.text.substring(1, 2).toInt()
+            scApp?.boxId=tv_Fcabinet_num.text.substring(1, tv_Fcabinet_num.text.length).toInt()
             deletCabinetClicked("updatedrawer")
         }
 
