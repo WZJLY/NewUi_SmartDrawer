@@ -38,17 +38,6 @@ class SearchActivity : BaseActivity(){
         }
 
 
-
-
-//        test_button.setOnClickListener({   //查找试剂位置时传参
-////            finish()
-////            val intent = Intent()
-////            scApp.reagentID="123"
-////            intent.setClass(this,OperationActivity::class.java)
-////            startActivity(intent)
-//
-//        })
-
     }
     @Subscribe
     fun onEvent(event: SerachEvent){

@@ -18,8 +18,6 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
         setContentView(R.layout.activity_set_cabinet)
         dbManager = DBManager(this)
         scApp = application as SCApp
-//        val setCabinetFragment = SetCabinetFragment()
-//        replaceFragment(setCabinetFragment,R.id.fl_setCabinet_drawer)
         val cabinetFragment = HorizontalFragment()
         val arg=Bundle()
         arg.putString("cabinet","set")
@@ -66,6 +64,8 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
                arg.putString("cabinet","set")
                cabinetFragment.arguments=arg
                replaceFragment(cabinetFragment,R.id.fl_setCabinet_cabinet)
+               val drawerFragment = VerticalFragment()
+               replaceFragment(drawerFragment,R.id.fl_setCabinet_drawer)
            }
            "updatedrawer" ->
            {
@@ -102,8 +102,11 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
     override fun deletDrawerClick(text: String) {
         if(text == "deletDrawer")
         {
-            val setCabinetFragment = SetCabinetFragment()
-            replaceFragment(setCabinetFragment,R.id.fl_setCabinet_drawer)
+            val drawerFragment = VerticalFragment()
+            val args = Bundle()
+            args.putString("drawer","addDrawer")
+            drawerFragment.arguments=args
+            replaceFragment(drawerFragment,R.id.fl_setCabinet_drawer)
         }
     }
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
@@ -115,6 +118,11 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
     fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
         supportFragmentManager.inTransaction{
            replace(frameId, fragment)
+        }
+    }
+    fun AppCompatActivity.removeFragment(fragment: Fragment){
+        supportFragmentManager.inTransaction {
+            remove(fragment)
         }
     }
 

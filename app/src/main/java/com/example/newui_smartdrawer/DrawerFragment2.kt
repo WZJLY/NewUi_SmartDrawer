@@ -4,10 +4,13 @@ package com.example.newui_smartdrawer
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
+import com.example.newui_smartdrawer.util.SerialPortInterface
 import kotlinx.android.synthetic.main.fragment_drawer2.*
 import org.greenrobot.eventbus.EventBus
 
@@ -15,6 +18,7 @@ class DrawerFragment2 : Fragment() {
     private var scApp:SCApp?=null
     private var drawerId= 0
     private var dbManager:DBManager?=null
+    private var spi: SerialPortInterface?= null
     private var activityCallback:DrawerFragment2.updateDrawerlisten? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,6 +29,7 @@ class DrawerFragment2 : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         scApp = context.applicationContext as SCApp
         dbManager = DBManager(context.applicationContext)
+        spi =  scApp?.getSpi()
         if(arguments!=null)
         {
             drawerId =  arguments.getInt("drawerID")
@@ -64,7 +69,57 @@ class DrawerFragment2 : Fragment() {
                 EventBus.getDefault().postSticky(eventMessenge)
             }
         }
+        ib_Fdrawer2_lock.setOnClickListener {
+            val check =  checkLock(scApp!!.touchCabint,2)
+            when(check)
+            {
+                -1 ->
+                     Toast.makeText(context.applicationContext,"串口通讯异常",Toast.LENGTH_SHORT).show()
+                0->
+                {
+                    spi?.sendOpenLock(scApp!!.touchCabint,tv_Fdrawer2_drawerNum.text.substring(2,3).toInt())
+                }
+                else ->
+                {
+                    Toast.makeText(context.applicationContext," 请关闭抽屉" +
+                            ""+check,Toast.LENGTH_SHORT).show()
+                }
+
+
+            }
+
+
+
+
+
+        }
     }
+
+    fun checkLock(DID: Int,num: Int): Int? {
+        var time = 0
+        for(i in 1..num) {
+            val lockData = spi?.sendGetStat(DID)
+            if (lockData != null) {
+                val drawerId = lockData.indexOf("1")+1
+                Log.d("SubOperation",""+drawerId)
+                if (drawerId > 0)
+                    return drawerId
+                else
+                    continue
+            }
+            else {
+                if (time > 0){
+                    return -1     //串口通讯存在问题
+                }
+                else{
+                    time++
+                    continue
+                }
+            }
+        }
+        return 0                //所有的抽屉均已关上
+    }
+
     interface updateDrawerlisten {
         fun updateDrawerClick(text: String)
     }

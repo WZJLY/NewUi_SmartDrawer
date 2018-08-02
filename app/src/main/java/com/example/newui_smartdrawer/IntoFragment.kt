@@ -88,14 +88,14 @@ class IntoFragment : Fragment() {
             val cal = Calendar.getInstance()
             val dialog = DatePickerDialog(context, null, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
 
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE,"确认", DialogInterface.OnClickListener { dialogInterface, i ->
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE,"确认", DialogInterface.OnClickListener { _, _ ->
                 val datePicker = dialog.datePicker
                 val year = datePicker.year
                 val month = datePicker.month+1
                 val day = datePicker.dayOfMonth
                 tv_Finto_data.text = ""+year+"年"+month+"月"+day+"日"
             })
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE,"取消", DialogInterface.OnClickListener { dialogInterface, i ->
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE,"取消", DialogInterface.OnClickListener { _, _ ->
                 Log.d("setDate","取消")
             })
             dialog.window.setGravity(Gravity.CENTER)

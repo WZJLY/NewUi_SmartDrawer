@@ -23,54 +23,50 @@ class VerticalFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         dbManager= DBManager(context.applicationContext)
         scApp = context.applicationContext as SCApp
-        if(arguments.getString("addtemplate")=="add")
-        {
-            val arrListReagentTemplate = dbManager?.reagentTemplate
-            val sum = arrListReagentTemplate!!.size
-            if(sum>0)
-            {
+        if(arguments!=null) {
+            if (arguments.getString("addtemplate") == "add") {
+                val arrListReagentTemplate = dbManager?.reagentTemplate
+                val sum = arrListReagentTemplate!!.size
+                if (sum > 0) {
                     for (i in 1..sum) {
-                    val templateFragment = TemplateFragment()
-                    val args = Bundle()
-                    args.putInt("order",i-1)
-                    templateFragment.arguments = args
-                    val fragmentTransaction = fragmentManager.beginTransaction()
-                    fragmentTransaction.add(R.id.ll_Fvertical,templateFragment)
-                    fragmentTransaction.commit()
-                }
-            }
-            else
-            Toast.makeText(context ,"没有试剂模板", Toast.LENGTH_SHORT).show()
-        }
-        if(arguments.getString("addreagent")=="addreagent")
-        {
-            val arrayListReagent =  dbManager?.reagents
-            if(arrayListReagent!=null)
-            {
-                val sum = arrayListReagent.size
-                if(sum>0) {
-                    for (i in 1..sum) {
-                        reagent = arrayListReagent?.get(i - 1)
-                        val fragment = childFragmentManager.beginTransaction()
-                        val informationFragment = InformationFragment()
+                        val templateFragment = TemplateFragment()
                         val args = Bundle()
-                        args.putString("addreagent","addreagent")
-                        args.putString("reagentID", reagent?.reagentId)
-                        informationFragment.arguments = args
-                        fragment.add(R.id.ll_Fvertical, informationFragment)
-                        fragment.commit()
+                        args.putInt("order", i - 1)
+                        templateFragment.arguments = args
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.add(R.id.ll_Fvertical, templateFragment)
+                        fragmentTransaction.commit()
+                    }
+                } else
+                    Toast.makeText(context, "没有试剂模板", Toast.LENGTH_SHORT).show()
+            }
+            if (arguments.getString("addreagent") == "addreagent") {
+                val arrayListReagent = dbManager?.reagents
+                if (arrayListReagent != null) {
+                    val sum = arrayListReagent.size
+                    if (sum > 0) {
+                        for (i in 1..sum) {
+                            reagent = arrayListReagent?.get(i - 1)
+                            val fragment = childFragmentManager.beginTransaction()
+                            val informationFragment = InformationFragment()
+                            val args = Bundle()
+                            args.putString("addreagent", "addreagent")
+                            args.putString("reagentID", reagent?.reagentId)
+                            informationFragment.arguments = args
+                            fragment.add(R.id.ll_Fvertical, informationFragment)
+                            fragment.commit()
 
 
+                        }
                     }
                 }
             }
-        }
 
-        if(arguments.getString("drawer")=="addDrawer")
-        {
+            if (arguments.getString("drawer") == "addDrawer") {
 
-            updateDrawer()
+                updateDrawer()
 
+            }
         }
 
     }

@@ -75,10 +75,4 @@ class SetCabinetFragment : Fragment() {
         activityCallback?.addDrawerButtonClick(text)
     }
 
-
-
-
-
-
-
 }

@@ -168,7 +168,7 @@ public class UpdateAppManager {
      */
     private void showNoticeDialog() {
         new AlertDialog.Builder(context)
-                .setTitle("检测到新版本！")
+                .setTitle("安储智能试剂柜有新版本可供升级")
                 .setMessage(update_describe)
                 .setPositiveButton("下载", new DialogInterface.OnClickListener() {
                     @Override

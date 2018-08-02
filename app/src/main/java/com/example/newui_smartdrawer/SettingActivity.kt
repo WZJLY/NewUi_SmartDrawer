@@ -1,26 +1,19 @@
 package com.example.newui_smartdrawer
 
-import android.app.Activity
+
+import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
+import android.support.v7.app.AlertDialog
 import android.view.Gravity
 import android.widget.EditText
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
+import com.example.newui_smartdrawer.util.SerialPortInterface
 import com.example.newui_smartdrawer.util.UpdateAppManager
 import kotlinx.android.synthetic.main.activity_setting.*
-import java.io.File
 import java.util.*
 import kotlin.concurrent.timerTask
-import android.provider.MediaStore
-import android.provider.DocumentsContract
-import android.content.ContentUris
-import android.os.Build
-import android.annotation.SuppressLint
-import android.content.Context
-import android.database.Cursor
 
 class SettingActivity : BaseActivity() {
 
@@ -28,6 +21,7 @@ class SettingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+        dbManager = DBManager(this)
         ib_setting_back.setOnClickListener {
             finish()
             overridePendingTransition(0, 0)
@@ -48,7 +42,6 @@ class SettingActivity : BaseActivity() {
         }
 
         btn_setting_binding.setOnClickListener {
-            dbManager = DBManager(this)
             val dialog = BindingDialog(this)
             if(dbManager!!.cabinetNo.size > 0)
                 dialog.setBinding(dbManager!!.cabinetNo[0].cabinetNo,dbManager!!.cabinetNo[0].cabinetServiceCode)
@@ -121,6 +114,51 @@ class SettingActivity : BaseActivity() {
         btn_setting_update.setOnClickListener {
             val manager = UpdateAppManager(this)
             manager.getUpdateMsg()
+        }
+        btn_setting_weight.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+                    .setTitle("提示")
+                    .setMessage("请确认称重平台上上没有任何称重物体")
+                    .setPositiveButton("确定", DialogInterface.OnClickListener{ dialogInterface, i ->
+                        if(dbManager!!.sysSeting.size > 0){
+                            val serialPortNum = dbManager!!.sysSeting[0].serialNum.toInt()
+                            var serialPortID:String ?= null
+                            when (serialPortNum){
+                                0 -> serialPortID = "/dev/ttyS1"
+                                1 -> serialPortID = "/dev/ttyS2"
+                                2 -> serialPortID = "/dev/ttyS3"
+                                3 -> serialPortID = "/dev/ttyS4"
+                            }
+                            val spi = SerialPortInterface(this.applicationContext, serialPortID)
+                            val Weight = spi!!.GetLoad()
+                            if (Weight == -1) {
+                                val dialog = TopFalseDialog(this@SettingActivity)
+                                dialog.window.setDimAmount(0f)
+                                dialog.setTitle("称重错误")
+                                dialog.setMessage("未连接电子秤")
+                                dialog.show()
+                                dialog.window.setGravity(Gravity.TOP)
+                                val t = Timer()
+                                t.schedule(timerTask {
+                                    dialog.dismiss()
+                                    t.cancel()
+                                }, 3000)
+                            }else {
+                                if (dbManager!!.initialWeight.size > 0) {
+                                    dbManager?.deleteAllInitialWeight()
+                                }
+                                dbManager?.addInitialWeight(Weight.toString())
+                            }
+                        }
+                        else
+                            Toast.makeText(this,"请进行系统硬件设置", Toast.LENGTH_SHORT).show()
+
+                    })
+                    .setNeutralButton("取消",null)
+                    .create()
+            dialog.show()
+            dialog.window.setGravity(Gravity.CENTER)
+
         }
     }
 

@@ -55,11 +55,11 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
         args.putString("addtemplate","add")
         templateLine.arguments=args
         replaceFragment(templateLine,R.id.fl_template)
-        ib_Template_back.setOnClickListener({
+        ib_Template_back.setOnClickListener{
             finish()
             overridePendingTransition(0, 0)
-        })
-        btn_template_batchImport.setOnClickListener({
+        }
+        btn_template_batchImport.setOnClickListener{
             val edit= EditText(this)
             val dialog = AlertDialog.Builder(this)
                     .setTitle("提示")
@@ -73,8 +73,8 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
                     .create()
             dialog.show()
             dialog.window.setGravity(Gravity.CENTER)
-        })
-        btn_template_allDel.setOnClickListener({
+        }
+        btn_template_allDel.setOnClickListener{
 
             dbManager?.deleteAllReagentTemplate()
             val templateLine = VerticalFragment()
@@ -83,7 +83,7 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
             templateLine.arguments=args
             replaceFragment(templateLine,R.id.fl_template)
 
-        })
+        }
         btn_template_import.setOnClickListener{
             val dialog = ImportDialog(this)
             dialog.onYesOnclickListener(object :ImportDialog.onYesOnclickListener{
@@ -240,7 +240,8 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
                         Log.e("wzj",line)
                         if (lineNumber >= 1) {     //insert to DB
                             lineArray = line.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                            if (lineArray[0] != null && lineArray[0] != "") {
+
+                            if (lineArray[1] != null && lineArray[1] != "") {
                                 if (lineArray[5] == "") lineArray[5] = "1"
                                 dbManager?.addReagentTemplate(lineArray[0], lineArray[1], lineArray[2], lineArray[3], lineArray[4], lineArray[5].toInt(),
                                         lineArray[6], lineArray[7], lineArray[8], lineArray[9], lineArray[10], lineArray[11])
@@ -264,7 +265,7 @@ class TemplateActivity : BaseActivity(),TemplateFragment.deletTemplatelisten {
                 val path = "SmartCabinet/ReagentTemplate"
                 val fileName = scApp?.templateID + ".csv"
                 val urlStr = SC_Const.REAGENTTEMPLATEADDRESS + fileName
-                val SDCard = Environment.getExternalStorageDirectory().getAbsolutePath().toString() + ""
+                val SDCard = Environment.getExternalStorageDirectory().absolutePath.toString() + ""
                 val pathName = "$SDCard/$path/$fileName"//文件存储路径
                 if (File(pathName).exists()) {
                     templateToDB(pathName)

@@ -76,7 +76,7 @@ class UserLineFragment : Fragment() {
         if(user?.userPower==SC_Const.ADMIN)
             tv_FuserLine_user.text="管理员"
 
-        ib_FuserLine_user.setOnClickListener({
+        ib_FuserLine_user.setOnClickListener{
             if(account?.userName=="admin")
             {
                 val dialog = UserDialog(context)
@@ -247,9 +247,9 @@ class UserLineFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
-        btn_FuserLine_del.setOnClickListener({
+        btn_FuserLine_del.setOnClickListener{
 //            dbManager?.deleteAccountByUserName( userName)
             if(btn_FuserLine_del.text.toString()=="禁用") {
                 dbManager?.updateStatueByUserName(userName, "1")
@@ -260,7 +260,7 @@ class UserLineFragment : Fragment() {
                 btn_FuserLine_del.text = "禁用"
             }
 //            deletbuttonClicked("deletperson")
-        })
+        }
     }
 
 

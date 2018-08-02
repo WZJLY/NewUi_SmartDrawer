@@ -600,6 +600,24 @@ public ReagentUserRecord getReagentUseRecordByDate(String strdate)
     public void addSysSeting(String serialNum,String cameraVersion) {
         db.execSQL("INSERT INTO sysSeting VALUES(null,?,?)", new Object[]{serialNum,cameraVersion});
     }
-
+    public ArrayList<InitialWeight> getInitialWeight() {
+        Cursor cursor = db.rawQuery("select * from initialWeight",null);
+        ArrayList<InitialWeight> arrListweight = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            if (!cursor.isAfterLast()) {
+                InitialWeight intialWeight = new InitialWeight(cursor.getString(cursor.getColumnIndex("weight")));
+                arrListweight.add(intialWeight);
+                cursor.moveToNext();
+            }
+        }
+        return arrListweight;
+    }
+    public void deleteAllInitialWeight()
+    {
+        db.execSQL("DELETE FROM initialWeight");
+    }
+    public void addInitialWeight(String strWeight) {
+        db.execSQL("INSERT INTO initialWeight VALUES(null,?)", new Object[]{strWeight});
+    }
 
 }

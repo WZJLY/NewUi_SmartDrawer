@@ -28,7 +28,6 @@ class UserDialog(context: Context) : Dialog(context) {
     private var phoneStr: String? = null
     private var numStr: String? = null
     private var stateInt: Int = 0
-    var userAccount:UserAccount?=null
     private var noOnclickListener: onNoOnclickListener? = null//取消按钮被点击了的监听器
     private var yesOnclickListener: onYesOnclickListener? = null//确定按钮被点击了的监听器
 

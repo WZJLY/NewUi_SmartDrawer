@@ -30,8 +30,8 @@ class LoginActivity :BaseActivity() {
         dbManager = DBManager(this)
         dbManager?.tableUpgrade()
         scApp = application as SCApp
-        val lastname = getLastLoginName()
-        account.setText(lastname)
+//        val lastname = getLastLoginName()
+//        account.setText(lastname)             //保存上一次登陆的用户
         loginButton.setOnClickListener {
             login(account.text.toString(), password.text.toString())
         }
@@ -110,9 +110,9 @@ class LoginActivity :BaseActivity() {
                 if (dbManager!!.cabinetNo.size != 0) {
                     val upload: UploadRecordManager = UploadRecordManager(this)
                     upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "登陆", scApp!!.userInfo.userName, str,
-                            "", "", "", "", "", "")
+                "", "", "", "", "", "")
 
-                }
+            }
 //                val it = Intent(this, MyService::class.java)
 //                startService(it)
                 intent.setClass(this, MainActivity::class.java)
