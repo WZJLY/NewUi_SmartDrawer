@@ -44,7 +44,8 @@ class DrawerFragment2 : Fragment() {
         }
         if(scApp?.touchdrawer==drawerId)
         {
-            scApp?.touchdrawer=0
+            Log.d("cly",""+scApp?.touchdrawer)
+//            scApp?.touchdrawer=0
             val tableFragment = TableFragment()
             val args = Bundle()
             args.putInt("drawerID", drawerId)
@@ -57,9 +58,11 @@ class DrawerFragment2 : Fragment() {
 
         ib_Fdrawer2_op.setOnClickListener{
             if (childFragmentManager.findFragmentByTag("table") == null) {
+                scApp?.touchtable=0
                 scApp?.touchdrawer = drawerId
                 updateDrawerClicked("update")
             } else {
+                scApp?.touchtable=0
                 val tableFragment = childFragmentManager.findFragmentByTag("table")
                 val fragmentTransaction = childFragmentManager.beginTransaction()
                 fragmentTransaction.remove(tableFragment)
@@ -87,9 +90,6 @@ class DrawerFragment2 : Fragment() {
 
 
             }
-
-
-
 
 
         }

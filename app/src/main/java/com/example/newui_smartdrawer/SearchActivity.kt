@@ -65,14 +65,12 @@ class SearchActivity : BaseActivity(){
     {
         if(text=="update")
         {
-
             finish()
             overridePendingTransition(0,0)
             val intent = Intent()
             intent.setClass(this,OperationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0,0)
-
         }
 
 

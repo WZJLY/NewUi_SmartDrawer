@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +42,8 @@ class TableFragment : Fragment() {
                     tableNum = arguments.getInt("tableNum")
                 }
                 "subOperation" -> {
+                    Log.d("wzj",""+scApp!!.touchdrawer)
+                    Log.d("wzj",""+scApp!!.boxId)
                     tableNum=dbManager!!.getDrawerByDrawerId(scApp!!.touchdrawer,scApp!!.boxId).drawerSize
                 }
                 "operation" -> {
@@ -116,10 +119,12 @@ class TableFragment : Fragment() {
                                                         val eventMessenge = BtnEvent()
                                                         eventMessenge.setMsg("take")
                                                         EventBus.getDefault().postSticky(eventMessenge)
+                                                        Log.d("anchu","take")
                                                     } else {
                                                         val eventMessenge = BtnEvent()
                                                         eventMessenge.setMsg("scarp")
                                                         EventBus.getDefault().postSticky(eventMessenge)
+                                                        Log.d("anchu","scarp")
                                                     }
                                                     val informationFragment = InformationFragment()
                                                     val fragmentTransaction = childFragmentManager.beginTransaction()
@@ -134,6 +139,7 @@ class TableFragment : Fragment() {
                                                     fragmentTransaction.commit()
 
                                                 } else {
+                                                    Log.d("anchu","into")
                                                     val eventMessenge = BtnEvent()
                                                     eventMessenge.setMsg("into")
                                                     EventBus.getDefault().postSticky(eventMessenge)
@@ -149,9 +155,25 @@ class TableFragment : Fragment() {
                                             }
 
                                         }
-                                        val eventMessenge = BtnEvent()
-                                        eventMessenge.setMsg("take")
-                                        EventBus.getDefault().postSticky(eventMessenge)
+                                        //新加的
+                                        if (dbManager?.getReagentByPos(drawerID.toString(), button.id.toString(),scApp!!.boxId.toString()) != null) {
+                                            if (dbManager!!.getReagentByPos(drawerID.toString(), button.id.toString(), scApp!!.boxId.toString()).status == 1) {
+                                                val eventMessenge = BtnEvent()
+                                                eventMessenge.setMsg("take")
+                                                EventBus.getDefault().postSticky(eventMessenge)
+                                            } else {
+                                                val eventMessenge = BtnEvent()
+                                                eventMessenge.setMsg("scarp")
+                                                EventBus.getDefault().postSticky(eventMessenge)
+                                            }
+                                        }
+                                            else
+                                        {
+                                            val eventMessenge = BtnEvent()
+                                            eventMessenge.setMsg("take")
+                                            EventBus.getDefault().postSticky(eventMessenge)
+                                        }
+                                        //新加的
                                         val informationFragment = InformationFragment()
                                         val fragmentTrasaction = childFragmentManager.beginTransaction()
                                         val arg = Bundle()
@@ -162,8 +184,8 @@ class TableFragment : Fragment() {
                                         fragmentTrasaction.replace(R.id.fl_Ftable_information, informationFragment, "Info")
                                         fragmentTrasaction.commit()
 
-                                        scApp?.touchdrawer=0
-                                        scApp?.touchtable =0
+//                                        scApp?.touchdrawer=0
+//                                        scApp?.touchtable =0
 
                                     }
                                     if(reagent!!.reagentName.length>3)
