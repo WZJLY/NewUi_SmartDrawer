@@ -37,14 +37,17 @@ class DrawerFragment2 : Fragment() {
             val statue =  dbManager!!.getDrawerByDrawerId(drawerId,scApp!!.boxId).getStatue()
             if(statue=="1")
             {
-                ib_Fdrawer2_op.isEnabled=false
+                ib_Fdrawer2_op.isEnabled=false          //抽屉禁止使用
                 //改变底色
             }
+            if(scApp!!.userInfo.userPower==1)       //当操作者是普通用户时，则隐藏开锁图片(普通用户为1，管理员为0)
+            {
+                ib_Fdrawer2_lock.isEnabled = false
 
+            }
         }
         if(scApp?.touchdrawer==drawerId)
         {
-            Log.d("cly",""+scApp?.touchdrawer)
 //            scApp?.touchdrawer=0
             val tableFragment = TableFragment()
             val args = Bundle()
@@ -72,7 +75,7 @@ class DrawerFragment2 : Fragment() {
                 EventBus.getDefault().postSticky(eventMessenge)
             }
         }
-        ib_Fdrawer2_lock.setOnClickListener {
+        ib_Fdrawer2_lock.setOnClickListener {               //开锁功能（普通用户无法操作）
             val check =  checkLock(scApp!!.touchCabint,2)
             when(check)
             {
@@ -87,7 +90,6 @@ class DrawerFragment2 : Fragment() {
                     Toast.makeText(context.applicationContext," 请关闭抽屉" +
                             ""+check,Toast.LENGTH_SHORT).show()
                 }
-
 
             }
 
