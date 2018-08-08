@@ -145,16 +145,16 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
 //                                    var into = checkLock(size, 2)
 //                                }
 //                            }
-                            var into_drawer = checkLock(1, 2)
+                            var into_drawer = checkLock(scApp!!.boxId, 2)
                                     if (into_drawer == -1)
                                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
                                     else if (into_drawer != drawerID && into_drawer > 0)
                                         Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
                                     else {
                                         if (into_drawer != drawerID) {
-                                            spi?.sendOpenLock(1, drawerID)
+                                            spi?.sendOpenLock(scApp!!.boxId, drawerID)
                                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                                            into_drawer = checkLock(1, 190)
+                                            into_drawer = checkLock(scApp!!.boxId, 190)
                                         }
                                         if (into_drawer == drawerID) {
 //                                    弹窗
@@ -307,16 +307,16 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 }
 
                 "Take" -> {
-                   var  takedrawer = checkLock(1, 2)
+                   var  takedrawer = checkLock(scApp!!.boxId, 2)
                     if (takedrawer == -1)
                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
                     else if (takedrawer != drawerID && takedrawer > 0)
                         Toast.makeText(this, " 请关闭" + (takedrawer) + "号抽屉", Toast.LENGTH_SHORT).show()
                     else {
                         if (takedrawer != drawerID) {
-                            spi?.sendOpenLock(1, drawerID)
+                            spi?.sendOpenLock(scApp!!.boxId, drawerID)
                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                            takedrawer = checkLock(1, 190)
+                            takedrawer = checkLock(scApp!!.boxId, 190)
                         }
                         if (takedrawer == drawerID) {
                             //弹窗
@@ -370,7 +370,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                         if (dbManager!!.isReagentExist(code) && !dbManager!!.isScrapReagentExist(code)) {
                             if (dbManager!!.getReagentById(code).status == 2) {
                                 if (load.isNotEmpty()) {
-                                    var returndrawer = checkLock(1, 2)
+                                    var returndrawer = checkLock(scApp!!.boxId, 2)
                                     if (returndrawer == -1)
                                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
                                     else if (returndrawer != R_drawerId && returndrawer > 0)
@@ -379,14 +379,14 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                         Log.d("returndrawer",""+returndrawer)
                                         Log.d("returndrawer",""+R_drawerId)
                                         if (returndrawer != R_drawerId) {
-                                            spi?.sendOpenLock(1, R_drawerId)
+                                            spi?.sendOpenLock(scApp!!.boxId, R_drawerId)
                                             Toast.makeText(this, " 请拉开" + (R_drawerId) + "号抽屉", Toast.LENGTH_SHORT).show()
-                                            returndrawer = checkLock(1, 190)
+                                            returndrawer = checkLock(scApp!!.boxId, 190)
                                         }
                                         if (returndrawer == R_drawerId) {
                                             table = dbManager?.getReagentById(code)!!.reagentPosition.toInt()
                                             val reagent = dbManager!!.getReagentById(code)
-                                            tv_subOperation_num.text="柜子1-抽屉"+reagent?.drawerId
+                                            tv_subOperation_num.text="柜子"+scApp?.boxId+"-抽屉"+reagent?.drawerId
                                             scApp?.touchtable=reagent!!.reagentPosition.toInt()
                                             val drawerSize = dbManager!!.getDrawerByDrawerId(reagent!!.drawerId.toInt(),1).drawerSize
                                             val tableFragment = TableFragment()
@@ -415,27 +415,27 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                                         weight -= reagent.reagentTotalSize.toDouble()
                                                         var size = reagent.reagentSize.toDouble() - (weight / density.toDouble())
                                                         size3=size
-                                                        dbManager?.updateReagentSize(code, String.format("%.2f",size),load)
+                                                        dbManager?.updateReagentSize(code, String.format("%.1f",size),load)
                                                          unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
-                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", size.toString() + unit, String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
+                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", String.format("%.1f",size) + unit, "-"+String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
                                                     } else {
                                                         weight = reagent.reagentTotalSize.toDouble() - weight
                                                         var size1 = reagent.reagentSize.toDouble() - (weight / density.toDouble())
                                                         size3=size1
-                                                        dbManager?.updateReagentSize(code, String.format("%.2f",size1),load)
+                                                        dbManager?.updateReagentSize(code, String.format("%.1f",size1),load)
                                                          unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
-                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.2f",size1) + unit, String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
+                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.1f",size1) + unit, String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
                                                     }
                                                     val curDate = Date(System.currentTimeMillis())
                                                     val str = sdf.format(curDate)
                                                     if(dbManager!!.cabinetNo.size!=0) {
                                                         val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
                                                         upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "归还试剂", scApp!!.userInfo.userName, str, reagent?.reagentName
-                                                        ,reagent!!.reagentId,load + "g", String.format("%.2f",size3) + unit,String.format("%.2f",(weight / density.toDouble())),reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
+                                                        ,reagent!!.reagentId,load + "g", String.format("%.1f",size3) + unit,String.format("%.1f",(weight / density.toDouble())),reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                                     }
                                                     scApp?.touchdrawer = 0
                                                     scApp?.touchtable = 0 //新加的
@@ -525,16 +525,16 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 }
 
                 "Remove" -> {
-                    var removedrawer = checkLock(1, 2)
+                    var removedrawer = checkLock(scApp!!.boxId, 2)
                     if (removedrawer == -1)
                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
                     else if (removedrawer != drawerID && removedrawer > 0)
                         Toast.makeText(this, " 请关闭" + (removedrawer) + "号抽屉", Toast.LENGTH_SHORT).show()
                     else {
                         if (removedrawer != drawerID) {
-                            spi?.sendOpenLock(1, drawerID)
+                            spi?.sendOpenLock(scApp!!.boxId, drawerID)
                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                            removedrawer = checkLock(1, 190)
+                            removedrawer = checkLock(scApp!!.boxId, 190)
                         }
                         if (removedrawer == drawerID) {
                             //弹窗

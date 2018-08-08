@@ -333,8 +333,6 @@ class MainActivity : BaseActivity() {
 
                     val selectionArgs = arrayOf(split[1])
 
-
-
                     return getDataColumn(context, contentUri, selection, selectionArgs)
 
                 }// MediaProvider
