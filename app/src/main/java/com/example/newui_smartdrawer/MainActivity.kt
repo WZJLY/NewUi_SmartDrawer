@@ -45,9 +45,11 @@ class MainActivity : BaseActivity() {
         scApp = application as SCApp
         tv_mainAdmin_user.text = scApp!!.userInfo.userName      //崩溃
         val power = scApp!!.userInfo.userPower
+        btn_mainAdmin_video.visibility=View.GONE            //隐藏监控视频按钮
         if (power == SC_Const.NORMAL) {
             btn_mainAdmin_setting.visibility = View.GONE
             btn_mainAdmin_management.visibility = View.GONE
+
         }
         btn_mainAdmin_setting.setOnClickListener {
             val intent = Intent()

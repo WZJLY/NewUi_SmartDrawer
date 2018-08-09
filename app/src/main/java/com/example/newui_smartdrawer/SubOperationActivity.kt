@@ -155,6 +155,12 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                             spi?.sendOpenLock(scApp!!.boxId, drawerID)
                                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
                                             into_drawer = checkLock(scApp!!.boxId, 190)
+                                            //新加的记录
+                                            reagentTemplate = dbManager!!.reagentTemplate.get(scApp!!.templateNum)
+                                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                                            val now = sdf.format(Date())
+                                            dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"",reagentTemplate?.reagentName)
+                                            //新加的记录
                                         }
                                         if (into_drawer == drawerID) {
 //                                    弹窗
@@ -317,6 +323,14 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                             spi?.sendOpenLock(scApp!!.boxId, drawerID)
                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
                             takedrawer = checkLock(scApp!!.boxId, 190)
+                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                            val now = sdf.format(Date())
+                            val reagentId =  dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp!!.boxId.toString()).reagentId
+                            val reagent = dbManager?.getReagentById(reagentId)
+                            var unit = "g"
+                            if(reagent?.reagentUnit==2)
+                                unit = "ml"
+                            dbManager?.addReagentUserRecord(reagentId,5,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"",reagent?.reagentName)
                         }
                         if (takedrawer == drawerID) {
                             //弹窗
@@ -382,6 +396,33 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                             spi?.sendOpenLock(scApp!!.boxId, R_drawerId)
                                             Toast.makeText(this, " 请拉开" + (R_drawerId) + "号抽屉", Toast.LENGTH_SHORT).show()
                                             returndrawer = checkLock(scApp!!.boxId, 190)
+                                            //新增加的归还拉开抽屉
+                                            val reagent = dbManager!!.getReagentById(code)
+                                            var weight = load.toDouble()
+                                            var density = "1"
+                                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                                            val now = sdf.format(Date())
+                                            var unit:String?=null
+                                            if (reagent.reagentDensity.length > 0) {
+                                                density = reagent.reagentDensity
+                                            }
+                                            if (weight > reagent.reagentTotalSize.toDouble()) {
+                                                weight -= reagent.reagentTotalSize.toDouble()
+                                                var size = reagent.reagentSize.toDouble() - (weight / density.toDouble())
+                                                dbManager?.updateReagentSize(code, String.format("%.1f",size),load)
+                                                unit = "g"
+                                                if (reagent?.reagentUnit == 2)
+                                                    unit = "ml"
+                                                dbManager?.addReagentUserRecord(code, 5, now, scApp!!.userInfo.getUserName(), load + "g", String.format("%.1f",size) + unit, "-"+String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
+                                            } else {
+                                                weight = reagent.reagentTotalSize.toDouble() - weight
+                                                var size1 = reagent.reagentSize.toDouble() - (weight / density.toDouble())
+                                                unit = "g"
+                                                if (reagent?.reagentUnit == 2)
+                                                    unit = "ml"
+                                                dbManager?.addReagentUserRecord(code, 5, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.1f",size1) + unit, String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
+                                            }
+                                            //新增加的归还拉开抽屉
                                         }
                                         if (returndrawer == R_drawerId) {
                                             table = dbManager?.getReagentById(code)!!.reagentPosition.toInt()
@@ -535,6 +576,13 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                             spi?.sendOpenLock(scApp!!.boxId, drawerID)
                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
                             removedrawer = checkLock(scApp!!.boxId, 190)
+                            //移除试剂添加了拉开抽屉记录
+                            val reagentId=dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp?.boxId.toString()).reagentId
+                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                            val now = sdf.format(Date())
+                            val reagent = dbManager?.getReagentById(reagentId)
+                            dbManager?.addReagentUserRecord(reagentId,5,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","",reagent?.reagentName)
+                            //移除试剂添加了拉开抽屉记录
                         }
                         if (removedrawer == drawerID) {
                             //弹窗

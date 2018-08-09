@@ -188,10 +188,11 @@ class TableFragment : Fragment() {
 //                                        scApp?.touchtable =0
 
                                     }
+                                    button.text = reagent!!.reagentName
                                     if(reagent!!.reagentName.length>3)
                                         button.text = reagent!!.reagentName.subSequence(0,3)
                                     if(reagent?.status==1) {
-                                        button.setBackgroundResource(R.drawable.btn_table1_style)
+                                        button.setBackgroundResource(R.drawable.btn_table3_style)
                                         //在位时得颜色
                                     }
                                     if(reagent?.status==2)

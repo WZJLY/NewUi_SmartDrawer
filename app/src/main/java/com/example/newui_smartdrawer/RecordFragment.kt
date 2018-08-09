@@ -42,6 +42,9 @@ class RecordFragment : Fragment() {
                 4->{
                     tv_Frecord_type.text = "移除"
                 }
+                5->{
+                    tv_Frecord_type.text="抽屉打开"
+                }
             }
             tv_Frecord_date.text=reagentUserRecord?.operationTime
             tv_Frecord_user.text=reagentUserRecord?.operator
