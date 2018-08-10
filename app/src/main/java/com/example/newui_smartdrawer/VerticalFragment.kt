@@ -42,20 +42,35 @@ class VerticalFragment : Fragment() {
             }
             if (arguments.getString("addreagent") == "addreagent") {
                 val arrayListReagent = dbManager?.reagents
+                val serach = arguments.getString("serach")
                 if (arrayListReagent != null) {
                     val sum = arrayListReagent.size
                     if (sum > 0) {
                         for (i in 1..sum) {
                             reagent = arrayListReagent?.get(i - 1)
-                            val fragment = childFragmentManager.beginTransaction()
-                            val informationFragment = InformationFragment()
-                            val args = Bundle()
-                            args.putString("addreagent", "addreagent")
-                            args.putString("reagentID", reagent?.reagentId)
-                            informationFragment.arguments = args
-                            fragment.add(R.id.ll_Fvertical, informationFragment)
-                            fragment.commit()
-
+                            if(serach !=null) {
+                                if (reagent!!.reagentName.contains(serach)) {
+                                    val fragment = childFragmentManager.beginTransaction()
+                                    val informationFragment = InformationFragment()
+                                    val args = Bundle()
+                                    args.putString("addreagent", "addreagent")
+                                    args.putString("reagentID", reagent?.reagentId)
+                                    informationFragment.arguments = args
+                                    fragment.add(R.id.ll_Fvertical, informationFragment)
+                                    fragment.commit()
+                                }
+                            }
+                            else
+                            {
+                                val fragment = childFragmentManager.beginTransaction()
+                                val informationFragment = InformationFragment()
+                                val args = Bundle()
+                                args.putString("addreagent", "addreagent")
+                                args.putString("reagentID", reagent?.reagentId)
+                                informationFragment.arguments = args
+                                fragment.add(R.id.ll_Fvertical, informationFragment)
+                                fragment.commit()
+                            }
 
                         }
                     }

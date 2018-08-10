@@ -139,6 +139,7 @@ class MainActivity : BaseActivity() {
                     val etPhone = dialog.findViewById(R.id.et_Duser_phone) as EditText
                     val rgDuserLevel = dialog.findViewById(R.id.rg_Duser_level) as RadioGroup
                     val selectId = dialog.findViewById(rgDuserLevel.checkedRadioButtonId) as RadioButton
+
                     if (etName.length() == 0) {
                         val dialog = TopFalseDialog(this@MainActivity)
                         dialog.window.setDimAmount(0f)

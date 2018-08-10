@@ -91,11 +91,11 @@ class UserDialog(context: Context) : Dialog(context) {
             }
             else if (levelStr == "NORMAL"){
                 rg_Duser_level.check(R.id.rb_Duser_normal)
-                if (stateInt > 0) {
-                    rb_Duser_admin.isEnabled = false
-                    rb_Duser_normal.isEnabled = false
-                    rg_Duser_level.setBackgroundResource(R.drawable.bg_edit_false)
-                }
+            }
+            if (stateInt > 0) {
+                rb_Duser_admin.isEnabled = false
+                rb_Duser_normal.isEnabled = false
+                rg_Duser_level.setBackgroundResource(R.drawable.bg_edit_false)
             }
         }
         if (nameStr != null) {

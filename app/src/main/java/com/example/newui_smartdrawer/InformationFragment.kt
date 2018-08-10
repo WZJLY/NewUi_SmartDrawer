@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.newui_smartdrawer.R.drawable.image_18_f97251
+import com.example.newui_smartdrawer.R.drawable.*
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.fragment_information.*
 import org.greenrobot.eventbus.EventBus
@@ -57,8 +57,8 @@ class InformationFragment : Fragment() {
                 {
 //                    tv_Finformation_use.visibility=View.GONE
                     tv_Finformation_use.text="在位"
-                    tv_Finformation_use.setBackgroundColor(0x7f0600ae)
-                }
+                    tv_Finformation_use.setBackgroundColor(btn_table3)
+            }
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
                 tv_Finformation_data.text=reagent?.reagentInvalidDate
@@ -73,11 +73,12 @@ class InformationFragment : Fragment() {
             {
                 var reagentId = arguments.getString("reagentID")
                 var searchreagent = dbManager?.getReagentById(reagentId)
+
                 if(searchreagent?.status==1)
                 {
 //                    tv_Finformation_use.visibility=View.GONE
                     tv_Finformation_use.text="在位"
-                    tv_Finformation_use.setBackgroundColor(0x7f0600ae)
+                    tv_Finformation_use.setBackgroundColor(btn_table3)
 
                 }
 
@@ -88,7 +89,6 @@ class InformationFragment : Fragment() {
                 tv_Finformation_purity.text=searchreagent?.reagentPurity
                 tv_Finformation_user.text=searchreagent?.reagentUser
                 tv_Finformation_residue.text=searchreagent?.reagentSize+"ml"
-
 
             }
 

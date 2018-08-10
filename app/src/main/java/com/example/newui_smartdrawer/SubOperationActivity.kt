@@ -165,6 +165,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                         if (into_drawer == drawerID) {
 //                                    弹窗
                                     val dialog = BottomDialog(this)
+                                    dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂放入抽屉")
                                     dialog.setYesOnclickListener(null ,object :BottomDialog.onYesOnclickListener {
                                         override fun onYesClick() {
                                             reagentTemplate = dbManager!!.reagentTemplate.get(scApp!!.templateNum)
@@ -335,7 +336,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                         if (takedrawer == drawerID) {
                             //弹窗
                             val dialog = BottomDialog(this)
-                            dialog.setMessage("请将试剂从抽屉中取出")
+                            dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂从抽屉中取出")
                             dialog.setYesOnclickListener("已取出",object :BottomDialog.onYesOnclickListener {
                                 override fun onYesClick() {
                                     dbManager?.updateReagentStatusByPos("" + drawerID, "" + scApp?.touchtable, scApp!!.userInfo.getUserName(), 2)
@@ -438,6 +439,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                             replaceFragment(R.id.fl_subOperation_table, tableFragment)
                                     //弹窗
                                             val dialog = BottomDialog(this)
+                                            dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂放入抽屉中")
                                             dialog.setYesOnclickListener(null, object : BottomDialog.onYesOnclickListener {
                                                 override fun onYesClick() {
                                                     dbManager?.updateReagentStatus(code, 1, scApp!!.userInfo.getUserName())
@@ -587,7 +589,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                         if (removedrawer == drawerID) {
                             //弹窗
                             val dialog = BottomDialog(this)
-                            dialog.setMessage("请将试剂从抽屉中取出")
+                            dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂从抽屉中取出")
                             dialog.setYesOnclickListener("已取出",object :BottomDialog.onYesOnclickListener {
                                 override fun onYesClick() {
                                     val reagentId=dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp?.boxId.toString()).reagentId
