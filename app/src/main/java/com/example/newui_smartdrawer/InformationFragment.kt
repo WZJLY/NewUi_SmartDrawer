@@ -55,7 +55,7 @@ class InformationFragment : Fragment() {
                 var reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"),scApp?.boxId.toString())
                 if(reagent?.status==1)
                 {
-//                    tv_Finformation_use.visibility=View.GONE
+
                     tv_Finformation_use.text="在位"
                     tv_Finformation_use.setBackgroundColor(btn_table3)
             }
@@ -76,7 +76,7 @@ class InformationFragment : Fragment() {
 
                 if(searchreagent?.status==1)
                 {
-//                    tv_Finformation_use.visibility=View.GONE
+
                     tv_Finformation_use.text="在位"
                     tv_Finformation_use.setBackgroundColor(btn_table3)
 

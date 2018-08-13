@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -167,7 +168,8 @@ public class UpdateAppManager {
      * 显示提示更新对话框
      */
     private void showNoticeDialog() {
-        new AlertDialog.Builder(context)
+
+        AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle("安储智能试剂柜有新版本可供升级")
                 .setMessage(update_describe)
                 .setPositiveButton("下载", new DialogInterface.OnClickListener() {
@@ -181,7 +183,9 @@ public class UpdateAppManager {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
-        }).create().show();
+        }).create();
+        dialog.show();
+        dialog.getWindow().setGravity(Gravity.CENTER);
     }
 
     /**
@@ -193,7 +197,7 @@ public class UpdateAppManager {
         progressDialog.setTitle("正在下载...");
         progressDialog.setCanceledOnTouchOutside(true);
         progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-
+        progressDialog.getWindow().setGravity(Gravity.CENTER);
         new downloadAsyncTask().execute();
     }
 
