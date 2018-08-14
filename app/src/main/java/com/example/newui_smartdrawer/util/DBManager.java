@@ -620,4 +620,42 @@ public ReagentUserRecord getReagentUseRecordByDate(String strdate)
         db.execSQL("INSERT INTO initialWeight VALUES(null,?)", new Object[]{strWeight});
     }
 
+
+    //----------------------------------loginUser manage ----------------------------//
+
+    public void addLoginUser(String userName){
+        if(!isLoginUserExist(userName)) {
+            db.execSQL("INSERT INTO loginUser VALUES(null,?)", new Object[]{userName});
+            Log.i(DBOPERATION, "Insert Success");
+        }
+        else{
+            Log.i(DBOPERATION, "already exist!");
+        }
+    }
+
+    public ArrayList<LoginUser> getLoginUser() {
+        Cursor cursor = db.rawQuery("select * from loginUser",null);
+        ArrayList<LoginUser> arrListUser = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                LoginUser loginUser = new LoginUser(cursor.getString(cursor.getColumnIndex("userName")));
+                arrListUser.add(loginUser);
+                cursor.moveToNext();
+            }
+        }
+        return arrListUser;
+    }
+
+    public boolean isLoginUserExist(String strLoginUser) {
+        Cursor cursor = db.query("loginUser", null, "userName=? ", new String[] { strLoginUser}, null, null, null);
+        if (cursor.moveToNext()) {
+            return true;
+        }
+        return false;
+    }
+    public void deletLoginUser(String strUserName){
+        db.delete("loginUser","userName ==? ",new String[]{strUserName});
+    }
+
+
 }

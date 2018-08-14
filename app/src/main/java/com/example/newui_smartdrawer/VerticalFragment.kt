@@ -47,7 +47,7 @@ class VerticalFragment : Fragment() {
                     val sum = arrayListReagent.size
                     if (sum > 0) {
                         for (i in 1..sum) {
-                            reagent = arrayListReagent?.get(i - 1)
+                            reagent = arrayListReagent.get(i - 1)
                             if(serach !=null) {
                                 if (reagent!!.reagentName.contains(serach)) {
                                     val fragment = childFragmentManager.beginTransaction()
