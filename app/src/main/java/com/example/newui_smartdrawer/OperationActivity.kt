@@ -58,7 +58,7 @@ class OperationActivity : BaseActivity(),DrawerFragment2.updateDrawerlisten,subC
                 2 -> serialPortID = "/dev/ttyS3"
                 3 -> serialPortID = "/dev/ttyS4"
             }
-            spi = SerialPortInterface(this.applicationContext, serialPortID)
+            spi = SerialPortInterface(this.applicationContext, serialPortID,38400)
             scApp?.setSpi(spi)
             val Weight = spi!!.GetLoad()
             if (Weight == -1) {

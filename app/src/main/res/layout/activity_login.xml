@@ -12,21 +12,28 @@
         android:id="@+id/logo1_imageView"
         android:layout_width="46dp"
         android:layout_height="58dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="160dp"
         android:background="@drawable/group"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/login_view"
         android:layout_width="572dp"
         android:layout_height="171dp"
-        android:layout_marginTop="122dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/image_login"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo2_imageView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.387" />
 
     <View
         android:id="@+id/view3"
@@ -82,16 +89,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/password_imageView"
         app:layout_constraintStart_toEndOf="@+id/password_imageView"
         app:layout_constraintTop_toTopOf="@+id/password_imageView" />
-
-    <ImageView
-        android:id="@+id/logo2_imageView"
-        android:layout_width="134dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo1_imageView" />
 
     <ImageButton
         android:id="@+id/delet_Button"

@@ -129,7 +129,7 @@ class SettingActivity : BaseActivity() {
                                 2 -> serialPortID = "/dev/ttyS3"
                                 3 -> serialPortID = "/dev/ttyS4"
                             }
-                            val spi = SerialPortInterface(this.applicationContext, serialPortID)
+                            val spi = SerialPortInterface(this.applicationContext, serialPortID,38400)
                             val Weight = spi!!.GetLoad()
                             if (Weight == -1) {
                                 val dialog = TopFalseDialog(this@SettingActivity)

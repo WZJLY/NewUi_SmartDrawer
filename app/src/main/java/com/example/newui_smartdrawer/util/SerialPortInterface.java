@@ -20,10 +20,10 @@ public class SerialPortInterface extends AppCompatActivity {
     Context context;
 
 
-    public SerialPortInterface(Context context, String serialPortID) {
+    public SerialPortInterface(Context context, String serialPortID,int baudrate) {
         this.context = context;
         try {
-            sp = new SerialPort(new File(serialPortID), 38400, 0);
+            sp = new SerialPort(new File(serialPortID), baudrate, 0);
             mOutputStream = (FileOutputStream) sp.getOutputStream();
             mInputStream = (FileInputStream) sp.getInputStream();
         } catch (SecurityException e) {
@@ -347,14 +347,16 @@ public class SerialPortInterface extends AppCompatActivity {
         return null;
     }
     public String readTHData() {
-        String Error = "";
+        String readDatas = null;
+        String Error ="" ;
+        String lrc;
         byte[] buffer2 ;
         byte[] buffer3 = new byte[1];
         byte[] buffer4 = new byte[1];
         byte[] buffer5 = new byte[1];
         byte[] buffer6 = new byte[1];
         if(mInputStream ==  null){
-            Toast.makeText(this.context,"无法读取串口数据", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this.context,"无法读取串口数据", Toast.LENGTH_SHORT).show();
             return Error;
         }
 
@@ -363,28 +365,30 @@ public class SerialPortInterface extends AppCompatActivity {
                 Thread.sleep(50);
                 if (mInputStream.available() > 0) {
                     if (mInputStream != null) {
-                        byte[] buffer = new byte[2048];
+                        byte[] buffer = new byte[6];
                         int size = mInputStream.read(buffer);
                         if(size>5)
                         {
-                            buffer2=new byte[6];
-                            for (int j =0;j<6;j++)
-                            {
-                                buffer2[j]=buffer[j];
-                            }
                             byte[] buffer7 = new byte[2];
                             byte[] buffer8 = new byte[2];
-                            buffer3[0]=buffer2[0];
-                            buffer4[0]=buffer2[1];
-                            buffer5[0]=buffer2[3];
-                            buffer6[0]=buffer2[4];
+                            buffer3[0]=buffer[0];
+                            buffer4[0]=buffer[1];
+                            buffer5[0]=buffer[3];
+                            buffer6[0]=buffer[4];
                             System.arraycopy(buffer3,0,buffer7,0,1);
                             System.arraycopy(buffer4,0,buffer7,1,1);
                             System.arraycopy(buffer5,0,buffer8,0,1);
                             System.arraycopy(buffer6,0,buffer8,1,1);
+
                             double template = Integer.parseInt(bytesToHexFun1(buffer7),16)*175.0/65535.0-45.0;
                             double rh = Integer.parseInt(bytesToHexFun1(buffer8),16)*100.0/65535.0;
-                            return  String.format("%.2f", rh);
+
+                            String str =  String.format("%.1f", template);
+                           String str1 = String.format("%.1f", rh) ;
+                            return  str+str1;
+
+
+
                         }
 
                     }
@@ -418,6 +422,7 @@ public class SerialPortInterface extends AppCompatActivity {
 
         return new String(buf);
     }
+
 
 
 }

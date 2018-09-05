@@ -21,7 +21,7 @@ import android.view.WindowManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private long mAdvertisingTime =300 * 1000;//定时跳转广告时间
+    private long mAdvertisingTime =3 * 1000;//定时跳转广告时间
     public CountDownTimer mCountDownTimer;
     public Context mContext;
 //    public MyService service;
@@ -109,7 +109,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 public void onFinish() {
                     //TODO:定时完成后的操作
 
-                    Intent advertising  = new Intent(BaseActivity.this,AdvertisementActivity.class);
+                    Intent advertising  = new Intent(BaseActivity.this,ReadTHActivity.class);
                     startActivity(advertising);
                     finish();
 //                    Intent it=new Intent(BaseActivity.this,MyService.class);
