@@ -1,5 +1,6 @@
 package com.example.newui_smartdrawer;
 
+import android.app.Application;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+
 
 /**
  * Created by Alex on 2017/11/11.
@@ -27,12 +29,14 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //屏幕常亮，如果不需要，可以注释
+
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         //全屏效果
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mContext = this;
 //        Intent intent = new Intent(this, BaseActivity.class);

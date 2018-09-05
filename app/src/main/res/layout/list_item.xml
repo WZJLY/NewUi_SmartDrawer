@@ -5,26 +5,15 @@
     android:gravity="center_horizontal"
     android:background="#ffffff"
     android:orientation="horizontal" >
-    
-    <ImageView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/user"
-        />
 
     <TextView
         android:id="@+id/tv_list_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0"
         android:gravity="center_vertical"
         android:text="hello_world"
-        android:textColor="@android:color/black" />
-    <ImageView 
-        android:id="@+id/delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/delete"
-        />
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
 
 </LinearLayout>

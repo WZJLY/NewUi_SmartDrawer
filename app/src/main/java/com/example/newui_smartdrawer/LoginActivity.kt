@@ -227,19 +227,13 @@ class LoginActivity :BaseActivity() {
             if (arg1 == null) {
                 arg1 = View.inflate(applicationContext, R.layout.list_item, null)
                 houder = ViewHolder()
-                houder.deleteImageView = arg1!!.findViewById<View>(R.id.delete) as ImageView
-                houder.tv_msgTextView = arg1.findViewById<View>(R.id.tv_list_item) as TextView
+                houder.tv_msgTextView = arg1!!.findViewById<View>(R.id.tv_list_item) as TextView
                 arg1.tag = houder
             } else {
                 houder = arg1.tag as ViewHolder
             }
 
             houder.tv_msgTextView!!.text = msgList!![arg0]
-            houder.deleteImageView!!.setOnClickListener {
-                msgList!!.removeAt(arg0)
-
-                this@MyListAdapter.notifyDataSetChanged()
-            }
 
             arg1.setOnClickListener {
                 account.setText(msgList!![arg0])
