@@ -54,16 +54,23 @@ class LoginActivity :BaseActivity() {
         delet_Button.setOnClickListener {
             password.setText("")
         }
-        downUser_button.setOnClickListener {
-
-            popupWindow = PopupWindow(this)
-            popupWindow?.width = account.width
-            popupWindow?.height = 200
-            popupWindow?.contentView=listView
-            popupWindow?.isOutsideTouchable = true
-            popupWindow?.showAsDropDown(account,0,0)
+        th_button.setOnClickListener{
+            finish()
+            intent.setClass(this@LoginActivity,ReadTHActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
 
         }
+//        downUser_button.setOnClickListener {
+//
+//            popupWindow = PopupWindow(this)
+//            popupWindow?.width = account.width
+//            popupWindow?.height = 200
+//            popupWindow?.contentView=listView
+//            popupWindow?.isOutsideTouchable = true
+//            popupWindow?.showAsDropDown(account,0,0)
+//
+//        }
 
     }
 

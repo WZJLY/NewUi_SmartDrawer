@@ -41,8 +41,10 @@
             android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
@@ -71,7 +73,12 @@
             android:exported="true" />
 
         <activity android:name=".VideoActivity" />
-        <activity android:name=".ReadTHActivity"/>
+        <activity android:name=".ReadTHActivity" />
+
+        <receiver
+            android:name=".BootUpReceiverr"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
