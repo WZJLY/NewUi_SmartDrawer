@@ -24,7 +24,14 @@ class ReadTHActivity : AppCompatActivity() {
         spi = SerialPortInterface(this.application, "/dev/ttyUSB0",9600)
         spi?.readData()
         TimeThread().start()
-        imageButton2.setOnClickListener{
+        bg1_image.setOnClickListener{
+
+            val intent = Intent()
+            intent.setClass(this, LoginActivity::class.java)
+            startActivity(intent)
+
+        }
+        bg2_image.setOnClickListener{
 
             val intent = Intent()
             intent.setClass(this, LoginActivity::class.java)
@@ -36,13 +43,15 @@ class ReadTHActivity : AppCompatActivity() {
         override fun run() {
             do {
                 try {
-                    var str = spi?.readTHData()
+                    var str = spi?.readTHData().toString()
                     if( str!=null)
                     {
-                        val msg = Message()
-                        msg.what = 0  //消息(一个整型值)
-                        msg.obj = str
-                        mHandler.sendMessage(msg)
+                        if(str.length>5) {
+                            val msg = Message()
+                            msg.what = 0  //消息(一个整型值)
+                            msg.obj = str
+                            mHandler.sendMessage(msg)
+                        }
                     }
                     Thread.sleep(1000)// 每隔1秒发送一个msg给mHandler
                 } catch (e: InterruptedException) {
@@ -62,8 +71,8 @@ class ReadTHActivity : AppCompatActivity() {
                     val str = msg.obj.toString()
                     val tem = str.substring(0,str.indexOf(".")+2)
                     val ht =  str.substring(str.indexOf(".")+2)
-                    temperature.text=tem
-                    humidity.text=ht
+                    t1View.text=tem+"℃"
+                    h1View.text=ht+"%"
                 }
 
 

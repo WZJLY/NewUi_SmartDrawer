@@ -27,10 +27,17 @@ public class SerialPortInterface extends AppCompatActivity {
             mOutputStream = (FileOutputStream) sp.getOutputStream();
             mInputStream = (FileInputStream) sp.getInputStream();
         } catch (SecurityException e) {
-            Toast.makeText(this.context,"锁控板连接异常", Toast.LENGTH_SHORT).show();
+            if(baudrate==38400)
+
+                Toast.makeText(this.context,"锁控板连接异常", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this.context,"LoRa连接异常", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (IOException e) {
-            Toast.makeText(this.context,"锁控板连接异常", Toast.LENGTH_SHORT).show();
+            if(baudrate==38400)
+                Toast.makeText(this.context,"锁控板连接异常", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this.context,"LoRa连接异常", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
