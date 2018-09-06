@@ -22,10 +22,9 @@ class ReadTHActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read_th)
         spi = SerialPortInterface(this.application, "/dev/ttyUSB0",9600)
-        spi?.readData()
+        spi?.readTHData()
         TimeThread().start()
         bg1_image.setOnClickListener{
-
             val intent = Intent()
             intent.setClass(this, LoginActivity::class.java)
             startActivity(intent)

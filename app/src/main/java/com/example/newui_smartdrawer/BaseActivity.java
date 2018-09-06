@@ -21,7 +21,7 @@ import android.view.WindowManager;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    private long mAdvertisingTime =30 * 1000;//定时跳转广告时间
+    private long mAdvertisingTime =3 * 1000;//定时跳转广告时间
     public CountDownTimer mCountDownTimer;
     public Context mContext;
 //    public MyService service;
