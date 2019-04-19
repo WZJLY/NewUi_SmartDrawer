@@ -8,15 +8,28 @@
     tools:context=".SettingActivity">
 
     <Button
+        android:id="@+id/btn_setting_weight"
+        android:layout_width="220dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/btn_drawer_style_39"
+        android:text="称重校准"
+        android:textColor="#fff"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView11" />
+
+    <Button
         android:id="@+id/btn_setting_update"
         android:layout_width="220dp"
         android:layout_height="64dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_drawer_style_39"
         android:text="系统升级"
         android:textColor="#fff"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_setting_binding" />
 
@@ -77,12 +90,12 @@
         android:id="@+id/btn_setting_cabinet"
         android:layout_width="220dp"
         android:layout_height="64dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/btn_drawer_style_39"
-        android:text="存储空间设置"
+        android:text="试剂柜空间设置"
         android:textColor="#fff"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView11" />
 
@@ -90,25 +103,25 @@
         android:id="@+id/btn_setting_hardware"
         android:layout_width="220dp"
         android:layout_height="64dp"
+        android:layout_marginEnd="120dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_drawer_style_39"
         android:text="硬件参数设置"
         android:textColor="#fff"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_setting_cabinet" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_setting_weight" />
 
     <Button
         android:id="@+id/btn_setting_binding"
         android:layout_width="220dp"
         android:layout_height="64dp"
+        android:layout_marginStart="120dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_drawer_style_39"
-        android:text="智能柜绑定"
+        android:text="试剂柜绑定"
         android:textColor="#fff"
         android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_setting_hardware" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_setting_cabinet" />
 </android.support.constraint.ConstraintLayout>

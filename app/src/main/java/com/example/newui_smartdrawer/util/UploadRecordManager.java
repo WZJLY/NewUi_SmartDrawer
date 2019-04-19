@@ -2,7 +2,6 @@ package com.example.newui_smartdrawer.util;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;

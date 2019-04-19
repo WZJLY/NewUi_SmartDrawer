@@ -70,7 +70,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
         when(subOperation) {
             "Into" -> {
                 btn_subOperation_OK.text = "确认入柜"
-                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
+                tv_subOperation_num.text="柜子"+scApp?.boxId+"-抽屉"+scApp?.touchdrawer
                 val informationFragment = IntoFragment()
                 val args = Bundle()
                 args.putString("scan_value", scanValue)
@@ -80,11 +80,10 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
             }
             "Take" -> {
                 btn_subOperation_OK.text = "确认取用"
-                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
+                tv_subOperation_num.text="柜子"+scApp?.boxId+"-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂取用"
                 val informationFragment = InformationFragment()
                 val args = Bundle()
-                args.putString("operation", "operation")
                 args.putString("state","in")
                 informationFragment.arguments = args
                 replaceFragment(R.id.fl_subOperation_inf,informationFragment)
@@ -92,7 +91,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
             }
             "Return" -> {
                 btn_subOperation_OK.text = "确认归还"
-                tv_subOperation_num.text="柜子1-抽屉"+scApp?.touchdrawer
+                tv_subOperation_num.text="柜子"+scApp?.boxId+"-抽屉"+scApp?.touchdrawer
                 tv_subOperation_title.text = "试剂归还"
                 val informationFragment = ReturnFragment()
                 val args = Bundle()
@@ -100,7 +99,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 if(dbManager?.isReagentExist(scanValue.toString())==true)
                 {
                     val reagent = dbManager?.getReagentById(scanValue.toString())
-                    val drawerSize =dbManager!!.getDrawerByDrawerId(reagent!!.drawerId.toInt(),1).drawerSize
+                    val drawerSize =dbManager!!.getDrawerByDrawerId(reagent!!.drawerId.toInt(),scApp!!.boxId).drawerSize
                     val tableFragment = TableFragment()
                     val arg = Bundle()
                     arg.putInt("drawerSize",drawerSize)
@@ -131,7 +130,8 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
         btn_subOperation_OK.setOnClickListener {
             var drawerID = scApp!!.touchdrawer
             var table = scApp!!.touchtable
-            var CabinetId = scApp!!.touchCabint
+
+            var CabinetId = scApp!!.boxId
             when (subOperation) {
                 "Into" -> {
                     val code = et_Finto_code.text.toString()
@@ -139,20 +139,33 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                     val residue = et_Finto_residue.text.toString()
                     if(code.isNotEmpty() && load.isNotEmpty() && residue.isNotEmpty()){
                         if (!dbManager!!.isReagentExist(code) && !dbManager!!.isScrapReagentExist(code)) {
-                            var into_drawer = checkLock(1, 2)
-                            if (into_drawer == null)
-                                Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                            else if (into_drawer != drawerID && into_drawer > 0)
-                                Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
-                            else {
-                                if (into_drawer != drawerID) {
-                                    spi?.sendOpenLock(1, drawerID)
-                                    Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                                    into_drawer = checkLock(1, 190)
-                                }
-                                if (into_drawer == drawerID) {
-                                    //弹窗
+//                            val size = dbManager!!.cabinetNo.size
+//                            if(size>1) {
+//                                for (sum in 1..size) {
+//                                    var into = checkLock(size, 2)
+//                                }
+//                            }
+                            var into_drawer = checkLock(scApp!!.boxId, 2)
+                                    if (into_drawer == -1)
+                                        Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
+                                    else if (into_drawer != drawerID && into_drawer > 0)
+                                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+                                    else {
+                                        if (into_drawer != drawerID) {
+                                            spi?.sendOpenLock(scApp!!.boxId, drawerID)
+                                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
+                                            into_drawer = checkLock(scApp!!.boxId, 190)
+                                            //新加的记录
+                                            reagentTemplate = dbManager!!.reagentTemplate.get(scApp!!.templateNum)
+                                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                                            val now = sdf.format(Date())
+                                            dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"",reagentTemplate?.reagentName)
+                                            //新加的记录
+                                        }
+                                        if (into_drawer == drawerID) {
+//                                    弹窗
                                     val dialog = BottomDialog(this)
+                                    dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂放入抽屉")
                                     dialog.setYesOnclickListener(null ,object :BottomDialog.onYesOnclickListener {
                                         override fun onYesClick() {
                                             reagentTemplate = dbManager!!.reagentTemplate.get(scApp!!.templateNum)
@@ -173,7 +186,8 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                                 upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "添加试剂", scApp!!.userInfo.userName, str, reagentTemplate?.reagentName,code,load+"g",residue+reagentTemplate?.reagentUnit,
                                                         "",""+CabinetId+","+drawerID+","+table)
                                             }
-                                            dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"")
+                                            dbManager?.addReagentUserRecord(code,1,now,scApp!!.userInfo.getUserName(),load+"g",residue+reagentTemplate?.reagentUnit,"",reagentTemplate?.reagentName)
+                                            scApp?.touchdrawer = 0
                                             scApp?.touchtable = 0 //新加的
                                             finish()
                                             overridePendingTransition(0, 0)
@@ -300,32 +314,40 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 }
 
                 "Take" -> {
-                    var into_drawer = checkLock(1, 2)
-                    if (into_drawer == null)
+                   var  takedrawer = checkLock(scApp!!.boxId, 2)
+                    if (takedrawer == -1)
                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                    else if (into_drawer != drawerID && into_drawer > 0)
-                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+                    else if (takedrawer != drawerID && takedrawer > 0)
+                        Toast.makeText(this, " 请关闭" + (takedrawer) + "号抽屉", Toast.LENGTH_SHORT).show()
                     else {
-                        if (into_drawer != drawerID) {
-                            spi?.sendOpenLock(1, drawerID)
+                        if (takedrawer != drawerID) {
+                            spi?.sendOpenLock(scApp!!.boxId, drawerID)
                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                            into_drawer = checkLock(1, 190)
+                            takedrawer = checkLock(scApp!!.boxId, 190)
+                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                            val now = sdf.format(Date())
+                            val reagentId =  dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp!!.boxId.toString()).reagentId
+                            val reagent = dbManager?.getReagentById(reagentId)
+                            var unit = "g"
+                            if(reagent?.reagentUnit==2)
+                                unit = "ml"
+                            dbManager?.addReagentUserRecord(reagentId,5,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"",reagent?.reagentName)
                         }
-                        if (into_drawer == drawerID) {
+                        if (takedrawer == drawerID) {
                             //弹窗
                             val dialog = BottomDialog(this)
-                            dialog.setMessage("请将试剂从抽屉中取出")
+                            dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂从抽屉中取出")
                             dialog.setYesOnclickListener("已取出",object :BottomDialog.onYesOnclickListener {
                                 override fun onYesClick() {
                                     dbManager?.updateReagentStatusByPos("" + drawerID, "" + scApp?.touchtable, scApp!!.userInfo.getUserName(), 2)
                                     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                                     val now = sdf.format(Date())
-                                    val reagentId =  dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable).reagentId
+                                    val reagentId =  dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp!!.boxId.toString()).reagentId
                                     val reagent = dbManager?.getReagentById(reagentId)
                                     var unit = "g"
                                     if(reagent?.reagentUnit==2)
                                         unit = "ml"
-                                    dbManager?.addReagentUserRecord(reagentId,2,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"")
+                                    dbManager?.addReagentUserRecord(reagentId,2,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,"",reagent?.reagentName)
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
                                     if(dbManager!!.cabinetNo.size!=0) {
@@ -333,6 +355,8 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                         upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "取用试剂", scApp!!.userInfo.userName, str, reagent?.reagentName,reagentId,reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,""
                                         ,reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                     }
+                                    scApp?.touchdrawer = 0
+                                    scApp?.touchtable = 0 //新加的
                                     finish()
                                     overridePendingTransition(0, 0)
                                     val intent = Intent()
@@ -356,25 +380,55 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 "Return" -> {
                     val code = et_Freturn_code.text.toString()
                     val load = et_Freturn_load.text.toString()
+                    val R_drawerId =  dbManager!!.getReagentById(code).drawerId.toInt()
                     if(code.isNotEmpty()) {
                         if (dbManager!!.isReagentExist(code) && !dbManager!!.isScrapReagentExist(code)) {
                             if (dbManager!!.getReagentById(code).status == 2) {
                                 if (load.isNotEmpty()) {
-                                    var into_drawer = checkLock(1, 2)
-                                    if (into_drawer == null)
+                                    var returndrawer = checkLock(scApp!!.boxId, 2)
+                                    if (returndrawer == -1)
                                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                                    else if (into_drawer != drawerID && into_drawer > 0)
-                                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+                                    else if (returndrawer != R_drawerId && returndrawer > 0)
+                                        Toast.makeText(this, " 请关闭" + (returndrawer) + "号抽屉", Toast.LENGTH_SHORT).show()
                                     else {
-                                        if (into_drawer != drawerID) {
-                                            spi?.sendOpenLock(1, drawerID)
-                                            Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                                            into_drawer = checkLock(1, 190)
+                                        Log.d("returndrawer",""+returndrawer)
+                                        Log.d("returndrawer",""+R_drawerId)
+                                        if (returndrawer != R_drawerId) {
+                                            spi?.sendOpenLock(scApp!!.boxId, R_drawerId)
+                                            Toast.makeText(this, " 请拉开" + (R_drawerId) + "号抽屉", Toast.LENGTH_SHORT).show()
+                                            returndrawer = checkLock(scApp!!.boxId, 190)
+                                            //新增加的归还拉开抽屉
+                                            val reagent = dbManager!!.getReagentById(code)
+                                            var weight = load.toDouble()
+                                            var density = "1"
+                                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                                            val now = sdf.format(Date())
+                                            var unit:String?=null
+                                            if (reagent.reagentDensity.length > 0) {
+                                                density = reagent.reagentDensity
+                                            }
+                                            if (weight > reagent.reagentTotalSize.toDouble()) {
+                                                weight -= reagent.reagentTotalSize.toDouble()
+                                                var size = reagent.reagentSize.toDouble() - (weight / density.toDouble())
+                                                dbManager?.updateReagentSize(code, String.format("%.1f",size),load)
+                                                unit = "g"
+                                                if (reagent?.reagentUnit == 2)
+                                                    unit = "ml"
+                                                dbManager?.addReagentUserRecord(code, 5, now, scApp!!.userInfo.getUserName(), load + "g", String.format("%.1f",size) + unit, "-"+String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
+                                            } else {
+                                                weight = reagent.reagentTotalSize.toDouble() - weight
+                                                var size1 = reagent.reagentSize.toDouble() - (weight / density.toDouble())
+                                                unit = "g"
+                                                if (reagent?.reagentUnit == 2)
+                                                    unit = "ml"
+                                                dbManager?.addReagentUserRecord(code, 5, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.1f",size1) + unit, String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
+                                            }
+                                            //新增加的归还拉开抽屉
                                         }
-                                        if (into_drawer == drawerID) {
+                                        if (returndrawer == R_drawerId) {
                                             table = dbManager?.getReagentById(code)!!.reagentPosition.toInt()
                                             val reagent = dbManager!!.getReagentById(code)
-                                            tv_subOperation_num.text="柜子1-抽屉"+reagent?.drawerId
+                                            tv_subOperation_num.text="柜子"+scApp?.boxId+"-抽屉"+reagent?.drawerId
                                             scApp?.touchtable=reagent!!.reagentPosition.toInt()
                                             val drawerSize = dbManager!!.getDrawerByDrawerId(reagent!!.drawerId.toInt(),1).drawerSize
                                             val tableFragment = TableFragment()
@@ -385,10 +439,11 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                             replaceFragment(R.id.fl_subOperation_table, tableFragment)
                                     //弹窗
                                             val dialog = BottomDialog(this)
+                                            dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂放入抽屉中")
                                             dialog.setYesOnclickListener(null, object : BottomDialog.onYesOnclickListener {
                                                 override fun onYesClick() {
                                                     dbManager?.updateReagentStatus(code, 1, scApp!!.userInfo.getUserName())
-                                                    var weight: Int = Integer.valueOf(load)
+                                                    var weight = load.toDouble()
                                                     var density = "1"
                                                     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                                                     val now = sdf.format(Date())
@@ -399,33 +454,34 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                                         density = reagent.reagentDensity
                                                     }
                                                     Log.d("suboperationReturn2", density)
-                                                    if (weight > reagent.reagentTotalSize.toInt()) {
-                                                        weight -= reagent.reagentTotalSize.toInt()
+                                                    if (weight > reagent.reagentTotalSize.toDouble()) {
+                                                        weight -= reagent.reagentTotalSize.toDouble()
                                                         var size = reagent.reagentSize.toDouble() - (weight / density.toDouble())
                                                         size3=size
-                                                        dbManager?.updateReagentSize(code, size.toString(),load)
-
+                                                        dbManager?.updateReagentSize(code, String.format("%.1f",size),load)
                                                          unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
-                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", size.toString() + unit, (weight / density.toDouble()).toString())
+                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g", String.format("%.1f",size) + unit, "-"+String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
                                                     } else {
-                                                        weight = reagent.reagentTotalSize.toInt() - weight
+                                                        weight = reagent.reagentTotalSize.toDouble() - weight
                                                         var size1 = reagent.reagentSize.toDouble() - (weight / density.toDouble())
                                                         size3=size1
-                                                        dbManager?.updateReagentSize(code, size1.toString(),load)
+                                                        dbManager?.updateReagentSize(code, String.format("%.1f",size1),load)
                                                          unit = "g"
                                                         if (reagent?.reagentUnit == 2)
                                                             unit = "ml"
-                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", size1.toString() + unit, (weight / density.toDouble()).toString())
+                                                        dbManager?.addReagentUserRecord(code, 3, now, scApp!!.userInfo.getUserName(), load + "g ", String.format("%.1f",size1) + unit, String.format("%.1f",weight / density.toDouble()),reagent?.reagentName)
                                                     }
                                                     val curDate = Date(System.currentTimeMillis())
                                                     val str = sdf.format(curDate)
                                                     if(dbManager!!.cabinetNo.size!=0) {
                                                         val upload: UploadRecordManager = UploadRecordManager(this@SubOperationActivity)
                                                         upload.getCode(dbManager!!.cabinetNo.get(0).cabinetNo, "归还试剂", scApp!!.userInfo.userName, str, reagent?.reagentName
-                                                        ,reagent!!.reagentId,load + "g", size3.toString() + unit, (weight / density.toDouble()).toString(),reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
+                                                        ,reagent!!.reagentId,load + "g", String.format("%.1f",size3) + unit,String.format("%.1f",(weight / density.toDouble())),reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                                     }
+                                                    scApp?.touchdrawer = 0
+                                                    scApp?.touchtable = 0 //新加的
                                                     finish()
                                                     overridePendingTransition(0, 0)
                                                     val intent = Intent()
@@ -500,9 +556,6 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                         }
                         else{
                             val dialog = TopFalseDialog(this)
-                            dialog.window.setDimAmount(0f)
-                            dialog.setTitle("试剂条码和称重重量未填写")
-                            dialog.setMessage("请填写试剂条码和称重重量")
                             dialog.show()
                             dialog.window.setGravity(Gravity.TOP)
                             val t = Timer()
@@ -515,30 +568,37 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 }
 
                 "Remove" -> {
-                    var into_drawer = checkLock(1, 2)
-                    if (into_drawer == null)
+                    var removedrawer = checkLock(scApp!!.boxId, 2)
+                    if (removedrawer == -1)
                         Toast.makeText(this, "ERROR：串口通讯！", Toast.LENGTH_SHORT).show()
-                    else if (into_drawer != drawerID && into_drawer > 0)
-                        Toast.makeText(this, " 请关闭" + (into_drawer) + "号抽屉", Toast.LENGTH_SHORT).show()
+                    else if (removedrawer != drawerID && removedrawer > 0)
+                        Toast.makeText(this, " 请关闭" + (removedrawer) + "号抽屉", Toast.LENGTH_SHORT).show()
                     else {
-                        if (into_drawer != drawerID) {
-                            spi?.sendOpenLock(1, drawerID)
+                        if (removedrawer != drawerID) {
+                            spi?.sendOpenLock(scApp!!.boxId, drawerID)
                             Toast.makeText(this, " 请拉开" + (drawerID) + "号抽屉", Toast.LENGTH_SHORT).show()
-                            into_drawer = checkLock(1, 190)
+                            removedrawer = checkLock(scApp!!.boxId, 190)
+                            //移除试剂添加了拉开抽屉记录
+                            val reagentId=dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp?.boxId.toString()).reagentId
+                            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
+                            val now = sdf.format(Date())
+                            val reagent = dbManager?.getReagentById(reagentId)
+                            dbManager?.addReagentUserRecord(reagentId,5,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","",reagent?.reagentName)
+                            //移除试剂添加了拉开抽屉记录
                         }
-                        if (into_drawer == drawerID) {
+                        if (removedrawer == drawerID) {
                             //弹窗
                             val dialog = BottomDialog(this)
-                            dialog.setMessage("请将试剂从抽屉中取出")
+                            dialog.setMessage("请拉开柜"+scApp?.boxId+"抽屉"+drawerID+",请将试剂从抽屉中取出")
                             dialog.setYesOnclickListener("已取出",object :BottomDialog.onYesOnclickListener {
                                 override fun onYesClick() {
-                                    val reagentId=dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable).reagentId
+                                    val reagentId=dbManager!!.getReagentByPos("" + drawerID,"" + scApp?.touchtable,scApp?.boxId.toString()).reagentId
                                     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA)
                                     val now = sdf.format(Date())
                                     val reagent = dbManager?.getReagentById(reagentId)
                                     dbManager?.addSrapReagent(reagent?.reagentId,reagent?.reagentName,"","","",reagent!!.reagentType.toInt(),reagent?.reagentPurity,reagent?.reagentSize,reagent?.reagentTotalSize,reagent?.reagentCreater,"",reagent?.reagentUnit,reagent?.reagentDensity,reagent?.reagentInvalidDate,reagent?.reagentCabinetId,drawerID.toString(),reagent?.reagentPosition,4,scApp!!.userInfo.getUserName())
                                     dbManager?.deleteReagentById(reagentId)
-                                    dbManager?.addReagentUserRecord(reagentId,4,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","")
+                                    dbManager?.addReagentUserRecord(reagentId,4,now,scApp!!.userInfo.getUserName(),reagent?.reagentTotalSize+"g","","",reagent?.reagentName)
                                     val curDate = Date(System.currentTimeMillis())
                                     val str = sdf.format(curDate)
                                     var unit = "g"
@@ -550,6 +610,8 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                                         ,reagentId,reagent?.reagentTotalSize+"g",reagent?.reagentSize+unit,""
                                                 ,reagent!!.reagentCabinetId+","+reagent!!.drawerId+","+reagent!!.reagentPosition)
                                     }
+                                    scApp?.touchdrawer = 0
+                                    scApp?.touchtable = 0 //新加的
                                     finish()
                                     overridePendingTransition(0, 0)
                                     val intent = Intent()
@@ -574,22 +636,63 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
     }
 
     override fun intobuttononClick(text: String) {
-        if (text == "scan") {
-//            spi?.sendLED(1,1)
-            statue="into"
-            var intent = Intent(this,CaptureActivity::class.java)
-            startActivityForResult(intent,REQUEST_CODE)
+        when (text) {
+            "scan" -> {
+                statue = "Into"
+                var intent = Intent(this, CaptureActivity::class.java)
+                startActivityForResult(intent, REQUEST_CODE)
+            }
+            "weight" -> {
+                val weight = spi!!.GetLoad()
+                if (weight > scApp!!.initialWeight && weight - scApp!!.initialWeight > 50) {
+                    val double = (weight - scApp!!.initialWeight).toDouble()
+                    et_Finto_load.setText((double / 10).toString())
+                } else {
+                    val dialog = TopFalseDialog(this)
+                    dialog.window.setDimAmount(0f)
+                    dialog.setTitle("未获得重量")
+                    dialog.setMessage("请先将试剂放置于称台上再进行称重")
+                    dialog.show()
+                    dialog.window.setGravity(Gravity.TOP)
+                    val t = Timer()
+                    t.schedule(timerTask {
+                        dialog.dismiss()
+                        t.cancel()
+                    }, 3000)
+                }
+            }
+        }
+    }
+    override fun returnbuttonClick(text: String) {
+        when (text) {
+            "scan" -> {
+                statue = "Return"
+                var intent = Intent(this, CaptureActivity::class.java)
+                startActivityForResult(intent, REQUEST_CODE)
+            }
+            "weight" -> {
+                val weight = spi!!.GetLoad()
+                Log.d("weight",""+weight)
+                if (weight > scApp!!.initialWeight && weight - scApp!!.initialWeight > 50) {
+                    val double = (weight - scApp!!.initialWeight).toDouble()
+                    et_Freturn_load.setText((double / 10).toString())
+                } else {
+                    val dialog = TopFalseDialog(this)
+                    dialog.window.setDimAmount(0f)
+                    dialog.setTitle("未获得重量")
+                    dialog.setMessage("请先将试剂放置于称台上再进行称重")
+                    dialog.show()
+                    dialog.window.setGravity(Gravity.TOP)
+                    val t = Timer()
+                    t.schedule(timerTask {
+                        dialog.dismiss()
+                        t.cancel()
+                    }, 3000)
+                }
+            }
         }
     }
 
-    override fun returnbuttonClick(text: String) {
-        if (text == "scan") {
-//            spi?.sendLED(1,1)
-            statue="return"
-            var intent = Intent(this,CaptureActivity::class.java)
-            startActivityForResult(intent,REQUEST_CODE)
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
 //        spi?.sendLED(1,0)
@@ -623,7 +726,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
 
     }
 
-    fun checkLock(DID: Int,num: Int): Int? {
+    fun checkLock(DID: Int,num: Int): Int{
         var time = 0
         for(i in 1..num) {
             val lockData = spi?.sendGetStat(DID)
@@ -637,7 +740,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
             }
             else {
                 if (time > 0){
-                    return null
+                    return -1     //串口通讯存在问题
                 }
                 else{
                     time++
@@ -645,7 +748,7 @@ class SubOperationActivity : BaseActivity(),IntoFragment.intobuttonlisten,Return
                 }
             }
         }
-        return 0
+        return 0                //所有的抽屉均已关上
     }
 
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {

@@ -4,10 +4,13 @@ package com.example.newui_smartdrawer
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
+import com.example.newui_smartdrawer.util.SerialPortInterface
 import kotlinx.android.synthetic.main.fragment_drawer2.*
 import org.greenrobot.eventbus.EventBus
 
@@ -15,6 +18,7 @@ class DrawerFragment2 : Fragment() {
     private var scApp:SCApp?=null
     private var drawerId= 0
     private var dbManager:DBManager?=null
+    private var spi: SerialPortInterface?= null
     private var activityCallback:DrawerFragment2.updateDrawerlisten? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,21 +29,26 @@ class DrawerFragment2 : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         scApp = context.applicationContext as SCApp
         dbManager = DBManager(context.applicationContext)
+        spi =  scApp?.getSpi()
         if(arguments!=null)
         {
             drawerId =  arguments.getInt("drawerID")
             tv_Fdrawer2_drawerNum.text="抽屉"+drawerId
-            val statue =  dbManager!!.getDrawerByDrawerId(drawerId,1).getStatue()
+            val statue =  dbManager!!.getDrawerByDrawerId(drawerId,scApp!!.boxId).getStatue()
             if(statue=="1")
             {
-                ib_Fdrawer2_op.isEnabled=false
+                ib_Fdrawer2_op.isEnabled=false          //抽屉禁止使用
                 //改变底色
             }
+            if(scApp!!.userInfo.userPower==1)       //当操作者是普通用户时，则隐藏开锁图片(普通用户为1，管理员为0)
+            {
+                ib_Fdrawer2_lock.isEnabled = false
 
+            }
         }
         if(scApp?.touchdrawer==drawerId)
         {
-            scApp?.touchdrawer=0
+//            scApp?.touchdrawer=0
             val tableFragment = TableFragment()
             val args = Bundle()
             args.putInt("drawerID", drawerId)
@@ -52,9 +61,11 @@ class DrawerFragment2 : Fragment() {
 
         ib_Fdrawer2_op.setOnClickListener{
             if (childFragmentManager.findFragmentByTag("table") == null) {
+                scApp?.touchtable=0
                 scApp?.touchdrawer = drawerId
                 updateDrawerClicked("update")
             } else {
+                scApp?.touchtable=0
                 val tableFragment = childFragmentManager.findFragmentByTag("table")
                 val fragmentTransaction = childFragmentManager.beginTransaction()
                 fragmentTransaction.remove(tableFragment)
@@ -64,7 +75,53 @@ class DrawerFragment2 : Fragment() {
                 EventBus.getDefault().postSticky(eventMessenge)
             }
         }
+        ib_Fdrawer2_lock.setOnClickListener {               //开锁功能（普通用户无法操作）
+            val check =  checkLock(scApp!!.touchCabint,2)
+            when(check)
+            {
+                -1 ->
+                     Toast.makeText(context.applicationContext,"串口通讯异常",Toast.LENGTH_SHORT).show()
+                0->
+                {
+                    spi?.sendOpenLock(scApp!!.touchCabint,tv_Fdrawer2_drawerNum.text.substring(2,3).toInt())
+                }
+                else ->
+                {
+                    Toast.makeText(context.applicationContext," 请关闭抽屉" +
+                            ""+check,Toast.LENGTH_SHORT).show()
+                }
+
+            }
+
+
+        }
     }
+
+    fun checkLock(DID: Int,num: Int): Int? {
+        var time = 0
+        for(i in 1..num) {
+            val lockData = spi?.sendGetStat(DID)
+            if (lockData != null) {
+                val drawerId = lockData.indexOf("1")+1
+                Log.d("SubOperation",""+drawerId)
+                if (drawerId > 0)
+                    return drawerId
+                else
+                    continue
+            }
+            else {
+                if (time > 0){
+                    return -1     //串口通讯存在问题
+                }
+                else{
+                    time++
+                    continue
+                }
+            }
+        }
+        return 0                //所有的抽屉均已关上
+    }
+
     interface updateDrawerlisten {
         fun updateDrawerClick(text: String)
     }

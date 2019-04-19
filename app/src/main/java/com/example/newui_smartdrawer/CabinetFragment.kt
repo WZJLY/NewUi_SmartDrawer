@@ -11,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.fragment_cabinet.*
-import kotlinx.android.synthetic.main.fragment_set_cabinet.*
 
 
 class CabinetFragment : Fragment() {
@@ -47,19 +46,10 @@ class CabinetFragment : Fragment() {
         dbManager= DBManager(context.applicationContext)
         scApp= context.applicationContext as SCApp
         if(arguments!=null) {
-//            if (arguments.getString("delCabinet") == "false")
-//                ib_Fcabinet_del.isEnabled = false
-//            if (arguments.getString("cabinetNum") != null)
-//                tv_Fcabinet_num.text = arguments.getString("cabinetNum")
-//            if (arguments.getString("choice") == "true") {
-//                val params = LinearLayout.LayoutParams(60, 156)
-//                btn_Fcabinet_cabinet.layoutParams = params
-//                im_Fcabinet.setBackgroundResource(R.drawable.circle_a2a2a2)
-//            }
-            val boxID =  arguments.getString("boxID")
+            val boxID =  arguments.getInt("boxID")
             tv_Fcabinet_num.text = "柜"+boxID
             val arrlistCabinet = dbManager!!.boxes
-            if(arrlistCabinet[boxID.toInt()-1].id == scApp?.boxId)
+            if(arrlistCabinet[boxID-1].id == scApp?.boxId)
             {
 
                 val params = LinearLayout.LayoutParams(60, 156)
@@ -69,14 +59,17 @@ class CabinetFragment : Fragment() {
             }
         }
         ib_Fcabinet_del.setOnClickListener{             //删除必须最后一个且没有试剂存在
-            val cabinetID = tv_Fcabinet_num.text.substring(0,1)
+
+            val cabinetID = tv_Fcabinet_num.text.substring(1,tv_Fcabinet_num.text.length)
             if(dbManager!!.getReagentByboxID(cabinetID).size<=0)
             {
                 if(cabinetID.toInt()==dbManager!!.boxes.size) {
-                    dbManager?.deleteBox(tv_Fcabinet_num.text.substring(0, 1).toInt())
+                    dbManager?.deleteBox(tv_Fcabinet_num.text.substring(1, tv_Fcabinet_num.text.length).toInt())
                     deletCabinetClicked("deletCabinet")
                 }
-                Toast.makeText(context.applicationContext,"该列柜子不是最后一列柜子无法删除",Toast.LENGTH_SHORT).show()
+                else{
+                    Toast.makeText(context.applicationContext,"该列柜子不是最后一列柜子无法删除",Toast.LENGTH_SHORT).show()
+                }
 
             }
             else
@@ -88,10 +81,7 @@ class CabinetFragment : Fragment() {
         }
 
         btn_Fcabinet_cabinet.setOnClickListener {
-            val params = LinearLayout.LayoutParams(60, 156)
-            btn_Fcabinet_cabinet.layoutParams = params
-            im_Fcabinet.setBackgroundResource(R.drawable.circle_a2a2a2)
-            scApp?.boxId=tv_Fcabinet_num.text.substring(0, 1).toInt()
+            scApp?.boxId=tv_Fcabinet_num.text.substring(1, tv_Fcabinet_num.text.length).toInt()
             deletCabinetClicked("updatedrawer")
         }
 

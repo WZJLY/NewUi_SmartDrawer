@@ -14,7 +14,7 @@ import com.example.newui_smartdrawer.util.UserAccount;
  * Created by Administrator on 2017/7/5 0005.
  */
 
-public class SCApp extends Application {  //全局变量
+public class SCApp extends com.example.newui_smartdrawer.Application {  //全局变量
     private DBManager dbManager;
     private UserAccount userInfo;
     private CabinetInfo cabinetInfo;

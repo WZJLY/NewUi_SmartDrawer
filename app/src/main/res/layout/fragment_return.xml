@@ -8,6 +8,19 @@
 
     <!-- TODO: Update blank fragment layout -->
 
+    <Button
+        android:id="@+id/btn_Freturn_weight"
+        android:layout_width="120dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_code"
+        android:text="获取重量"
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Freturn_load"
+        app:layout_constraintStart_toEndOf="@+id/textView21"
+        app:layout_constraintTop_toTopOf="@+id/et_Freturn_load" />
+
     <EditText
         android:id="@+id/et_Freturn_load"
         android:layout_width="175dp"
