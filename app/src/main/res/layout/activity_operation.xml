@@ -18,20 +18,29 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView4"
         app:srcCompat="@android:color/transparent" />
 
-    <FrameLayout
-        android:id="@+id/ll_operation_cabinet"
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView18"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView18"
         app:layout_constraintTop_toTopOf="@+id/imageView18">
 
-    </FrameLayout>
+        <LinearLayout
+            android:id="@+id/ll_operation_cabinet"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/ll_FsetCabinet_drawer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView4"></LinearLayout>
+    </HorizontalScrollView>
 
     <ScrollView
         android:id="@+id/scrollView4"

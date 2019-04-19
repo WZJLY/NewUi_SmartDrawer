@@ -27,8 +27,7 @@ class RecordFragment : Fragment() {
             date = arguments.getString("date")
             reagentUserRecord=dbManager?.getReagentUseRecordByDate(date)
             tv_Frecord_id.text=reagentUserRecord?.reagentId
-            reagentName=reagentUserRecord?.reagentName
-            tv_Frecord_name.text=reagentName
+//            reagentName=dbManager!!.getReagentById(reagentUserRecord?.reagentId).reagentName
             when(reagentUserRecord?.operationType){
                 1 ->{
                     tv_Frecord_type.text = "入柜"
@@ -41,9 +40,6 @@ class RecordFragment : Fragment() {
                 }
                 4->{
                     tv_Frecord_type.text = "移除"
-                }
-                5->{
-                    tv_Frecord_type.text="抽屉打开"
                 }
             }
             tv_Frecord_date.text=reagentUserRecord?.operationTime

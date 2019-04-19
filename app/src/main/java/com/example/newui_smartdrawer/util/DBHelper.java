@@ -93,9 +93,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(_id INTEGER PRIMARY KEY, serialNum VARCHAR, cameraVersion VARCHAR)");
         db.execSQL("CREATE TABLE IF NOT EXISTS initialWeight"+
                 "(_id INTEGER PRIMARY KEY, weight  VARCHAR)");
-        //App登陆用户表
-        db.execSQL("CREATE TABLE IF NOT EXISTS loginUser"+
-                "(_id INTEGER PRIMARY KEY, userName VARCHAR)");
     }
 
 

@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_set_cabinet.*
 class SetCabinetFragment : Fragment() {
     private var dbManager:DBManager?=null
     private var drawer:Drawer?=null
-    private var scApp:SCApp?=null
     private var activityCallback:SetCabinetFragment.addDrawerbuttonlisten? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,7 +37,7 @@ class SetCabinetFragment : Fragment() {
     }
     fun updateDrawer()
     {
-        val arrListDrawers = dbManager?.getDrawersByboxID(scApp?.boxId.toString())
+        val arrListDrawers = dbManager?.getDrawers()
         val sum = arrListDrawers!!.size
         if(sum > 0)
         {
@@ -74,5 +73,11 @@ class SetCabinetFragment : Fragment() {
     private fun addDrawerbuttonClicked(text: String) {
         activityCallback?.addDrawerButtonClick(text)
     }
+
+
+
+
+
+
 
 }

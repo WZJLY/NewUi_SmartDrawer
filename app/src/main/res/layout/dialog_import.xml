@@ -279,7 +279,7 @@
         android:textColor="#676767"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView29"
-        app:layout_constraintTop_toBottomOf="@+id/rg_Dimport_level" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_volume" />
 
     <RadioGroup
         android:id="@+id/rg_Dimport_level"
@@ -287,10 +287,11 @@
         android:layout_height="41dp"
         android:layout_marginEnd="148dp"
         android:layout_marginTop="22dp"
+        android:checkedButton="@+id/rb_Dimport_state2"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/imageView29"
-        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_volume">
+        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_code">
 
         <RadioButton
             android:id="@+id/rb_Dimport_state2"
@@ -325,7 +326,7 @@
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView29"
         app:layout_constraintStart_toStartOf="@+id/imageView29"
-        app:layout_constraintTop_toBottomOf="@+id/et_Dimport_code" />
+        app:layout_constraintTop_toBottomOf="@+id/rg_Dimport_level" />
 
     <Button
         android:id="@+id/btn_Dimport_no"

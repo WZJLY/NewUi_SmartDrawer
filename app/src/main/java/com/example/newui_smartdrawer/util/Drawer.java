@@ -28,4 +28,5 @@ public class Drawer {
     }
     public int getDrawerSize(){return this.drawerSize;}
     public String getStatue(){return this.statue;}
+    public int getBoxId(){return  this.boxId;}
 }

@@ -98,8 +98,8 @@ class ManagementActivity : BaseActivity(),UserLineFragment.deletbuttonlisten {
                                     1, etAccount.text.toString(), etPhone.text.toString(), "0")
                         }
                         dbManager?.addAccount(userAccount)
-                        val managementFragment1 = ManagementFragment()
-                        replaceFragment(R.id.fl_management, managementFragment1)
+                        val managementFragment = ManagementFragment()
+                        replaceFragment(R.id.fl_management, managementFragment)
                         dialog.dismiss()
                     }
                 }
@@ -115,15 +115,9 @@ class ManagementActivity : BaseActivity(),UserLineFragment.deletbuttonlisten {
         }
     }
     override fun deletButtonClick(text: String) {
-        when(text) {
-            "deletperson" -> {
-                val managementFragment = ManagementFragment()
-                replaceFragment(R.id.fl_management, managementFragment)
-            }
-            "update" -> {
-                val managementFragment = ManagementFragment()
-                replaceFragment(R.id.fl_management, managementFragment)
-            }
+        if(text == "deletperson") {
+            val managementFragment = ManagementFragment()
+            replaceFragment(R.id.fl_management, managementFragment)
         }
     }
 

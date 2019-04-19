@@ -35,6 +35,7 @@ class IntoFragment : Fragment() {
         scApp = context.applicationContext as SCApp
         dbManager = DBManager(context.applicationContext)
         val value = arguments.getString("scan_value")
+        val weight = arguments.getString("weight")
         val data_list = ArrayAdapter<String>(context, R.layout.information_spinner_style)
         val arrListReagentTemplate = dbManager?.reagentTemplate
         val sum = arrListReagentTemplate!!.size
@@ -68,34 +69,43 @@ class IntoFragment : Fragment() {
         }
         if(value != null) {
             et_Finto_code.setText(value)
+            if(weight != null){
+
+                et_Finto_load.setText(weight)
+                et_Finto_residue.isFocusable = true
+                et_Finto_residue.isFocusableInTouchMode = true
+                et_Finto_residue.requestFocus()
+            }
+            else{
                 et_Finto_load.isFocusable = true
                 et_Finto_load.isFocusableInTouchMode = true
                 et_Finto_load.requestFocus()
+            }
         }
         else{
             et_Finto_code.isFocusable = true
             et_Finto_code.isFocusableInTouchMode = true
             et_Finto_code.requestFocus()
+            if(weight != null) {
+                et_Finto_load.setText(weight)
+            }
         }
         btn_Finto_code.setOnClickListener{
             activityCallback?.intobuttononClick("scan")
-        }
-        btn_Finto_weight.setOnClickListener {
-            activityCallback?.intobuttononClick("weight")
         }
 
         tv_Finto_data.setOnClickListener {
             val cal = Calendar.getInstance()
             val dialog = DatePickerDialog(context, null, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
 
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE,"确认", DialogInterface.OnClickListener { _, _ ->
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE,"确认", DialogInterface.OnClickListener { dialogInterface, i ->
                 val datePicker = dialog.datePicker
                 val year = datePicker.year
                 val month = datePicker.month+1
                 val day = datePicker.dayOfMonth
                 tv_Finto_data.text = ""+year+"年"+month+"月"+day+"日"
             })
-            dialog.setButton(DialogInterface.BUTTON_NEGATIVE,"取消", DialogInterface.OnClickListener { _, _ ->
+            dialog.setButton(DialogInterface.BUTTON_NEGATIVE,"取消", DialogInterface.OnClickListener { dialogInterface, i ->
                 Log.d("setDate","取消")
             })
             dialog.window.setGravity(Gravity.CENTER)

@@ -4,11 +4,9 @@ package com.example.newui_smartdrawer
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.newui_smartdrawer.R.drawable.*
 import com.example.newui_smartdrawer.util.DBManager
 import kotlinx.android.synthetic.main.fragment_information.*
 import org.greenrobot.eventbus.EventBus
@@ -33,7 +31,7 @@ class InformationFragment : Fragment() {
         scApp= context.applicationContext as SCApp
         if (arguments != null) {
             if (arguments.getString("state") == "in") {
-                var reagent =  dbManager?.getReagentByPos(scApp?.touchdrawer.toString(),scApp?.touchtable.toString(),scApp?.boxId.toString())
+                var reagent =  dbManager?.getReagentByPos(scApp?.touchdrawer.toString(),scApp?.touchtable.toString())
                 tv_Finformation_use.visibility = View.GONE
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
@@ -51,13 +49,11 @@ class InformationFragment : Fragment() {
             {
                 ib_Finformation_jump.visibility = View.GONE
                 cl_Finformation.setBackgroundColor(Color.TRANSPARENT)
-                var reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"),scApp?.boxId.toString())
+                var reagent =  dbManager?.getReagentByPos(arguments.getString("tablenum"),arguments.getString("pos"))
                 if(reagent?.status==1)
                 {
-
-                    tv_Finformation_use.text="在位"
-                    tv_Finformation_use.setBackgroundColor(btn_table3)
-            }
+                    tv_Finformation_use.visibility=View.GONE
+                }
                 tv_Finforation_name.text=reagent?.reagentName
                 tv_Finformation_manufactor.text=reagent?.reagentCreater
                 tv_Finformation_data.text=reagent?.reagentInvalidDate
@@ -72,15 +68,10 @@ class InformationFragment : Fragment() {
             {
                 var reagentId = arguments.getString("reagentID")
                 var searchreagent = dbManager?.getReagentById(reagentId)
-
                 if(searchreagent?.status==1)
                 {
-
-                    tv_Finformation_use.text="在位"
-                    tv_Finformation_use.setBackgroundColor(btn_table3)
-
+                    tv_Finformation_use.visibility=View.GONE
                 }
-
                 tv_Finforation_name.text=searchreagent?.reagentName
                 tv_Finformation_manufactor.text=searchreagent?.reagentCreater
                 tv_Finformation_data.text=searchreagent?.reagentInvalidDate
@@ -89,14 +80,14 @@ class InformationFragment : Fragment() {
                 tv_Finformation_user.text=searchreagent?.reagentUser
                 tv_Finformation_residue.text=searchreagent?.reagentSize+"ml"
 
+
             }
 
         }
         ib_Finformation_jump.setOnClickListener {
             var reagent =  dbManager?.getReagentById(tv_Finformation_id.text.toString())
             scApp?.touchdrawer=reagent!!.drawerId.toInt()
-            scApp?.touchtable=reagent.reagentPosition.toInt()
-            scApp?.boxId = reagent.reagentCabinetId.toInt()
+            scApp?.touchtable=reagent!!.reagentPosition.toInt()
             var eventMessenge = SerachEvent()
             eventMessenge.setMsg("update")
             EventBus.getDefault().postSticky(eventMessenge)

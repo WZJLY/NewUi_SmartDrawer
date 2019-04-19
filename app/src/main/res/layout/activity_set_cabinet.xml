@@ -112,7 +112,7 @@
 
     <FrameLayout
         android:id="@+id/fl_setCabinet_cabinet"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="100dp"
