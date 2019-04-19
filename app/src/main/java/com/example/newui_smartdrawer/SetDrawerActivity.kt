@@ -24,12 +24,12 @@ class SetDrawerActivity : BaseActivity() {
         dbManager = DBManager(this)
         scApp = application as SCApp
         val intent = intent
-        val drawerId  = intent.getStringExtra("drawerId")
+        val drawerId = intent.getStringExtra("drawerId")
         val set_drawerId = intent.getStringExtra("set_drawerId")
-        tv_setDrawer_num.setText("柜1-抽屉"+drawerId)
+        tv_setDrawer_num.setText("柜"+scApp!!.boxId+"-抽屉"+drawerId)
         if(set_drawerId!=null)
         {
-            tv_setDrawer_num.setText("柜1-抽屉"+set_drawerId)
+            tv_setDrawer_num.setText("柜"+scApp!!.boxId+"-抽屉"+set_drawerId)
             val drawer =  dbManager?.getDrawerByDrawerId(set_drawerId.toInt(),scApp!!.boxId)
             val tableFragment = TableFragment()
             val args = Bundle()
@@ -161,8 +161,8 @@ class SetDrawerActivity : BaseActivity() {
                     t.cancel()
                 },3000)
             } else {
-                if(set_drawerId!=null) dbManager?.updateDrawer(set_drawerId.toInt(),1,num,status.toString())
-                else dbManager?.addDrawer(drawerId.toInt(),scApp!!.boxId,num,status.toString())
+                if(set_drawerId!=null) dbManager?.updateDrawer(set_drawerId.toInt(),scApp!!.boxId,num,status.toString())
+                else dbManager?.addDrawer(drawerId!!.toInt(),scApp!!.boxId,num,status.toString())
                 finish()
                 val intent = Intent()
                 intent.setClass(this,SetCabinetActivity::class.java)

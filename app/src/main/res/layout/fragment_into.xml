@@ -7,6 +7,19 @@
     tools:context=".IntoFragment">
 
 
+    <Button
+        android:id="@+id/btn_Finto_weight"
+        android:layout_width="120dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_code"
+        android:text="获取重量"
+        android:textColor="#282828"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_Finto_load"
+        app:layout_constraintStart_toEndOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/et_Finto_load" />
+
     <TextView
         android:id="@+id/tv_Finto_data"
         android:layout_width="175dp"

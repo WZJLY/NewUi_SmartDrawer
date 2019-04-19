@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="试剂名"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="试剂ID"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:text="操作类型"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:text="余量"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:gravity="center"
             android:text="称重量"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -75,7 +75,7 @@
             android:gravity="center"
             android:text="消耗量"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -86,7 +86,7 @@
             android:gravity="center"
             android:text="操作人员"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
         <TextView
@@ -97,7 +97,7 @@
             android:gravity="center"
             android:text="操作时间"
             android:textAlignment="center"
-            android:textColor="#282828"
+            android:textColor="#B5B5B5"
             android:textSize="18sp" />
 
     </LinearLayout>
