@@ -12,16 +12,13 @@ import kotlinx.android.synthetic.main.activity_set_cabinet.*
 
 class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,CabinetFragment.deletCabinetlisten {
     private var dbManager:DBManager?=null
-    private var scApp:SCApp?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_cabinet)
         dbManager = DBManager(this)
-        scApp = application as SCApp
+//        val setCabinetFragment = SetCabinetFragment()
+//        replaceFragment(setCabinetFragment,R.id.fl_setCabinet_drawer)
         val cabinetFragment = HorizontalFragment()
-        val arg=Bundle()
-        arg.putString("cabinet","set")
-        cabinetFragment.arguments=arg
         replaceFragment(cabinetFragment,R.id.fl_setCabinet_cabinet)
         val drawerFragment = VerticalFragment()
         val args = Bundle()
@@ -36,14 +33,11 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
             val sum = dbManager!!.boxes.size+1
             dbManager?.addBox(sum)
             val cabinetFragment1 = HorizontalFragment()
-            val arg3=Bundle()
-            arg3.putString("cabinet","set")
-            cabinetFragment1.arguments=arg3
             replaceFragment(cabinetFragment1,R.id.fl_setCabinet_cabinet)
         }
 
         ib_setCabinet_addDrawer.setOnClickListener {
-            val sum = dbManager!!.getDrawersByboxID(scApp?.boxId.toString()).size+1
+            val sum = dbManager!!.drawers.size+1
             Log.d("drawerID",sum.toString())
             finish()
             val intent = Intent()
@@ -60,12 +54,7 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
            "deletCabinet" ->
            {
                val cabinetFragment = HorizontalFragment()
-               val arg = Bundle()
-               arg.putString("cabinet","set")
-               cabinetFragment.arguments=arg
                replaceFragment(cabinetFragment,R.id.fl_setCabinet_cabinet)
-               val drawerFragment = VerticalFragment()
-               replaceFragment(drawerFragment,R.id.fl_setCabinet_drawer)
            }
            "updatedrawer" ->
            {
@@ -74,11 +63,6 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
                args.putString("drawer", "addDrawer")
                drawerFragment.arguments=args
                replaceFragment(drawerFragment,R.id.fl_setCabinet_drawer)
-               val cabinetFragment = HorizontalFragment()
-               val arg = Bundle()
-               arg.putString("cabinet","set")
-               cabinetFragment.arguments=arg
-               replaceFragment(cabinetFragment,R.id.fl_setCabinet_cabinet)
            }
        }
     }
@@ -102,11 +86,8 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
     override fun deletDrawerClick(text: String) {
         if(text == "deletDrawer")
         {
-            val drawerFragment = VerticalFragment()
-            val args = Bundle()
-            args.putString("drawer","addDrawer")
-            drawerFragment.arguments=args
-            replaceFragment(drawerFragment,R.id.fl_setCabinet_drawer)
+            val setCabinetFragment = SetCabinetFragment()
+            replaceFragment(setCabinetFragment,R.id.fl_setCabinet_drawer)
         }
     }
     inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Unit) {
@@ -118,11 +99,6 @@ class SetCabinetActivity : BaseActivity(),DrawerFragment.deletDrawerlisten,Cabin
     fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int) {
         supportFragmentManager.inTransaction{
            replace(frameId, fragment)
-        }
-    }
-    fun AppCompatActivity.removeFragment(fragment: Fragment){
-        supportFragmentManager.inTransaction {
-            remove(fragment)
         }
     }
 

@@ -20,10 +20,10 @@ public class SerialPortInterface extends AppCompatActivity {
     Context context;
 
 
-    public SerialPortInterface(Context context, String serialPortID,int baudrate) {
+    public SerialPortInterface(Context context, String serialPortID) {
         this.context = context;
         try {
-            sp = new SerialPort(new File(serialPortID), baudrate, 0);
+            sp = new SerialPort(new File(serialPortID), 38400, 0);
             mOutputStream = (FileOutputStream) sp.getOutputStream();
             mInputStream = (FileInputStream) sp.getInputStream();
         } catch (SecurityException e) {
@@ -239,7 +239,6 @@ public class SerialPortInterface extends AppCompatActivity {
             return -1;
         }
         int load = readLoad();
-        Log.d("load", String.valueOf(load));
         return load;
     }
 
@@ -346,83 +345,6 @@ public class SerialPortInterface extends AppCompatActivity {
         }
         return null;
     }
-    public String readTHData() {
-        String readDatas = null;
-        String Error ="" ;
-        String lrc;
-        byte[] buffer2 ;
-        byte[] buffer3 = new byte[1];
-        byte[] buffer4 = new byte[1];
-        byte[] buffer5 = new byte[1];
-        byte[] buffer6 = new byte[1];
-        if(mInputStream ==  null){
-//            Toast.makeText(this.context,"无法读取串口数据", Toast.LENGTH_SHORT).show();
-            return Error;
-        }
-
-        for (int i = 0; i < 10; i++) {
-            try {
-                Thread.sleep(50);
-                if (mInputStream.available() > 0) {
-                    if (mInputStream != null) {
-                        byte[] buffer = new byte[6];
-                        int size = mInputStream.read(buffer);
-                        if(size>5)
-                        {
-                            byte[] buffer7 = new byte[2];
-                            byte[] buffer8 = new byte[2];
-                            buffer3[0]=buffer[0];
-                            buffer4[0]=buffer[1];
-                            buffer5[0]=buffer[3];
-                            buffer6[0]=buffer[4];
-                            System.arraycopy(buffer3,0,buffer7,0,1);
-                            System.arraycopy(buffer4,0,buffer7,1,1);
-                            System.arraycopy(buffer5,0,buffer8,0,1);
-                            System.arraycopy(buffer6,0,buffer8,1,1);
-
-                            double template = Integer.parseInt(bytesToHexFun1(buffer7),16)*175.0/65535.0-45.0;
-                            double rh = Integer.parseInt(bytesToHexFun1(buffer8),16)*100.0/65535.0;
-
-                            String str =  String.format("%.1f", template);
-                           String str1 = String.format("%.1f", rh) ;
-                            return  str+str1;
-
-
-
-                        }
-
-                    }
-                }
-            }catch(Exception e){
-                return null;
-            }
-        }
-        return null;
-    }
-
-
-    public  String bytesToHexFun1(byte[] bytes) {
-        // 一个byte为8位，可用两个十六进制位标识
-        final char[] HEX_CHAR = {'0', '1', '2', '3', '4', '5',
-                '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-
-        char[] buf = new char[bytes.length * 2];
-        int a = 0;
-        int index = 0;
-        for(byte b : bytes) { // 使用除与取余进行转换
-            if(b < 0) {
-                a = 256 + b;
-            } else {
-                a = b;
-            }
-
-            buf[index++] = HEX_CHAR[a / 16];
-            buf[index++] = HEX_CHAR[a % 16];
-        }
-
-        return new String(buf);
-    }
-
 
 
 }

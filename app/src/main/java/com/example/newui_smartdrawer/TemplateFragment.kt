@@ -11,8 +11,7 @@ import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.ReagentTemplate
 import kotlinx.android.synthetic.main.fragment_template.*
 
-class
-TemplateFragment : Fragment() {
+class TemplateFragment : Fragment() {
     private var reagentTemplate: ReagentTemplate?=null
     private var dbManager: DBManager? = null
     private var activityCallback:TemplateFragment.deletTemplatelisten? = null

@@ -24,7 +24,7 @@ class RecordActivity : BaseActivity() {
         {
            for(m in 1..sum)
             {
-                record = arrayListRecord[sum-m]         //对试剂记录进行了逆序排列
+                record = arrayListRecord[m-1]
                 val recordLineFragment = RecordFragment()
                 val args = Bundle()
                 args.putString("date", record?.operationTime)
@@ -33,6 +33,9 @@ class RecordActivity : BaseActivity() {
             }
 
         }
+
+
+
 
         ib_record_back.setOnClickListener {
             finish()

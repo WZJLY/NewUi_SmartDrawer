@@ -44,6 +44,15 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:color/background_light" />
 
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="44dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView"
+                app:srcCompat="@drawable/icon" />
+
             <TextView
                 android:id="@+id/tv_mainAdmin_time"
                 android:layout_width="wrap_content"
@@ -111,7 +120,6 @@
         app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_user" />
 
     <ImageView
-        android:id="@+id/imageView34"
         android:layout_width="0dp"
         android:layout_height="356dp"
         android:background="@drawable/background_main"
@@ -126,14 +134,14 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="1052dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/btn_21_ffffff"
         android:text="退出登录"
         android:textColor="#494949"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_mainAdmin_video" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -227,20 +235,5 @@
             app:layout_constraintTop_toBottomOf="@+id/ib_mainAdmin_search" />
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/regist_face"
-        android:layout_width="111dp"
-        android:layout_height="71dp"
-        android:layout_marginBottom="228dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/btn_10_style"
-        android:text="人脸绑定"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView34"
-        app:layout_constraintHorizontal_bias="0.821"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

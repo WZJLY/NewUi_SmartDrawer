@@ -19,7 +19,7 @@ public class ReagentUserRecord {
         /*
         * 试剂ID，操作类型（1-入柜、2-取用、3-归还、4-移除），操作时间；
         * 操作者，称重值，余量；
-        * 消耗量；
+        * 消耗量；试剂名称
       *
         * */
         this.reagentId = strReagentId;
@@ -33,7 +33,6 @@ public class ReagentUserRecord {
         this.consumption = strConsumption;
 
         this.reagentName = strReagentName;
-
     }
     public  int getOperationType()
     {
