@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
+import android.text.Editable
+import android.text.TextWatcher
 import com.example.newui_smartdrawer.util.DBManager
 import com.example.newui_smartdrawer.util.Reagent
 import kotlinx.android.synthetic.main.activity_search.*
@@ -36,18 +38,30 @@ class SearchActivity : BaseActivity(){
             finish()
            overridePendingTransition(0, 0)
         }
+        et_search_search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
 
 
+            }
 
-//        test_button.setOnClickListener({   //查找试剂位置时传参
-////            finish()
-////            val intent = Intent()
-////            scApp.reagentID="123"
-////            intent.setClass(this,OperationActivity::class.java)
-////            startActivity(intent)
-//
-//        })
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) { //屏蔽回车 中英文空格
+                if(s.length!=0)
+                {
+                    val verticalFragment = VerticalFragment()
+                    val args = Bundle()
+                    args.putString("addreagent","addreagent")
+                    args.putString("serach",s.toString())
+                    verticalFragment.arguments=args
+                    replaceFragment(verticalFragment,R.id.reagent_area)
+                }
+
+            }
+        })
 
     }
     @Subscribe
@@ -76,14 +90,12 @@ class SearchActivity : BaseActivity(){
     {
         if(text=="update")
         {
-
             finish()
             overridePendingTransition(0,0)
             val intent = Intent()
             intent.setClass(this,OperationActivity::class.java)
             startActivity(intent)
             overridePendingTransition(0,0)
-
         }
 
 

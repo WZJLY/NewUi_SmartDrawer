@@ -73,10 +73,9 @@ class UserLineFragment : Fragment() {
             btn_FuserLine_del.visibility = View.GONE   //对可删除的用户就行了判断
         if(account?.userName!="admin"&&user?.userPower==0)
             btn_FuserLine_del.visibility = View.GONE
-        if(user?.userPower==SC_Const.ADMIN) {
-            tv_FuserLine_user.text = "管理员"
-            iv_FuserLine_icon.setImageResource(R.drawable.admin)
-        }
+        if(user?.userPower==SC_Const.ADMIN)
+            tv_FuserLine_user.text="管理员"
+
         ib_FuserLine_user.setOnClickListener{
             if(account?.userName=="admin")
             {
@@ -144,16 +143,14 @@ class UserLineFragment : Fragment() {
                             if (selectId.text == "管理员") {
                                 dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
                                         0, et_account.text.toString(), et_phone.text.toString())
-
                             } else if (selectId.text == "普通用户") {
-
                                 dbManager?.updateAccountByUserName(et_name.text.toString(),et_num.text.toString(),  et_password.text.toString(),
                                         1, et_account.text.toString(), et_phone.text.toString())
                             }
+                            deletbuttonClicked("update")
                             dialog.dismiss()
                         }
                     }
-
                 })
                 dialog.setNoOnclickListener("取消", object : UserDialog.onNoOnclickListener {
                     override fun onNoClick() {
@@ -254,7 +251,6 @@ class UserLineFragment : Fragment() {
 
         btn_FuserLine_del.setOnClickListener{
 //            dbManager?.deleteAccountByUserName( userName)
-
             if(btn_FuserLine_del.text.toString()=="禁用") {
                 dbManager?.updateStatueByUserName(userName, "1")
                 btn_FuserLine_del.text = "启用"

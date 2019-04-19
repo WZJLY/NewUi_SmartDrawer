@@ -18,33 +18,25 @@ class ReturnFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         val value = arguments.getString("scan_value")
-        val weight = arguments.getString("weight")
         if(value != null)
         {
             et_Freturn_code.setText(value)
-            if(weight != null){
-                et_Freturn_load.setText(weight)
-                et_Freturn_load.isFocusable = false
-                et_Freturn_load.isFocusableInTouchMode = false
-                et_Freturn_load.requestFocus()
-            }
-            else {
-                et_Freturn_load.isFocusable = true
-                et_Freturn_load.isFocusableInTouchMode = true
-                et_Freturn_load.requestFocus()
-            }
+            et_Freturn_load.isFocusable = true
+            et_Freturn_load.isFocusableInTouchMode = true
+            et_Freturn_load.requestFocus()
         }
         else {
             et_Freturn_code.isFocusable = true
             et_Freturn_code.isFocusableInTouchMode = true
             et_Freturn_code.requestFocus()
-            if(weight != null){
-                et_Freturn_load.setText(weight)
-            }
         }
 
         btn_Freturn_code.setOnClickListener{
             activityCallback?.returnbuttonClick("scan")
+        }
+
+        btn_Freturn_weight.setOnClickListener {
+            activityCallback?.returnbuttonClick("weight")
         }
 
     }
